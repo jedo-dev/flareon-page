@@ -17,16 +17,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const starList = document.getElementById('star-list');
   let section1 = document.querySelector('.section-1');
   // Получаем размеры секции, а не всего окна
- 
+
 
   const generateStars = () => {
 
     const { width, height } = section1.getBoundingClientRect();
-    console.log(`current width and height`,width,height)
+    console.log(`current width and height`, width, height)
     const isMobile = width < 768;
-     let sectionRect = section1.getBoundingClientRect();
-  let centerX = sectionRect.width / 2;
-  let centerY = sectionRect.height / 2;
+    let sectionRect = section1.getBoundingClientRect();
+    let centerX = sectionRect.width / 2;
+    let centerY = sectionRect.height / 2;
     const radius = isMobile ? width * 0.7 : height * 0.5;
     const numberOfStars = isMobile ? 30 : 60
     for (let i = 0; i < numberOfStars; i++) {
@@ -71,55 +71,55 @@ document.addEventListener('DOMContentLoaded', function () {
   generateStars(); // Увеличиваем радиус и количество звезд
   let resizeTimeout;
 
-
+  console.log(`anime`, anime)
   // Функция для очистки и генерации
   const updateStars = () => {
     section1 = document.querySelector('.section-1');
     starList.innerHTML = ''; // Удаляем все старые звезды
     generateStars(); // Генерируем новые
-      let animationStars = anime({
-    // Цели
-    targets: '.stars-1',
-    // Свойства
-    translateX: 10,
-    scale: 1,
-    rotate: '2turn',
-    // Параметры свойств
-    duration: 1000,
-    easing: 'linear',
-    // Параметры анимации
-    direction: 'alternate',
-    loop: true,
-  });
+    let animationStars = anime({
+      // Цели
+      targets: '.stars-1',
+      // Свойства
+      translateX: 10,
+      scale: 1,
+      rotate: '2turn',
+      // Параметры свойств
+      duration: 1000,
+      easing: 'linear',
+      // Параметры анимации
+      direction: 'alternate',
+      loop: true,
+    });
 
-  let animationStars2 = anime({
-    // Цели
-    targets: '.stars-2',
-    // Свойства
-    translateX: -100,
-    scale: 1,
-    rotate: '1turn',
-    // Параметры свойств
-    duration: 1000,
-    easing: 'linear',
-    // Параметры анимации
-    direction: 'alternate',
-    loop: true,
-  });
-  let animationStars3 = anime({
-    // Цели
-    targets: '.stars-3',
-    // Свойства
-    translateX: 100,
-    scale: 1,
-    rotate: '3turn',
-    // Параметры свойств
-    duration: 2000,
-    easing: 'linear',
-    // Параметры анимации
-    direction: 'alternate',
-    loop: true,
-  });
+    let animationStars2 = anime({
+      // Цели
+      targets: '.stars-2',
+      // Свойства
+      translateX: -100,
+      scale: 1,
+      rotate: '1turn',
+      // Параметры свойств
+      duration: 1000,
+      easing: 'linear',
+      // Параметры анимации
+      direction: 'alternate',
+      loop: true,
+    });
+    let animationStars3 = anime({
+      // Цели
+      targets: '.stars-3',
+      // Свойства
+      translateX: 100,
+      scale: 1,
+      rotate: '3turn',
+      // Параметры свойств
+      duration: 2000,
+      easing: 'linear',
+      // Параметры анимации
+      direction: 'alternate',
+      loop: true,
+    });
   };
 
   // Первая загрузка
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Обработчик ресайза с debounce
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
-     
+
     resizeTimeout = setTimeout(updateStars, 200);
   });
   // generateStars(750, 30);
@@ -261,21 +261,28 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   // Инициализация анимации
 
+const colors = ['#708ea7', '#7072a7', '#70a7a5', '#a78970']; // Ваша палитра
+  const cardboardShake = (target) => {
+    anime({
+      targets: target,
+      translateX: () => anime.random(-1, 1),
+      translateY: () => anime.random(-1, 1),
 
-const cardboardShake = (target) => {
-  anime({
-    targets: target,
-    translateX: () => anime.random(-1, 1),
-    translateY: () => anime.random(-1, 1),
-    rotate: () => anime.random(-1, 1),
-    duration: () => anime.random(80, 120),
-    duration:300,
-    easing: 'steps(10)', // Рваная анимация
-    complete: () => cardboardShake(target) // Рекурсивный вызов
-  });
-};
+     color: ()=>{
+      let num= anime.random(0, 4)
+      console.log(`num`,num,colors[num ])
+      return colors[num]
+     },
 
-cardboardShake('.text');
-cardboardShake('.text-2');
+      rotate: () => anime.random(-1, 1),
+      duration: () => anime.random(80, 120),
+     
+      easing: 'steps(10)', // Рваная анимация
+      complete: () => cardboardShake(target) // Рекурсивный вызов
+    });
+  };
+
+  cardboardShake('.text');
+  cardboardShake('.text-2');
 });
 

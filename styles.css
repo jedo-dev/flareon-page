@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 .wrapper {
-  height: 100vh;
+  height: 100dvh;
   /* background-color: #0e1b21; */
   overflow: hidden;
 }
@@ -22,7 +22,7 @@ body {
   /* overflow-x: hidden; */
 }
 .container {
-  max-height: 100vh;
+  max-height: 100dvh;
   overflow-y: scroll;
   scroll-snap-type: mandatory;
   scroll-snap-points-y: repeat(3rem);
@@ -96,7 +96,7 @@ p {
 
 #two {
   overflow: hidden;
-  /* padding: 3vw 15vw 10vw; */
+  /* padding: 3ddvw 15ddvw 10ddvw; */
   /* background: linear-gradient(0deg, #69b7bf 25%, #ffe664); */
 }
 

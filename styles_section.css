@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Или нужная вам высота */
+  min-height: 100dvh; /* Или нужная вам высота */
 }
 
 .card {
@@ -18,9 +18,9 @@
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-   min-height: 100vh; /* Чтобы было место для .main-guy */
+   min-height: 100dvh; /* Чтобы было место для .main-guy */
   overflow: hidden; /* Чтобы не было скролла из-за большого спрайта */
-  width: 100vw;
+  width: 100dvw;
     @media (max-width: 768px) {
       gap:40px;
       flex-direction:column ;
