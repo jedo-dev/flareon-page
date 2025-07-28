@@ -269,8 +269,7 @@ const colors = ['#708ea7', '#7072a7', '#70a7a5', '#a78970']; // Ваша пал�
       translateY: () => anime.random(-1, 1),
 
      color: ()=>{
-      let num= anime.random(0, 4)
-      console.log(`num`,num,colors[num ])
+      let num= anime.random(0, 4);
       return colors[num]
      },
 

@@ -50,6 +50,12 @@ section {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'BellotaText';
+  src: url('BellotaText-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
 .text {
   color: #708ea7;
   
