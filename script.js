@@ -241,41 +241,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
   });
 
-  const fly1Animation = anime({
-    targets: '.fly-1',
-    loop: true,
-    opacity: [0, 1, 0],
-    // translateY: ['0px', '-10px', '10px', '0px'], // Дрожание вверх-вниз
-    // easing: 'easeInOutSine',
-    duration: 1000,
 
-  });
-  const fly2Animation = anime({
-    targets: '.fly-2',
-    loop: true,
-    opacity: [0, 1, 0],
-    // translateY: ['0px', '-10px', '10px', '0px'], // Дрожание вверх-вниз
-    // easing: 'easeInOutSine',
-    duration: 1000,
-
-  });
   // Инициализация анимации
 
-const colors = ['#708ea7', '#7072a7', '#70a7a5', '#a78970']; // Ваша палитра
+  const colors = ['#708ea7', '#7072a7', '#70a7a5', '#a78970']; // Ваша палитра
   const cardboardShake = (target) => {
     anime({
       targets: target,
       translateX: () => anime.random(-1, 1),
       translateY: () => anime.random(-1, 1),
 
-     color: ()=>{
-      let num= anime.random(0, 4);
-      return colors[num]
-     },
+      color: () => {
+        let num = anime.random(0, 4);
+        return colors[num]
+      },
 
       rotate: () => anime.random(-1, 1),
       duration: () => anime.random(80, 120),
-     
+
       easing: 'steps(10)', // Рваная анимация
       complete: () => cardboardShake(target) // Рекурсивный вызов
     });

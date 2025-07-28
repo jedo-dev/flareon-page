@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Besom-2';
+  src: url('../fonts/Besom.eot');
+  src: local('Besom by Krisjanis Mezulis / RIT CREATIVE'), local('Besom'),
+    url('../fonts/Besom.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Besom.woff') format('woff'), url('../fonts/Besom.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Besom-cyr';
+  src: url('../fonts/Besom-cyr.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BellotaText';
+  src: url('../fonts/BellotaText-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}

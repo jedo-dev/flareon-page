@@ -35,30 +35,10 @@ body {
 section {
   scroll-snap-align: start;
 }
-@font-face {
-  font-family: 'Besom-2';
-  src: url('Besom.eot');
-  src: local('Besom by Krisjanis Mezulis / RIT CREATIVE'), local('Besom'),
-    url('Besom.eot?#iefix') format('embedded-opentype'), url('Besom.woff') format('woff'),
-    url('Besom.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Besom-cyr';
-  src: url('Besom-cyr.ttf');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'BellotaText';
-  src: url('BellotaText-Regular.ttf');
-  font-weight: normal;
-  font-style: normal;
-}
+
 .text {
   color: #708ea7;
-  
+
   @media (max-width: 768px) {
     text-align: left;
   }

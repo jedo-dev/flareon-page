@@ -87,17 +87,17 @@
   font-family: 'Besom-cyr';
 }
 
-.fly-3 {
-  background-image: url('./fly-3.png');
+.character-vertical {
+  background-image: url('./images/character-vertical.png');
   width: 636px;
   height: 162px;
   margin: 0 auto;
-  animation: fly-3 0.4s steps(2, end) infinite;
+  animation: character-vertical-animation 0.4s steps(2, end) infinite;
   @media (max-width: 480px) {
     transform: scale(0.4);
   }
 }
-@keyframes fly-3 {
+@keyframes character-vertical-animation {
   from {
     background-position: 0px;
   }
