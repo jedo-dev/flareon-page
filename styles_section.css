@@ -158,7 +158,10 @@
   padding: 20px;
   scrollbar-width: thin; /* Тонкий скроллбар */
   scrollbar-color: #973faf transparent; /* Цвет скроллбара */
-
+  @media (max-width: 480px) {
+    min-height: 60dvh;
+    transform: translateY(-5%);
+  }
   /* Стилизация скроллбара для WebKit */
   &::-webkit-scrollbar {
     width: 6px;
@@ -181,6 +184,7 @@
   transition: transform 0.3s ease;
   @media (max-width: 480px) {
     flex-direction: column;
+    min-height: 60dvh;
   }
   &:hover {
     transform: translateX(-10px);
