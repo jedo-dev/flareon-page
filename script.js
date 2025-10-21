@@ -1,54 +1,42 @@
-// let animation = anime({
-//   // Цели
-//   targets: '.text',
-//   // Свойства
-//   translateX: 250,
-//   scale: 1,
-//   rotate: '1turn',
-//   // Параметры свойств
-//   duration: 1000,
-//   easing: 'linear',
-//   // Параметры анимации
-//   direction: 'alternate',
-//   loop: true,
-// });
+/**
+ * Портфолио Александра Горбунова - Анимации и интерактивность
+ * Использует библиотеку Anime.js для создания анимаций
+ */
 
 document.addEventListener('DOMContentLoaded', function () {
+  // ===== ПЕРЕМЕННЫЕ И ЭЛЕМЕНТЫ =====
   const starList = document.getElementById('star-list');
-  let section1 = document.querySelector('.section-1');
-  // Получаем размеры секции, а не всего окна
+  let section1 = document.querySelector('.hero-section');
+  let resizeTimeout;
 
-
+  // ===== ГЕНЕРАЦИЯ ЗВЕЗД =====
+  /**
+   * Генерирует анимированные звезды в первой секции
+   * Адаптивно подстраивается под размер экрана
+   */
   const generateStars = () => {
-
     const { width, height } = section1.getBoundingClientRect();
-    console.log(`current width and height`, width, height)
     const isMobile = width < 768;
     let sectionRect = section1.getBoundingClientRect();
     let centerX = sectionRect.width / 2;
     let centerY = sectionRect.height / 2;
     const radius = isMobile ? width * 0.7 : height * 0.5;
-    const numberOfStars = isMobile ? 30 : 60
+    const numberOfStars = isMobile ? 30 : 60;
+
     for (let i = 0; i < numberOfStars; i++) {
       const angle = (i / numberOfStars) * Math.PI * 2;
-
-      // Генерация координат внутри секции
       const x = centerX + radius * Math.cos(angle) + (Math.random() * 100 - 50);
       const y = centerY + radius * Math.sin(angle) + (Math.random() * 100 - 50);
 
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('class', `stars stars-${Math.floor(Math.random() * 3) + 1}`);
+      svg.setAttribute('class', `star star-${Math.floor(Math.random() * 3) + 1}`);
       svg.setAttribute('viewBox', '0 0 800 400');
-      svg.setAttribute('height', '100px'); // Уменьшаем размер звезд
+      svg.setAttribute('height', '100px');
       svg.style.setProperty('--star-size', Math.floor(Math.random() * 3));
       svg.style.setProperty('--twinkle-delay', `${Math.floor(Math.random() * 3)}s`);
       svg.style.setProperty('--twinkle-duration', `${Math.floor(Math.random() * 3)}s`);
-      // Позиционируем относительно секции
-      svg.style.position = 'absolute';
-      svg.style.left = `${x}px`;
-      svg.style.top = `${y}px`;
 
-      // Ограничиваем, чтобы звезды не выходили за границы
+      svg.style.position = 'absolute';
       svg.style.left = `${Math.max(20, Math.min(x, sectionRect.width - 20))}px`;
       svg.style.top = `${Math.max(20, Math.min(y, sectionRect.height - 20))}px`;
 
@@ -68,107 +56,64 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
-  generateStars(); // Увеличиваем радиус и количество звезд
-  let resizeTimeout;
-
-  console.log(`anime`, anime)
-  // Функция для очистки и генерации
+  // ===== ОБНОВЛЕНИЕ ЗВЕЗД =====
+  /**
+   * Очищает старые звезды и создает новые с анимацией
+   */
   const updateStars = () => {
-    section1 = document.querySelector('.section-1');
-    starList.innerHTML = ''; // Удаляем все старые звезды
-    generateStars(); // Генерируем новые
-    let animationStars = anime({
-      // Цели
-      targets: '.stars-1',
-      // Свойства
+    section1 = document.querySelector('.hero-section');
+    starList.innerHTML = '';
+    generateStars();
+
+    // Анимация для разных групп звезд
+    anime({
+      targets: '.star-1',
       translateX: 10,
       scale: 1,
       rotate: '2turn',
-      // Параметры свойств
       duration: 1000,
       easing: 'linear',
-      // Параметры анимации
       direction: 'alternate',
       loop: true,
     });
 
-    let animationStars2 = anime({
-      // Цели
-      targets: '.stars-2',
-      // Свойства
+    anime({
+      targets: '.star-2',
       translateX: -100,
       scale: 1,
       rotate: '1turn',
-      // Параметры свойств
       duration: 1000,
       easing: 'linear',
-      // Параметры анимации
       direction: 'alternate',
       loop: true,
     });
-    let animationStars3 = anime({
-      // Цели
-      targets: '.stars-3',
-      // Свойства
+
+    anime({
+      targets: '.star-3',
       translateX: 100,
       scale: 1,
       rotate: '3turn',
-      // Параметры свойств
       duration: 2000,
       easing: 'linear',
-      // Параметры анимации
       direction: 'alternate',
       loop: true,
     });
   };
 
-  // Первая загрузка
+  // ===== ИНИЦИАЛИЗАЦИЯ =====
   updateStars();
 
   // Обработчик ресайза с debounce
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
-
     resizeTimeout = setTimeout(updateStars, 200);
   });
-  // generateStars(750, 30);
-  // generateStars(1050, 30);
-  // generateStars(250, 15);
 
-  ///падающие звезды
-
-  // window.addEventListener('scroll', function () {
-  //   console.log('scroll');
-  //   const scrollPosition = window.scrollY || window.pageYOffset; // Позиция скролла
-  //   anime({
-  //     // Запускаем анимацию превращения звезд в линию
-  //     targets: '.stars',
-  //     translateY: scrollPosition, // Преобразование в линию по вертикали
-  //     // Преобразование в линию по горизонтали
-  //     direction: 'alternate',
-  //     duration: 1000, // Длительность анимации
-  //     easing: 'linear',
-  //   });
-  // });
-
-  // var myAnimation = anime({
-  //   targets: ['.line-stars'],
-  //   translateX: window.innerWidth,
-  //   easing: 'linear',
-  //   duration: 1000,
-  //   delay: anime.stagger(100),
-  //   loop: true,
-  // });
-  // var myAnimation = anime({
-  //   targets: ['.line-stars-2'],
-  //   translateX: window.innerWidth,
-  //   easing: 'linear',
-  //   duration: 1100,
-  //   delay: anime.stagger(90),
-  //   loop: true,
-  // });
-
-  var myAnimation = anime({
+  // ===== АНИМАЦИИ ПАДАЮЩИХ ЗВЕЗД =====
+  /**
+   * Анимация падающих звезд в первой секции
+   */
+  anime({
     targets: ['.line-stars-3', '.line-stars', '.line-stars-2'],
     translateX: window.innerWidth,
     easing: function (el, i, total) {
@@ -176,95 +121,81 @@ document.addEventListener('DOMContentLoaded', function () {
         return Math.pow(Math.sin(t * (i + 1)), 1);
       };
     },
-    // duration: 4000,
-    // delay: anime.stagger(70),
     loop: true,
   });
 
-  var myAnimation = anime({
+  // Анимация вертикальных элементов
+  anime({
     targets: ['.vertical'],
-
     easing: 'linear',
     translateX: 50,
     translateY: 50,
     direction: 'alternate',
     duration: 900,
-
     loop: true,
   });
 
-  var myAnimation12 = anime({
-    // Цели
+  // ===== АНИМАЦИЯ ПАДАЮЩИХ ЗВЕЗД =====
+  /**
+   * Анимация падающих звезд с эффектом появления и исчезновения
+   */
+  anime({
     targets: '.falling-star',
-    // Начальная позиция (правый верхний угол)
-    translateX: ['100vw', '-100vw'], // От правого края до левого
-    translateY: ['-100vh', '100vh'], // От верхнего края до нижнего
-    // Масштабирование от маленького к большому и обратно
+    translateX: ['100vw', '-100vw'],
+    translateY: ['-100vh', '100vh'],
     scale: [0.2, 1.5, 0],
-    // Прозрачность (появление и исчезновение)
     opacity: [0, 1, 0],
-    // Вращение
-
-    // Длительность анимации
     duration: 6000,
-    // Функция плавности
     easing: 'easeInOutQuad',
-    // Бесконечный повтор
     loop: true,
-    // Задержка перед повторением (по желанию)
     delay: function (el, i) {
-      return i * 500; // Задержка для нескольких звезд
+      return i * 500;
     }
   });
 
-  var jupiter = anime({
-    // Цели
+  // ===== АНИМАЦИЯ ПЛАНЕТЫ ЮПИТЕР =====
+  /**
+   * Плавная анимация покачивания планеты Юпитер
+   */
+  anime({
     targets: '.jupiter',
-    // Плавное покачивание вверх-вниз
     translateY: ['-200px', '-100px'],
-    // Лёгкое колебание из стороны в сторону
     translateX: ['-70px', '-60px'],
-    // Небольшое изменение масштаба
     scale: [0.98, 1.02],
-    // Медленное вращение
     rotate: {
       value: 30,
       easing: 'linear'
     },
-    // Настройки анимации
-    duration: 8000, // Более медленная анимация для плавности
-    easing: 'easeInOutSine', // Плавное ускорение/замедление
-    direction: 'alternate', // Движение вперед-назад
+    duration: 8000,
+    easing: 'easeInOutSine',
+    direction: 'alternate',
     loop: true,
-    // Небольшая случайная задержка для более естественного вида
     delay: anime.random(0, 2000)
-
   });
 
-
-  // Инициализация анимации
-
-  const colors = ['#708ea7', '#7072a7', '#70a7a5', '#a78970']; // Ваша палитра
+  // ===== ЭФФЕКТ "ДРОЖАНИЯ" ДЛЯ ТЕКСТА =====
+  /**
+   * Создает эффект дрожания для текста (cardboard effect)
+   * @param {string} target - CSS селектор элемента
+   */
+  const colors = ['#708ea7', '#7072a7', '#70a7a5', '#a78970'];
   const cardboardShake = (target) => {
     anime({
       targets: target,
       translateX: () => anime.random(-1, 1),
       translateY: () => anime.random(-1, 1),
-
       color: () => {
         let num = anime.random(0, 4);
-        return colors[num]
+        return colors[num];
       },
-
       rotate: () => anime.random(-1, 1),
       duration: () => anime.random(80, 120),
-
-      easing: 'steps(10)', // Рваная анимация
-      complete: () => cardboardShake(target) // Рекурсивный вызов
+      easing: 'steps(10)',
+      complete: () => cardboardShake(target)
     });
   };
 
-  cardboardShake('.text');
-  cardboardShake('.text-2');
+  // Применяем эффект дрожания к тексту
+  cardboardShake('.text-primary');
+  cardboardShake('.text-secondary');
 });
-

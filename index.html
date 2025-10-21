@@ -1,220 +1,235 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <link rel="stylesheet" href="./styles/fonts.styles.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="styles_section.css" />
+    <!-- Мета-теги -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Александр Горбунов - Frontend Developer</title>
+
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="./styles/fonts.styles.css" />
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/layout.css" />
+    <link rel="stylesheet" href="./styles/components.css" />
+    <link rel="stylesheet" href="./styles/animations.css" />
+    <link rel="stylesheet" href="./styles/responsive.css" />
+
+    <!-- Подключение библиотек и скриптов -->
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div class="container">
-      <section id="two" class="wrapper section-1">
-        <ul id="star-list" class="star-list"></ul>
-        <div class="main-guy"></div>
-        <div class="card">
+    <div class="portfolio-container">
+      <!-- СЕКЦИЯ 1: ПРИВЕТСТВИЕ И ПРЕЗЕНТАЦИЯ -->
+      <section id="hero" class="portfolio-section hero-section">
+        <ul id="star-list" class="stars-container"></ul>
+        <div class="main-character"></div>
+        <div class="hero-card">
           <div>
-            <p class="text">A</p>
-            <p class="text">l</p>
-            <p class="text">e</p>
-            <p class="text">x</p>
+            <p class="text-primary">A</p>
+            <p class="text-primary">l</p>
+            <p class="text-primary">e</p>
+            <p class="text-primary">x</p>
             <br />
-            <p class="text"></p>
-            <p class="text">G</p>
-            <p class="text">o</p>
-            <p class="text">r</p>
-            <p class="text">b</p>
-            <p class="text">u</p>
-            <p class="text">n</p>
-            <p class="text">o</p>
-            <p class="text">v</p>
+            <p class="text-primary"></p>
+            <p class="text-primary">G</p>
+            <p class="text-primary">o</p>
+            <p class="text-primary">r</p>
+            <p class="text-primary">b</p>
+            <p class="text-primary">u</p>
+            <p class="text-primary">n</p>
+            <p class="text-primary">o</p>
+            <p class="text-primary">v</p>
             <div>&nbsp;</div>
-            <p class="text-2">F</p>
-            <p class="text-2">r</p>
-            <p class="text-2">o</p>
-            <p class="text-2">n</p>
-            <p class="text-2">t</p>
-            <p class="text-2">e</p>
-            <p class="text-2">n</p>
-            <p class="text-2">d</p>
+            <p class="text-secondary">F</p>
+            <p class="text-secondary">r</p>
+            <p class="text-secondary">o</p>
+            <p class="text-secondary">n</p>
+            <p class="text-secondary">t</p>
+            <p class="text-secondary">e</p>
+            <p class="text-secondary">n</p>
+            <p class="text-secondary">d</p>
             <br />
-            <p class="text-2">D</p>
-            <p class="text-2">e</p>
-            <p class="text-2">v</p>
-            <p class="text-2">e</p>
-            <p class="text-2">l</p>
-            <p class="text-2">o</p>
-            <p class="text-2">p</p>
-            <p class="text-2">e</p>
-            <p class="text-2">r</p>
+            <p class="text-secondary">D</p>
+            <p class="text-secondary">e</p>
+            <p class="text-secondary">v</p>
+            <p class="text-secondary">e</p>
+            <p class="text-secondary">l</p>
+            <p class="text-secondary">o</p>
+            <p class="text-secondary">p</p>
+            <p class="text-secondary">e</p>
+            <p class="text-secondary">r</p>
           </div>
-          <img src="./falling-star.svg" class="falling-star" width="70" />
-          <img src="./falling-star.svg" class="falling-star" width="70" />
-          <img src="./falling-star.svg" class="falling-star" width="70" />
-          <img src="./jupiter.png" class="jupiter" width="100" />
+          <img src="./assets/images/ui/falling-star.svg" class="falling-star" width="70" />
+          <img src="./assets/images/ui/falling-star.svg" class="falling-star" width="70" />
+          <img src="./assets/images/ui/falling-star.svg" class="falling-star" width="70" />
+          <img src="./assets/images/planets/jupiter.png" class="jupiter" width="100" />
         </div>
       </section>
-      <section id="two" class="wrapper section-2">
-        <div class="title">
-          <p class="text">П</p>
-          <p class="text">р</p>
-          <p class="text">о</p>
-          <p class="text">е</p>
-          <p class="text">к</p>
-          <p class="text">т</p>
-          <p class="text">ы</p>
+
+      <!-- СЕКЦИЯ 2: ПОРТФОЛИО ПРОЕКТОВ -->
+      <section id="projects" class="portfolio-section projects-section">
+        <div class="section-title">
+          <p class="text-primary">П</p>
+          <p class="text-primary">р</p>
+          <p class="text-primary">о</p>
+          <p class="text-primary">е</p>
+          <p class="text-primary">к</p>
+          <p class="text-primary">т</p>
+          <p class="text-primary">ы</p>
         </div>
-        <div class="character-vertical"></div>
-        <div class="horizontal-tabs-container">
-          <div class="horizontal-tabs">
-            <div data-count="0" class="vertical-tab">
-              <img/ src="./images/projects/kommunalka.png" class="tabs-image">
-              <div class="vertical-tab-wrapper-text">
-                <div class="vertical-tab-title">Kommunalka</div>
-                <div class="vertical-tab-text">
+        <div class="character-sprite"></div>
+        <div class="projects-container">
+          <div class="projects-grid">
+            <!-- ПРОЕКТ 1: KOMMUNALKA -->
+            <div data-count="0" class="project-card">
+              <img/ src="./assets/images/projects/kommunalka-project.png" class="project-image">
+              <div class="project-content">
+                <div class="project-title">Kommunalka</div>
+                <div class="project-description">
                   Пет-проект для расчета коммунальных услуг. Технологический стек: -Vue3 +
                   Express.js + MongoDB. Модуль авторизации и персонализированный круд по внесению
                   электроэнергии и показаний воды. На клиенте доступна опция экспорта крайнего
                   показания в виде png картинки.
                 </div>
                 <divider></divider>
-                <div class="vertical-tav-techno-wrapper">
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/vue.png" class="logo">
+                <div class="tech-list">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/vue-logo.png" class="tech-logo">
                     <div>Vue Js</div>
                   </div>
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/express.png" class="logo">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/express-logo.png" class="tech-logo">
                     <div>Express Js</div>
                   </div>
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/mongo.png" class="logo">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/mongodb-logo.png" class="tech-logo">
                     <div>Mongo DB</div>
                   </div>
                 </div>
               </div>
             </div>
-            <div data-count="0" class="vertical-tab">
-              <img/ src="./images/projects/pabp.png" class="tabs-image">
-              <div class="vertical-tab-wrapper-text">
-                <div class="vertical-tab-title">Система автоматизации бизнес-процессов</div>
-                <div class="vertical-tab-text">
+            <!-- ПРОЕКТ 2: СИСТЕМА АВТОМАТИЗАЦИИ -->
+            <div data-count="0" class="project-card">
+              <img/ src="./assets/images/projects/automation-system-project.png"
+              class="project-image">
+              <div class="project-content">
+                <div class="project-title">Система автоматизации бизнес-процессов</div>
+                <div class="project-description">
                   Система предназначена для решения задач сбора, хранения, анализа, поиска и
                   распространения информации о событиях, возникающих на атомных
                   электростанциях.Используемые технологии: Mobx, Keycloack, Camunda.
                 </div>
                 <divider></divider>
-                <div class="vertical-tav-techno-wrapper">
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/react.png" class="logo">
+                <div class="tech-list">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/react-logo.png" class="tech-logo">
                     <div>React</div>
                   </div>
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/nest.png" class="logo">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/nestjs-logo.png" class="tech-logo">
                     <div>Nest</div>
                   </div>
                 </div>
               </div>
             </div>
-            <div data-count="0" class="vertical-tab">
-              <img/ src="./images/projects/paio.png" class="tabs-image">
-              <div class="vertical-tab-wrapper-text">
-                <div class="vertical-tab-title">Система статистического анализа и отчетности</div>
-                <div class="vertical-tab-text">
+            <!-- ПРОЕКТ 3: СИСТЕМА СТАТИСТИЧЕСКОГО АНАЛИЗА -->
+            <div data-count="0" class="project-card">
+              <img/ src="./assets/images/projects/statistics-system-project.png"
+              class="project-image">
+              <div class="project-content">
+                <div class="project-title">Система статистического анализа и отчетности</div>
+                <div class="project-description">
                   Разработка клиентской части для интеграции отчетов с опцией филтрации путем
                   использованиz embedded-sdk.Используемые технологии: Apache Superset.
                 </div>
                 <divider></divider>
-                <div class="vertical-tav-techno-wrapper">
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/react.png" class="logo">
+                <div class="tech-list">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/react-logo.png" class="tech-logo">
                     <div>React</div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div data-count="0" class="vertical-tab">
-              <img/ src="./images/projects/leap.png" class="tabs-image">
-              <div class="vertical-tab-wrapper-text">
-                <div class="vertical-tab-title">CRM-система для ресторанного бизнеса</div>
-                <div class="vertical-tab-text">
+            <!-- ПРОЕКТ 4: CRM-СИСТЕМА ДЛЯ РЕСТОРАНОВ -->
+            <div data-count="0" class="project-card">
+              <img/ src="./assets/images/projects/restaurant-crm-project.png" class="project-image">
+              <div class="project-content">
+                <div class="project-title">CRM-система для ресторанного бизнеса</div>
+                <div class="project-description">
                   Участие в разработке CRM-системы, реализация админ панели внесения новостей
                   заведений для последующего взаимодействия клиентов уже во flutter приложении.
                   используемые технологии : Pinia, i18n.
                 </div>
                 <divider></divider>
-                <div class="vertical-tav-techno-wrapper">
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/nuxt.png" class="logo">
+                <div class="tech-list">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/nuxt-logo.png" class="tech-logo">
                     <div>Nuxt</div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div data-count="0" class="vertical-tab">
-              <img/ src="./images/projects/volimfit.png" class="tabs-image">
-              <div class="vertical-tab-wrapper-text">
-                <div class="vertical-tab-title">Сайт спортивного клуба</div>
-                <div class="vertical-tab-text">
+            <!-- ПРОЕКТ 5: САЙТ СПОРТИВНОГО КЛУБА -->
+            <div data-count="0" class="project-card">
+              <img/ src="./assets/images/projects/sports-club-project.png" class="project-image">
+              <div class="project-content">
+                <div class="project-title">Сайт спортивного клуба</div>
+                <div class="project-description">
                   Работа под ключ, с использованием сервверного рендеринга, подключением Google
                   Recaptcha для формы, подготовка бекенд сервиса smtp для получения писем и отправки
                   в телеграмм бота.
                 </div>
                 <divider></divider>
-                <div class="vertical-tav-techno-wrapper">
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/react.png" class="logo">
+                <div class="tech-list">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/react-logo.png" class="tech-logo">
                     <div>Nuxt</div>
                   </div>
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/nest.png" class="logo">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/nestjs-logo.png" class="tech-logo">
                     <div>Nest</div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <!--  Misty -->
-
-            <div data-count="0" class="vertical-tab">
-              <img/ src="./images/projects/mistystudio.png" class="tabs-image">
-              <div class="vertical-tab-wrapper-text">
-                <div class="vertical-tab-title">Сайт детейлинга автомобилей</div>
-                <div class="vertical-tab-text">
+            <!-- ПРОЕКТ 6: САЙТ ДЕТЕЙЛИНГА -->
+            <div data-count="0" class="project-card">
+              <img/ src="./assets/images/projects/detailing-studio-project.png"
+              class="project-image">
+              <div class="project-content">
+                <div class="project-title">Сайт детейлинга автомобилей</div>
+                <div class="project-description">
                   Сопровождение сайта, подддержка работы SEO, изменение функциональной логики
                   блоков, корректировка связей на стороне хедлесс фреймворка. Используемые
                   технологии: Strapi, Nuxt , Pinia
                 </div>
                 <divider></divider>
-                <div class="vertical-tav-techno-wrapper">
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/nuxt.png" class="logo">
+                <div class="tech-list">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/nuxt-logo.png" class="tech-logo">
                     <div>Nuxt</div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <!-- Experiments-->
-            <div data-count="0" class="vertical-tab">
-              <img/ src="./images/projects/experiments.png" class="tabs-image">
-              <div class="vertical-tab-wrapper-text">
-                <div class="vertical-tab-title">
+            <!-- ПРОЕКТ 7: АГРОТЕХНИЧЕСКИЕ ЭКСПЕРИМЕНТЫ -->
+            <div data-count="0" class="project-card">
+              <img/ src="./assets/images/projects/agricultural-experiments-project.png"
+              class="project-image">
+              <div class="project-content">
+                <div class="project-title">
                   Программа записи и учета агротехнических экспериментов
                 </div>
-                <div class="vertical-tab-text">
+                <div class="project-description">
                   Программа учитывает запись экспериментов и опытов над зерновыми культурами, имеет
                   функционал экспорта отчетов. Используемые технологии : React, Mobx
                 </div>
                 <divider></divider>
-                <div class="vertical-tav-techno-wrapper">
-                  <div class="vertical-tav-techno">
-                    <img/ src="./images/logo/react.png" class="logo">
+                <div class="tech-list">
+                  <div class="tech-item">
+                    <img/ src="./assets/images/technologies/react-logo.png" class="tech-logo">
                     <div>Nuxt</div>
                   </div>
                 </div>
@@ -223,9 +238,11 @@
           </div>
         </div>
       </section>
-      <section id="three" class="wrapper section-3">
+
+      <!-- СЕКЦИЯ 3: ОБРАЗОВАНИЕ -->
+      <section id="education" class="portfolio-section education-section">
         <div class="planet-container">
-          <img class="planet-img" src="./images/moon.png" alt="Планета">
+          <img class="planet-image" src="./assets/images/planets/moon.png" alt="Планета" />
           <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <path id="circlePath" d="M20,50 a30,30 0 1,1 60,0 a30,30 0 1,1 -60,0" />
@@ -236,12 +253,16 @@
           </svg>
         </div>
       </section>
-      <section id="four" class="wrapper section-3">
-        <div class="wrapper-contact">
-          <div class="star-layer"></div>
-          <p class="text text-test">Проверка деплоя</p>
 
-          <div class="last-img"></div>
+      <!-- СЕКЦИЯ 4: КОНТАКТЫ -->
+      <section id="contact" class="portfolio-section contact-section">
+        <div class="contact-wrapper">
+          <div class="star-background"></div>
+          <p class="text-primary text-accent">Проверка деплоя</p>
+
+          <div class="animated-image-wrapper">
+            <div class="animated-image"></div>
+          </div>
         </div>
       </section>
     </div>

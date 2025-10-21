@@ -1,0 +1,92 @@
+/**
+ * Адаптивные стили
+ * Медиа-запросы для всех устройств
+ */
+
+/* ===== МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) ===== */
+@media (max-width: 768px) {
+  .text-primary,
+  .text-secondary {
+    text-align: left;
+  }
+
+  .hero-card {
+    gap: 40px;
+    flex-direction: column;
+    align-content: flex-start;
+  }
+
+  .main-character {
+    transform: scale(0.25);
+  }
+
+  .projects-grid {
+    min-height: 60dvh;
+    transform: translateY(-5%);
+  }
+
+  .project-card {
+    flex-direction: column;
+    min-height: 60dvh;
+
+    .project-image {
+      width: 80vw;
+    }
+  }
+}
+
+/* ===== МАЛЕНЬКИЕ МОБИЛЬНЫЕ (до 480px) ===== */
+@media (max-width: 480px) {
+  .text-primary,
+  .text-secondary {
+    text-align: left;
+  }
+
+  .main-character {
+    transform: scale(0.4);
+    right: 0px;
+    bottom: -100px;
+  }
+
+  .character-sprite {
+    transform: scale(0.4);
+  }
+
+  .project-card {
+    flex-direction: column;
+    min-height: 60dvh;
+
+    .project-image {
+      width: 80vw;
+    }
+  }
+}
+
+/* ===== ПЛАНШЕТЫ И МАЛЕНЬКИЕ ДЕСКТОПЫ (до 1200px) ===== */
+@media (max-width: 1200px) {
+  .animated-image {
+    zoom: 0.7;
+  }
+}
+
+/* ===== СРЕДНИЕ ПЛАНШЕТЫ (до 900px) ===== */
+@media (max-width: 900px) {
+  .animated-image {
+    zoom: 0.6;
+  }
+}
+
+/* ===== МОБИЛЬНЫЕ (до 600px) ===== */
+@media (max-width: 600px) {
+  .star-background,
+  .animated-image {
+    zoom: 0.3;
+  }
+}
+
+/* ===== ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 400px) ===== */
+@media (max-width: 400px) {
+  .animated-image {
+    zoom: 0.35;
+  }
+}

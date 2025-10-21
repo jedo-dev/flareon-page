@@ -1,0 +1,98 @@
+/**
+ * Макет и структура страницы
+ * Контейнеры, секции, сетка
+ */
+
+/* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+.portfolio-container {
+  max-height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.portfolio-container::-webkit-scrollbar {
+  width: 0;
+}
+
+/* ===== СЕКЦИИ ===== */
+.portfolio-section {
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+/* ===== СЕКЦИЯ ПРИВЕТСТВИЯ ===== */
+.hero-section {
+  background: linear-gradient(180deg, rgba(14, 27, 33, 1) 0%, rgba(16, 41, 48, 1) 100%);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+}
+
+/* ===== СЕКЦИЯ ПРОЕКТОВ ===== */
+.projects-section {
+  background: linear-gradient(180deg, rgba(16, 41, 48, 1) 0%, rgb(16 42 51) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100dvh;
+}
+
+/* ===== СЕКЦИЯ ОБРАЗОВАНИЯ ===== */
+.education-section {
+  background: linear-gradient(180deg, rgb(16 42 51) 0%, rgb(19 50 60) 100%);
+}
+
+/* ===== СЕКЦИЯ КОНТАКТОВ ===== */
+.contact-section {
+  background: linear-gradient(180deg, rgb(16 42 51) 0%, rgb(19 50 60) 100%);
+}
+
+.contact-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: inherit;
+  align-items: center;
+  position: relative;
+}
+
+/* ===== ЗАГОЛОВКИ СЕКЦИЙ ===== */
+.section-title {
+  text-align: center;
+}
+
+/* ===== КОНТЕЙНЕР ПРОЕКТОВ ===== */
+.projects-container {
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  padding: 20px;
+}
+
+.projects-grid {
+  display: flex;
+  gap: 20px;
+  padding: 0 5vw;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #973faf transparent;
+}
+
+/* Стилизация скроллбара проектов */
+.projects-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.projects-grid::-webkit-scrollbar-thumb {
+  background-color: #973faf;
+  background: url('../assets/images/ui/scroll-planet.png');
+  border-radius: 3px;
+}
