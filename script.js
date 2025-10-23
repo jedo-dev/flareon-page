@@ -160,7 +160,8 @@ document.addEventListener('DOMContentLoaded', function () {
   anime({
     targets: '.jupiter',
     translateY: ['-200px', '-100px'],
-    translateX: ['-70px', '-60px'],
+    translateX: ['10px', '60px'],
+
     scale: [0.98, 1.02],
     rotate: {
       value: 30,

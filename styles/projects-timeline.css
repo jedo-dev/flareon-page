@@ -1,0 +1,656 @@
+/**
+ * Стили для ленты проектов с расширяемыми карточками
+ * Интерактивная временная линия проектов
+ */
+
+/* ===== КОНТЕЙНЕР ЛЕНТЫ ПРОЕКТОВ ===== */
+.projects-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Мобильная версия - горизонтальный скролл */
+@media (max-width: 768px) {
+  .projects-timeline {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding: 10px;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .projects-timeline::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .projects-timeline::-webkit-scrollbar-track {
+    background: rgba(208, 200, 150, 0.1);
+    border-radius: 2px;
+  }
+
+  .projects-timeline::-webkit-scrollbar-thumb {
+    background: #d0c896;
+    border-radius: 2px;
+  }
+
+  .projects-timeline::-webkit-scrollbar-thumb:hover {
+    background: #b8a882;
+  }
+}
+
+/* ===== ЭЛЕМЕНТ ВРЕМЕННОЙ ЛИНИИ ===== */
+.project-timeline-item {
+  position: relative;
+  background: rgba(16, 41, 48, 0.8);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  scroll-snap-align: start;
+}
+
+.project-timeline-item:hover {
+  border-color: #d0c896;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Мобильная версия - фиксированная ширина */
+@media (max-width: 768px) {
+  .project-timeline-item {
+    flex: 0 0 280px;
+    min-width: 280px;
+    max-width: 280px;
+  }
+}
+
+/* ===== ПРЕВЬЮ ПРОЕКТА ===== */
+.project-preview {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.project-preview:hover {
+  background: rgba(208, 200, 150, 0.1);
+}
+
+.project-preview-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+}
+
+.project-preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-preview:hover .project-preview-image img {
+  transform: scale(1.05);
+}
+
+.project-preview-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-preview-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #d0c896;
+  margin: 0 0 10px 0;
+  font-family: 'Besom-2';
+  line-height: 1.2;
+}
+
+.project-preview-description {
+  color: #ffffff;
+  margin: 0 0 15px 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.project-preview-tech {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.tech-tag {
+  background: rgba(208, 200, 150, 0.2);
+  color: #d0c896;
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(208, 200, 150, 0.3);
+}
+
+/* Мобильная версия - горизонтальная компоновка */
+@media (max-width: 768px) {
+  .project-preview {
+    flex-direction: row;
+    padding: 15px;
+    height: auto;
+  }
+
+  .project-preview-image {
+    width: 80px;
+    height: 60px;
+    margin-right: 15px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .project-preview-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .project-preview-title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .project-preview-description {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+
+  .tech-tag {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+  }
+}
+
+/* ===== КНОПКА РАСШИРЕНИЯ ===== */
+.project-expand-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #d0c896;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.project-expand-btn:hover {
+  background: #b8a882;
+  transform: scale(1.1);
+}
+
+.expand-icon {
+  color: #0e1b21;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.project-timeline-item.expanded .expand-icon {
+  transform: rotate(45deg);
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .project-expand-btn {
+    position: static;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .expand-icon {
+    font-size: 1rem;
+  }
+}
+
+/* ===== ДЕТАЛИ ПРОЕКТА ===== */
+.project-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  background: rgba(16, 41, 48, 0.95);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  border-radius: 15px;
+}
+
+.project-timeline-item.expanded .project-details {
+  max-height: 1000px;
+}
+
+/* Мобильная версия - полноэкранный режим */
+@media (max-width: 768px) {
+  .project-details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    border-radius: 0;
+    background: rgba(16, 41, 48, 0.98);
+  }
+}
+
+.project-details-content {
+  padding: 30px;
+}
+
+.project-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(208, 200, 150, 0.3);
+}
+
+.project-details-title {
+  font-size: 2rem;
+  color: #d0c896;
+  margin: 0;
+  font-family: 'Besom-2';
+}
+
+.project-close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #d0c896;
+  border: none;
+  color: #0e1b21;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.project-close-btn:hover {
+  background: #b8a882;
+  transform: scale(1.1);
+}
+
+/* ===== ТЕЛО ДЕТАЛЕЙ ===== */
+.project-details-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ===== СЛАЙДЕР ИЗОБРАЖЕНИЙ ===== */
+.project-image-slider {
+  position: relative;
+}
+
+.slider-container {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slider-slide {
+  min-width: 100%;
+  height: 300px;
+  position: relative;
+}
+
+.slider-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(208, 200, 150, 0.9);
+  border: none;
+  color: #0e1b21;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.slider-btn:hover {
+  background: #d0c896;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slider-prev {
+  left: 15px;
+}
+
+.slider-next {
+  right: 15px;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(208, 200, 150, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: #d0c896;
+  transform: scale(1.2);
+}
+
+/* ===== ИНФОРМАЦИЯ О ПРОЕКТЕ ===== */
+.project-details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.project-description-full,
+.project-features,
+.project-technologies {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #d0c896;
+}
+
+.project-description-full h3,
+.project-features h3,
+.project-technologies h3 {
+  color: #d0c896;
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  font-family: 'Besom-2';
+}
+
+.project-description-full p {
+  color: #ffffff;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.project-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-features li {
+  color: #ffffff;
+  padding: 8px 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.project-features li::before {
+  content: '▶';
+  color: #d0c896;
+  position: absolute;
+  left: 0;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 15px;
+  background: rgba(208, 200, 150, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+  background: rgba(208, 200, 150, 0.2);
+  transform: translateY(-2px);
+}
+
+.tech-item .tech-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.tech-item span {
+  color: #d0c896;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+
+/* ПЛАНШЕТЫ (до 1024px) */
+@media (max-width: 1024px) {
+  .projects-timeline {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .project-details-body {
+    gap: 30px;
+  }
+
+  .slider-slide {
+    height: 250px;
+  }
+}
+
+/* ПЛАНШЕТЫ (до 768px) */
+@media (max-width: 768px) {
+  .project-details-body {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .slider-slide {
+    height: 200px;
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+  }
+
+  .tech-item {
+    padding: 10px;
+  }
+
+  .tech-item .tech-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .project-details-content {
+    padding: 20px;
+  }
+
+  .project-details-title {
+    font-size: 1.5rem;
+  }
+
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .slider-prev {
+    left: 10px;
+  }
+
+  .slider-next {
+    right: 10px;
+  }
+}
+
+/* МОБИЛЬНЫЕ УСТРОЙСТВА (до 480px) */
+@media (max-width: 480px) {
+  .project-timeline-item {
+    flex: 0 0 250px;
+    min-width: 250px;
+    max-width: 250px;
+  }
+
+  .project-details-content {
+    padding: 15px;
+  }
+
+  .project-details-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+
+  .project-details-title {
+    font-size: 1.2rem;
+  }
+
+  .project-close-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+
+  .slider-slide {
+    height: 150px;
+  }
+
+  .slider-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .slider-prev {
+    left: 5px;
+  }
+
+  .slider-next {
+    right: 5px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .project-description-full,
+  .project-features,
+  .project-technologies {
+    padding: 15px;
+  }
+
+  .project-description-full h3,
+  .project-features h3,
+  .project-technologies h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .project-description-full p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .project-features li {
+    font-size: 0.9rem;
+    padding: 6px 0;
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 8px;
+  }
+
+  .tech-item {
+    padding: 8px;
+  }
+
+  .tech-item .tech-logo {
+    width: 25px;
+    height: 25px;
+  }
+
+  .tech-item span {
+    font-size: 0.8rem;
+  }
+}
+
+/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 360px) */
+@media (max-width: 360px) {
+  .project-timeline-item {
+    flex: 0 0 220px;
+    min-width: 220px;
+    max-width: 220px;
+  }
+
+  .project-details-content {
+    padding: 12px;
+  }
+
+  .slider-slide {
+    height: 120px;
+  }
+
+  .slider-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+}
