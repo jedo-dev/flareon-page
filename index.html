@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./styles/animations.css" />
     <link rel="stylesheet" href="./styles/projects-timeline.css" />
     <link rel="stylesheet" href="./styles/modal.css" />
+    <link rel="stylesheet" href="./styles/education.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
 
     <!-- Подключение библиотек и скриптов -->
@@ -894,16 +895,104 @@
 
       <!-- СЕКЦИЯ 3: ОБРАЗОВАНИЕ -->
       <section id="education" class="portfolio-section education-section">
-        <div class="planet-container">
-          <img class="planet-image" src="./assets/images/planets/moon.png" alt="Планета" />
-          <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <path id="circlePath" d="M20,50 a30,30 0 1,1 60,0 a30,30 0 1,1 -60,0" />
-            </defs>
-            <text>
-              <textPath href="#circlePath" startOffset="0">Бакалавриат - Мгту им Баумана</textPath>
-            </text>
-          </svg>
+        <div class="section-title">
+          <p class="text-primary">О</p>
+          <p class="text-primary">б</p>
+          <p class="text-primary">р</p>
+          <p class="text-primary">а</p>
+          <p class="text-primary">з</p>
+          <p class="text-primary">о</p>
+          <p class="text-primary">в</p>
+          <p class="text-primary">а</p>
+          <p class="text-primary">н</p>
+          <p class="text-primary">и</p>
+          <p class="text-primary">е</p>
+        </div>
+
+      
+
+        <div class="education-planets">
+          <!-- БАКАЛАВРИАТ -->
+          <div class="education-planet" data-education="bachelor">
+            <div class="planet-container">
+              <img class="planet-image" src="./assets/images/planets/moon.png" alt="Бакалавриат" />
+              <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <path
+                    id="bachelor-circle"
+                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                  />
+                </defs>
+                <text>
+                  <textPath href="#bachelor-circle" startOffset="0%">
+                    БАКАЛАВРИАТ • МГТУ им. Баумана • 2015-2019 •
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+            <div class="education-info">
+              <h3 class="education-degree">Бакалавриат</h3>
+              <p class="education-university">МГТУ им. Баумана</p>
+              <p class="education-years">2015-2019</p>
+              <p class="education-specialty"> Конструирование и технология электронных средств</p>
+            </div>
+          </div>
+
+          <!-- МАГИСТРАТУРА -->
+          <div class="education-planet" data-education="master">
+            <div class="planet-container">
+              <img
+                class="planet-image"
+                src="./assets/images/planets/earth.png"
+                alt="Магистратура"
+              />
+              <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <path
+                    id="master-circle"
+                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                  />
+                </defs>
+                <text>
+                  <textPath href="#master-circle" startOffset="0%">
+                    МАГИСТРАТУРА • РТУ МИРЭА • 2019-2021 •
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+            <div class="education-info">
+              <h3 class="education-degree">Магистратура</h3>
+              <p class="education-university">РТУ МИРЭА</p>
+              <p class="education-years">2019-2021</p>
+              <p class="education-specialty"> Конструирование и технология электронных средств</p>
+            </div>
+          </div>
+
+          <!-- АСПИРАНТУРА -->
+          <div class="education-planet" data-education="phd">
+            <div class="planet-container">
+              <img class="planet-image" src="./assets/images/planets/sun.png" alt="Аспирантура" />
+              <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <path
+                    id="phd-circle"
+                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                  />
+                </defs>
+                <text>
+                  <textPath href="#phd-circle" startOffset="0%">
+                    АСПИРАНТУРА • МФЮА • 2021-2025 •
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+            <div class="education-info">
+              <h3 class="education-degree">Аспирантура</h3>
+              <p class="education-university">МФЮА</p>
+              <p class="education-years">2021-2025</p>
+              <p class="education-specialty">Информатика и вычислительная техника</p>
+            </div>
+          </div>
         </div>
       </section>
 
