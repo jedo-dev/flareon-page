@@ -174,6 +174,24 @@ document.addEventListener('DOMContentLoaded', function () {
     delay: anime.random(0, 2000)
   });
 
+
+    anime({
+    targets: '.ufo',
+    translateY: ['0', '-100%'],
+    translateX: ['0', '-100%'],
+
+    scale: [0.98, 1.02],
+    rotate: {
+      value: 30,
+      easing: 'linear'
+    },
+    duration: 8000,
+    easing: 'easeInOutSine',
+    direction: 'alternate',
+    loop: true,
+    delay: anime.random(0, 2000)
+  });
+
   // ===== ЭФФЕКТ "ДРОЖАНИЯ" ДЛЯ ТЕКСТА =====
   /**
    * Создает эффект дрожания для текста (cardboard effect)
