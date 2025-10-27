@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-    anime({
+  anime({
     targets: '.ufo',
     translateY: ['0', '-100%'],
     translateX: ['0', '-100%'],
@@ -217,4 +217,129 @@ document.addEventListener('DOMContentLoaded', function () {
   // Применяем эффект дрожания к тексту
   cardboardShake('.text-primary');
   cardboardShake('.text-secondary');
+
+  // ===== ГЕНЕРАЦИЯ ПАДАЮЩИХ ЛИНИЙ ДЛЯ СЕКЦИИ ТЕХНОЛОГИЙ =====
+  /**
+   * Генерирует вертикальные линии, падающие сверху вниз
+   * Создает эффект карандашной штриховки
+   */
+
+  /**
+   * ===== КОНФИГУРАЦИЯ ЛИНИЙ =====
+   * Можно изменять параметры для настройки эффекта:
+   * 
+   * numberOfLines - количество одновременно создаваемых линий
+   * colors - массив цветов в HEX формате
+   * minSpeed/maxSpeed - диапазон скорости падения в миллисекундах
+   * minHeight/maxHeight - диапазон высоты линий в пикселях
+   * spawnInterval - интервал появления новых линий
+   * lineWidth - толщина линии
+   */
+  const lineConfig = {
+    numberOfLines: 100,           // Количество линий на экране
+    colors: ['#d0c896', '#9e7960', '#708ea7'],  // Три цвета для линий
+    minSpeed: 200,              // Минимальная скорость анимации (мс)
+    maxSpeed: 1000,              // Максимальная скорость анимации (мс)
+    minHeight: 80,               // Минимальная высота линии
+    maxHeight: 200,              // Максимальная высота линии
+    spawnInterval: 100,          // Интервал появления новых линий (мс)
+    lineWidth: 2,                // Толщина линии (px)
+  };
+
+  const generateFallingLines = () => {
+    const technologiesSection = document.querySelector('.technologies-section');
+    const starBackground = technologiesSection?.querySelector('.star-background');
+
+    if (!starBackground) return;
+
+    // Очищаем предыдущие линии
+    starBackground.innerHTML = '';
+
+    // Создаем функцию для генерации одной линии
+    const createLine = () => {
+      const line = document.createElement('div');
+      line.classList.add('falling-line');
+
+      // Случайная позиция по горизонтали
+      const randomX = Math.random() * 100;
+      line.style.left = `${randomX}%`;
+
+      // Случайная высота линии
+      const randomHeight = lineConfig.minHeight + Math.random() * (lineConfig.maxHeight - lineConfig.minHeight);
+      line.style.height = `${randomHeight}px`;
+
+      // Случайный цвет
+      const randomColor = lineConfig.colors[Math.floor(Math.random() * lineConfig.colors.length)];
+      line.style.backgroundColor = randomColor;
+      line.style.boxShadow = `0 0 3px ${randomColor}`;
+
+      // Толщина линии
+      line.style.width = `${lineConfig.lineWidth}px`;
+
+      // Небольшой горизонтальный сдвиг для неровности
+      const randomOffset = (Math.random() - 0.5) * 3;
+      line.style.setProperty('--shake-offset', `${randomOffset}px`);
+
+      starBackground.appendChild(line);
+
+      // Анимация через Anime.js
+      const randomSpeed = lineConfig.minSpeed + Math.random() * (lineConfig.maxSpeed - lineConfig.minSpeed);
+
+      const viewportHeight = window.innerHeight;
+      const lineStartTop = -randomHeight;
+
+      anime({
+        targets: line,
+        top: [lineStartTop, viewportHeight + 50],
+        opacity: [
+          { value: 0, duration: 0 },
+          { value: 1, duration: 100 },
+          { value: 1, duration: randomSpeed * 0.8 },
+          { value: 0, duration: 200 }
+        ],
+        duration: randomSpeed,
+        easing: 'linear',
+        complete: () => {
+          line.remove();
+        }
+      });
+
+      // Дополнительная анимация дрожания
+      anime({
+        targets: line,
+        translateX: [
+          { value: () => anime.random(-2, 2), duration: 200 },
+          { value: () => anime.random(-1.5, 1.5), duration: 200 },
+          { value: () => anime.random(-2, 2), duration: 200 },
+          { value: () => anime.random(-1, 1), duration: 200 },
+          { value: () => anime.random(-2, 2), duration: 200 },
+          { value: () => anime.random(-1.5, 1.5), duration: 200 },
+        ],
+        duration: randomSpeed * 0.5,
+        easing: 'easeInOutSine',
+        loop: true,
+        direction: 'alternate'
+      });
+    };
+
+    // Создаем начальные линии
+    for (let i = 0; i < lineConfig.numberOfLines; i++) {
+      const randomDelay = Math.random() * 2000;
+      setTimeout(() => {
+        createLine();
+      }, randomDelay);
+    }
+
+    // Постоянно создаем новые линии
+    const spawnLines = () => {
+      createLine();
+      setTimeout(spawnLines, lineConfig.spawnInterval);
+    };
+
+    // Запускаем постоянную генерацию
+    setTimeout(spawnLines, lineConfig.spawnInterval);
+  };
+
+  // Запускаем генерацию линий
+  generateFallingLines();
 });
