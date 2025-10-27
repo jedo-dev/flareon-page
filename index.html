@@ -12,17 +12,22 @@
     <link rel="stylesheet" href="./styles/layout.css" />
     <link rel="stylesheet" href="./styles/components.css" />
     <link rel="stylesheet" href="./styles/animations.css" />
+    <link rel="stylesheet" href="./styles/projects-timeline.css" />
+    <link rel="stylesheet" href="./styles/modal.css" />
+    <link rel="stylesheet" href="./styles/education.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
 
     <!-- Подключение библиотек и скриптов -->
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="script.js" defer></script>
+    <script src="js/projects-timeline.js" defer></script>
   </head>
   <body>
     <div class="portfolio-container">
       <!-- СЕКЦИЯ 1: ПРИВЕТСТВИЕ И ПРЕЗЕНТАЦИЯ -->
       <section id="hero" class="portfolio-section hero-section">
         <ul id="star-list" class="stars-container"></ul>
+        <div class="second-char"></div>
         <div class="main-character"></div>
         <div class="hero-card">
           <div>
@@ -69,6 +74,8 @@
 
       <!-- СЕКЦИЯ 2: ПОРТФОЛИО ПРОЕКТОВ -->
       <section id="projects" class="portfolio-section projects-section">
+         
+           <div class="star-background"></div>
         <div class="section-title">
           <p class="text-primary">П</p>
           <p class="text-primary">р</p>
@@ -79,158 +86,763 @@
           <p class="text-primary">ы</p>
         </div>
         <div class="character-sprite"></div>
+        
         <div class="projects-container">
-          <div class="projects-grid">
+          
+          <div class="projects-timeline">
             <!-- ПРОЕКТ 1: KOMMUNALKA -->
-            <div data-count="0" class="project-card">
-              <img/ src="./assets/images/projects/kommunalka-project.png" class="project-image">
-              <div class="project-content">
-                <div class="project-title">Kommunalka</div>
-                <div class="project-description">
-                  Пет-проект для расчета коммунальных услуг. Технологический стек: -Vue3 +
-                  Express.js + MongoDB. Модуль авторизации и персонализированный круд по внесению
-                  электроэнергии и показаний воды. На клиенте доступна опция экспорта крайнего
-                  показания в виде png картинки.
+            <div class="project-timeline-item" data-project="kommunalka">
+              <div class="project-preview">
+                <div class="project-preview-image">
+                  <img src="./assets/images/projects/kommunalka-project.png" alt="Kommunalka" />
                 </div>
-                <divider></divider>
-                <div class="tech-list">
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/vue-logo.png" class="tech-logo">
-                    <div>Vue Js</div>
+                <div class="project-preview-content">
+                  <h3 class="project-preview-title">Kommunalka</h3>
+                  <p class="project-preview-description">
+                    Пет-проект для расчета коммунальных услуг
+                  </p>
+                  <div class="project-preview-tech">
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">MongoDB</span>
                   </div>
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/express-logo.png" class="tech-logo">
-                    <div>Express Js</div>
+                </div>
+                <div class="project-expand-btn">
+                  <span class="expand-icon">+</span>
+                </div>
+              </div>
+
+              <div class="project-details">
+                <div class="project-details-content">
+                  <div class="project-details-header">
+                    <h2 class="project-details-title">Kommunalka</h2>
+                    <button class="project-close-btn">×</button>
                   </div>
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/mongodb-logo.png" class="tech-logo">
-                    <div>Mongo DB</div>
+
+                  <div class="project-details-body">
+                    <div class="project-image-slider">
+                      <div class="slider-container">
+                        <div class="slider-track">
+                          <div class="slider-slide active">
+                            <img
+                              src="./assets/images/projects/kommunalka-project.png"
+                              alt="Kommunalka - Главная страница"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/kommunalka-project.png"
+                              alt="Kommunalka - Дашборд"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/kommunalka-project.png"
+                              alt="Kommunalka - Настройки"
+                            />
+                          </div>
+                        </div>
+                        <button class="slider-btn slider-prev">‹</button>
+                        <button class="slider-btn slider-next">›</button>
+                        <div class="slider-dots">
+                          <span class="dot active"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="project-details-info">
+                      <div class="project-description-full">
+                        <h3>Описание проекта</h3>
+                        <p>
+                          Пет-проект для расчета коммунальных услуг. Технологический стек: Vue3 +
+                          Express.js + MongoDB. Модуль авторизации и персонализированный CRUD по
+                          внесению электроэнергии и показаний воды. На клиенте доступна опция
+                          экспорта крайнего показания в виде PNG картинки.
+                        </p>
+                      </div>
+
+                      <div class="project-features">
+                        <h3>Основные функции</h3>
+                        <ul>
+                          <li>Система авторизации пользователей</li>
+                          <li>Внесение показаний счетчиков</li>
+                          <li>Расчет коммунальных платежей</li>
+                          <li>Экспорт отчетов в PNG</li>
+                          <li>История платежей</li>
+                        </ul>
+                      </div>
+
+                      <div class="project-technologies">
+                        <h3>Технологии</h3>
+                        <div class="tech-grid">
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/vue-logo.png"
+                              alt="Vue.js"
+                              class="tech-logo"
+                            />
+                            <span>Vue.js</span>
+                          </div>
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/express-logo.png"
+                              alt="Express.js"
+                              class="tech-logo"
+                            />
+                            <span>Express.js</span>
+                          </div>
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/mongodb-logo.png"
+                              alt="MongoDB"
+                              class="tech-logo"
+                            />
+                            <span>MongoDB</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- ПРОЕКТ 2: СИСТЕМА АВТОМАТИЗАЦИИ -->
-            <div data-count="0" class="project-card">
-              <img/ src="./assets/images/projects/automation-system-project.png"
-              class="project-image">
-              <div class="project-content">
-                <div class="project-title">Система автоматизации бизнес-процессов</div>
-                <div class="project-description">
-                  Система предназначена для решения задач сбора, хранения, анализа, поиска и
-                  распространения информации о событиях, возникающих на атомных
-                  электростанциях.Используемые технологии: Mobx, Keycloack, Camunda.
+            <div class="project-timeline-item" data-project="automation-system">
+              <div class="project-preview">
+                <div class="project-preview-image">
+                  <img
+                    src="./assets/images/projects/automation-system-project.png"
+                    alt="Система автоматизации"
+                  />
                 </div>
-                <divider></divider>
-                <div class="tech-list">
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/react-logo.png" class="tech-logo">
-                    <div>React</div>
+                <div class="project-preview-content">
+                  <h3 class="project-preview-title">Система автоматизации бизнес-процессов</h3>
+                  <p class="project-preview-description">Система для атомных электростанций</p>
+                  <div class="project-preview-tech">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">NestJS</span>
+                    <span class="tech-tag">MobX</span>
                   </div>
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/nestjs-logo.png" class="tech-logo">
-                    <div>Nest</div>
+                </div>
+                <div class="project-expand-btn">
+                  <span class="expand-icon">+</span>
+                </div>
+              </div>
+
+              <div class="project-details">
+                <div class="project-details-content">
+                  <div class="project-details-header">
+                    <h2 class="project-details-title">Система автоматизации бизнес-процессов</h2>
+                    <button class="project-close-btn">×</button>
+                  </div>
+
+                  <div class="project-details-body">
+                    <div class="project-image-slider">
+                      <div class="slider-container">
+                        <div class="slider-track">
+                          <div class="slider-slide active">
+                            <img
+                              src="./assets/images/projects/automation-system-project.png"
+                              alt="Главная панель"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/automation-system-project.png"
+                              alt="Аналитика"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/automation-system-project.png"
+                              alt="Отчеты"
+                            />
+                          </div>
+                        </div>
+                        <button class="slider-btn slider-prev">‹</button>
+                        <button class="slider-btn slider-next">›</button>
+                        <div class="slider-dots">
+                          <span class="dot active"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="project-details-info">
+                      <div class="project-description-full">
+                        <h3>Описание проекта</h3>
+                        <p>
+                          Система предназначена для решения задач сбора, хранения, анализа, поиска и
+                          распространения информации о событиях, возникающих на атомных
+                          электростанциях. Используемые технологии: MobX, Keycloak, Camunda.
+                        </p>
+                      </div>
+
+                      <div class="project-features">
+                        <h3>Основные функции</h3>
+                        <ul>
+                          <li>Сбор данных с атомных станций</li>
+                          <li>Анализ событий в реальном времени</li>
+                          <li>Автоматизация бизнес-процессов</li>
+                          <li>Интеграция с Keycloak</li>
+                          <li>Генерация отчетов</li>
+                        </ul>
+                      </div>
+
+                      <div class="project-technologies">
+                        <h3>Технологии</h3>
+                        <div class="tech-grid">
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/react-logo.png"
+                              alt="React"
+                              class="tech-logo"
+                            />
+                            <span>React</span>
+                          </div>
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/nestjs-logo.png"
+                              alt="NestJS"
+                              class="tech-logo"
+                            />
+                            <span>NestJS</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <!-- ПРОЕКТ 3: СИСТЕМА СТАТИСТИЧЕСКОГО АНАЛИЗА -->
-            <div data-count="0" class="project-card">
-              <img/ src="./assets/images/projects/statistics-system-project.png"
-              class="project-image">
-              <div class="project-content">
-                <div class="project-title">Система статистического анализа и отчетности</div>
-                <div class="project-description">
-                  Разработка клиентской части для интеграции отчетов с опцией филтрации путем
-                  использованиz embedded-sdk.Используемые технологии: Apache Superset.
+            <div class="project-timeline-item" data-project="statistics-system">
+              <div class="project-preview">
+                <div class="project-preview-image">
+                  <img
+                    src="./assets/images/projects/statistics-system-project.png"
+                    alt="Система статистики"
+                  />
                 </div>
-                <divider></divider>
-                <div class="tech-list">
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/react-logo.png" class="tech-logo">
-                    <div>React</div>
+                <div class="project-preview-content">
+                  <h3 class="project-preview-title">Система статистического анализа</h3>
+                  <p class="project-preview-description">Клиентская часть для интеграции отчетов</p>
+                  <div class="project-preview-tech">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Apache Superset</span>
+                  </div>
+                </div>
+                <div class="project-expand-btn">
+                  <span class="expand-icon">+</span>
+                </div>
+              </div>
+
+              <div class="project-details">
+                <div class="project-details-content">
+                  <div class="project-details-header">
+                    <h2 class="project-details-title">
+                      Система статистического анализа и отчетности
+                    </h2>
+                    <button class="project-close-btn">×</button>
+                  </div>
+
+                  <div class="project-details-body">
+                    <div class="project-image-slider">
+                      <div class="slider-container">
+                        <div class="slider-track">
+                          <div class="slider-slide active">
+                            <img
+                              src="./assets/images/projects/statistics-system-project.png"
+                              alt="Главная панель"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/statistics-system-project.png"
+                              alt="Отчеты"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/statistics-system-project.png"
+                              alt="Аналитика"
+                            />
+                          </div>
+                        </div>
+                        <button class="slider-btn slider-prev">‹</button>
+                        <button class="slider-btn slider-next">›</button>
+                        <div class="slider-dots">
+                          <span class="dot active"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="project-details-info">
+                      <div class="project-description-full">
+                        <h3>Описание проекта</h3>
+                        <p>
+                          Разработка клиентской части для интеграции отчетов с опцией фильтрации
+                          путем использования embedded-sdk. Используемые технологии: Apache
+                          Superset.
+                        </p>
+                      </div>
+
+                      <div class="project-features">
+                        <h3>Основные функции</h3>
+                        <ul>
+                          <li>Интеграция с Apache Superset</li>
+                          <li>Фильтрация отчетов</li>
+                          <li>Embedded SDK</li>
+                          <li>Интерактивные дашборды</li>
+                          <li>Экспорт данных</li>
+                        </ul>
+                      </div>
+
+                      <div class="project-technologies">
+                        <h3>Технологии</h3>
+                        <div class="tech-grid">
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/react-logo.png"
+                              alt="React"
+                              class="tech-logo"
+                            />
+                            <span>React</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <!-- ПРОЕКТ 4: CRM-СИСТЕМА ДЛЯ РЕСТОРАНОВ -->
-            <div data-count="0" class="project-card">
-              <img/ src="./assets/images/projects/restaurant-crm-project.png" class="project-image">
-              <div class="project-content">
-                <div class="project-title">CRM-система для ресторанного бизнеса</div>
-                <div class="project-description">
-                  Участие в разработке CRM-системы, реализация админ панели внесения новостей
-                  заведений для последующего взаимодействия клиентов уже во flutter приложении.
-                  используемые технологии : Pinia, i18n.
+            <div class="project-timeline-item" data-project="restaurant-crm">
+              <div class="project-preview">
+                <div class="project-preview-image">
+                  <img
+                    src="./assets/images/projects/restaurant-crm-project.png"
+                    alt="CRM ресторанов"
+                  />
                 </div>
-                <divider></divider>
-                <div class="tech-list">
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/nuxt-logo.png" class="tech-logo">
-                    <div>Nuxt</div>
+                <div class="project-preview-content">
+                  <h3 class="project-preview-title">CRM-система для ресторанов</h3>
+                  <p class="project-preview-description">Админ панель для управления заведениями</p>
+                  <div class="project-preview-tech">
+                    <span class="tech-tag">Nuxt.js</span>
+                    <span class="tech-tag">Pinia</span>
+                    <span class="tech-tag">i18n</span>
+                  </div>
+                </div>
+                <div class="project-expand-btn">
+                  <span class="expand-icon">+</span>
+                </div>
+              </div>
+
+              <div class="project-details">
+                <div class="project-details-content">
+                  <div class="project-details-header">
+                    <h2 class="project-details-title">CRM-система для ресторанного бизнеса</h2>
+                    <button class="project-close-btn">×</button>
+                  </div>
+
+                  <div class="project-details-body">
+                    <div class="project-image-slider">
+                      <div class="slider-container">
+                        <div class="slider-track">
+                          <div class="slider-slide active">
+                            <img
+                              src="./assets/images/projects/restaurant-crm-project.png"
+                              alt="Админ панель"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/restaurant-crm-project.png"
+                              alt="Управление новостями"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/restaurant-crm-project.png"
+                              alt="Интеграция с Flutter"
+                            />
+                          </div>
+                        </div>
+                        <button class="slider-btn slider-prev">‹</button>
+                        <button class="slider-btn slider-next">›</button>
+                        <div class="slider-dots">
+                          <span class="dot active"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="project-details-info">
+                      <div class="project-description-full">
+                        <h3>Описание проекта</h3>
+                        <p>
+                          Участие в разработке CRM-системы, реализация админ панели внесения
+                          новостей заведений для последующего взаимодействия клиентов уже во Flutter
+                          приложении. Используемые технологии: Pinia, i18n.
+                        </p>
+                      </div>
+
+                      <div class="project-features">
+                        <h3>Основные функции</h3>
+                        <ul>
+                          <li>Админ панель для управления</li>
+                          <li>Внесение новостей заведений</li>
+                          <li>Интеграция с Flutter приложением</li>
+                          <li>Многоязычность (i18n)</li>
+                          <li>Управление состоянием (Pinia)</li>
+                        </ul>
+                      </div>
+
+                      <div class="project-technologies">
+                        <h3>Технологии</h3>
+                        <div class="tech-grid">
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/nuxt-logo.png"
+                              alt="Nuxt.js"
+                              class="tech-logo"
+                            />
+                            <span>Nuxt.js</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <!-- ПРОЕКТ 5: САЙТ СПОРТИВНОГО КЛУБА -->
-            <div data-count="0" class="project-card">
-              <img/ src="./assets/images/projects/sports-club-project.png" class="project-image">
-              <div class="project-content">
-                <div class="project-title">Сайт спортивного клуба</div>
-                <div class="project-description">
-                  Работа под ключ, с использованием сервверного рендеринга, подключением Google
-                  Recaptcha для формы, подготовка бекенд сервиса smtp для получения писем и отправки
-                  в телеграмм бота.
+            <div class="project-timeline-item" data-project="sports-club">
+              <div class="project-preview">
+                <div class="project-preview-image">
+                  <img
+                    src="./assets/images/projects/sports-club-project.png"
+                    alt="Спортивный клуб"
+                  />
                 </div>
-                <divider></divider>
-                <div class="tech-list">
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/react-logo.png" class="tech-logo">
-                    <div>Nuxt</div>
+                <div class="project-preview-content">
+                  <h3 class="project-preview-title">Сайт спортивного клуба</h3>
+                  <p class="project-preview-description">
+                    Полноценный сайт с серверным рендерингом
+                  </p>
+                  <div class="project-preview-tech">
+                    <span class="tech-tag">Nuxt.js</span>
+                    <span class="tech-tag">NestJS</span>
+                    <span class="tech-tag">Telegram Bot</span>
                   </div>
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/nestjs-logo.png" class="tech-logo">
-                    <div>Nest</div>
+                </div>
+                <div class="project-expand-btn">
+                  <span class="expand-icon">+</span>
+                </div>
+              </div>
+
+              <div class="project-details">
+                <div class="project-details-content">
+                  <div class="project-details-header">
+                    <h2 class="project-details-title">Сайт спортивного клуба</h2>
+                    <button class="project-close-btn">×</button>
+                  </div>
+
+                  <div class="project-details-body">
+                    <div class="project-image-slider">
+                      <div class="slider-container">
+                        <div class="slider-track">
+                          <div class="slider-slide active">
+                            <img
+                              src="./assets/images/projects/sports-club-project.png"
+                              alt="Главная страница"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/sports-club-project.png"
+                              alt="Расписание"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/sports-club-project.png"
+                              alt="Контакты"
+                            />
+                          </div>
+                        </div>
+                        <button class="slider-btn slider-prev">‹</button>
+                        <button class="slider-btn slider-next">›</button>
+                        <div class="slider-dots">
+                          <span class="dot active"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="project-details-info">
+                      <div class="project-description-full">
+                        <h3>Описание проекта</h3>
+                        <p>
+                          Работа под ключ, с использованием серверного рендеринга, подключением
+                          Google Recaptcha для формы, подготовка бекенд сервиса SMTP для получения
+                          писем и отправки в Telegram бота.
+                        </p>
+                      </div>
+
+                      <div class="project-features">
+                        <h3>Основные функции</h3>
+                        <ul>
+                          <li>Серверный рендеринг (SSR)</li>
+                          <li>Интеграция с Google Recaptcha</li>
+                          <li>SMTP сервис для отправки писем</li>
+                          <li>Telegram бот для уведомлений</li>
+                          <li>Адаптивный дизайн</li>
+                        </ul>
+                      </div>
+
+                      <div class="project-technologies">
+                        <h3>Технологии</h3>
+                        <div class="tech-grid">
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/nuxt-logo.png"
+                              alt="Nuxt.js"
+                              class="tech-logo"
+                            />
+                            <span>Nuxt.js</span>
+                          </div>
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/nestjs-logo.png"
+                              alt="NestJS"
+                              class="tech-logo"
+                            />
+                            <span>NestJS</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <!-- ПРОЕКТ 6: САЙТ ДЕТЕЙЛИНГА -->
-            <div data-count="0" class="project-card">
-              <img/ src="./assets/images/projects/detailing-studio-project.png"
-              class="project-image">
-              <div class="project-content">
-                <div class="project-title">Сайт детейлинга автомобилей</div>
-                <div class="project-description">
-                  Сопровождение сайта, подддержка работы SEO, изменение функциональной логики
-                  блоков, корректировка связей на стороне хедлесс фреймворка. Используемые
-                  технологии: Strapi, Nuxt , Pinia
+            <div class="project-timeline-item" data-project="detailing-studio">
+              <div class="project-preview">
+                <div class="project-preview-image">
+                  <img
+                    src="./assets/images/projects/detailing-studio-project.png"
+                    alt="Детейлинг студия"
+                  />
                 </div>
-                <divider></divider>
-                <div class="tech-list">
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/nuxt-logo.png" class="tech-logo">
-                    <div>Nuxt</div>
+                <div class="project-preview-content">
+                  <h3 class="project-preview-title">Сайт детейлинга автомобилей</h3>
+                  <p class="project-preview-description">Сопровождение и поддержка сайта</p>
+                  <div class="project-preview-tech">
+                    <span class="tech-tag">Nuxt.js</span>
+                    <span class="tech-tag">Strapi</span>
+                    <span class="tech-tag">Pinia</span>
+                  </div>
+                </div>
+                <div class="project-expand-btn">
+                  <span class="expand-icon">+</span>
+                </div>
+              </div>
+
+              <div class="project-details">
+                <div class="project-details-content">
+                  <div class="project-details-header">
+                    <h2 class="project-details-title">Сайт детейлинга автомобилей</h2>
+                    <button class="project-close-btn">×</button>
+                  </div>
+
+                  <div class="project-details-body">
+                    <div class="project-image-slider">
+                      <div class="slider-container">
+                        <div class="slider-track">
+                          <div class="slider-slide active">
+                            <img
+                              src="./assets/images/projects/detailing-studio-project.png"
+                              alt="Главная страница"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/detailing-studio-project.png"
+                              alt="Услуги"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/detailing-studio-project.png"
+                              alt="Галерея работ"
+                            />
+                          </div>
+                        </div>
+                        <button class="slider-btn slider-prev">‹</button>
+                        <button class="slider-btn slider-next">›</button>
+                        <div class="slider-dots">
+                          <span class="dot active"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="project-details-info">
+                      <div class="project-description-full">
+                        <h3>Описание проекта</h3>
+                        <p>
+                          Сопровождение сайта, поддержка работы SEO, изменение функциональной логики
+                          блоков, корректировка связей на стороне headless фреймворка. Используемые
+                          технологии: Strapi, Nuxt, Pinia.
+                        </p>
+                      </div>
+
+                      <div class="project-features">
+                        <h3>Основные функции</h3>
+                        <ul>
+                          <li>SEO оптимизация</li>
+                          <li>Headless CMS (Strapi)</li>
+                          <li>Управление контентом</li>
+                          <li>Адаптивный дизайн</li>
+                          <li>Интеграция с социальными сетями</li>
+                        </ul>
+                      </div>
+
+                      <div class="project-technologies">
+                        <h3>Технологии</h3>
+                        <div class="tech-grid">
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/nuxt-logo.png"
+                              alt="Nuxt.js"
+                              class="tech-logo"
+                            />
+                            <span>Nuxt.js</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <!-- ПРОЕКТ 7: АГРОТЕХНИЧЕСКИЕ ЭКСПЕРИМЕНТЫ -->
-            <div data-count="0" class="project-card">
-              <img/ src="./assets/images/projects/agricultural-experiments-project.png"
-              class="project-image">
-              <div class="project-content">
-                <div class="project-title">
-                  Программа записи и учета агротехнических экспериментов
+            <div class="project-timeline-item" data-project="agricultural-experiments">
+              <div class="project-preview">
+                <div class="project-preview-image">
+                  <img
+                    src="./assets/images/projects/agricultural-experiments-project.png"
+                    alt="Агроэксперименты"
+                  />
                 </div>
-                <div class="project-description">
-                  Программа учитывает запись экспериментов и опытов над зерновыми культурами, имеет
-                  функционал экспорта отчетов. Используемые технологии : React, Mobx
+                <div class="project-preview-content">
+                  <h3 class="project-preview-title">Агротехнические эксперименты</h3>
+                  <p class="project-preview-description">
+                    Программа учета экспериментов над зерновыми
+                  </p>
+                  <div class="project-preview-tech">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">MobX</span>
+                  </div>
                 </div>
-                <divider></divider>
-                <div class="tech-list">
-                  <div class="tech-item">
-                    <img/ src="./assets/images/technologies/react-logo.png" class="tech-logo">
-                    <div>Nuxt</div>
+                <div class="project-expand-btn">
+                  <span class="expand-icon">+</span>
+                </div>
+              </div>
+
+              <div class="project-details">
+                <div class="project-details-content">
+                  <div class="project-details-header">
+                    <h2 class="project-details-title">
+                      Программа записи и учета агротехнических экспериментов
+                    </h2>
+                    <button class="project-close-btn">×</button>
+                  </div>
+
+                  <div class="project-details-body">
+                    <div class="project-image-slider">
+                      <div class="slider-container">
+                        <div class="slider-track">
+                          <div class="slider-slide active">
+                            <img
+                              src="./assets/images/projects/agricultural-experiments-project.png"
+                              alt="Главная панель"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/agricultural-experiments-project.png"
+                              alt="Запись экспериментов"
+                            />
+                          </div>
+                          <div class="slider-slide">
+                            <img
+                              src="./assets/images/projects/agricultural-experiments-project.png"
+                              alt="Экспорт отчетов"
+                            />
+                          </div>
+                        </div>
+                        <button class="slider-btn slider-prev">‹</button>
+                        <button class="slider-btn slider-next">›</button>
+                        <div class="slider-dots">
+                          <span class="dot active"></span>
+                          <span class="dot"></span>
+                          <span class="dot"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="project-details-info">
+                      <div class="project-description-full">
+                        <h3>Описание проекта</h3>
+                        <p>
+                          Программа учитывает запись экспериментов и опытов над зерновыми
+                          культурами, имеет функционал экспорта отчетов. Используемые технологии:
+                          React, MobX.
+                        </p>
+                      </div>
+
+                      <div class="project-features">
+                        <h3>Основные функции</h3>
+                        <ul>
+                          <li>Запись экспериментов</li>
+                          <li>Учет опытов над зерновыми</li>
+                          <li>Экспорт отчетов</li>
+                          <li>Управление данными</li>
+                          <li>Аналитика результатов</li>
+                        </ul>
+                      </div>
+
+                      <div class="project-technologies">
+                        <h3>Технологии</h3>
+                        <div class="tech-grid">
+                          <div class="tech-item">
+                            <img
+                              src="./assets/images/technologies/react-logo.png"
+                              alt="React"
+                              class="tech-logo"
+                            />
+                            <span>React</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -239,18 +851,156 @@
         </div>
       </section>
 
+      <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ПРОЕКТОВ -->
+      <div id="project-modal" class="project-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+          <div class="modal-header">
+            <h2 class="modal-title" id="modal-title">Название проекта</h2>
+            <button class="modal-close-btn" id="modal-close-btn">×</button>
+          </div>
+
+          <div class="modal-body">
+            <div class="modal-image-slider">
+              <div class="modal-slider-container">
+                <div class="modal-slider-track" id="modal-slider-track">
+                  <!-- Слайды будут добавлены динамически -->
+                </div>
+                <button class="modal-slider-btn modal-slider-prev" id="modal-slider-prev">‹</button>
+                <button class="modal-slider-btn modal-slider-next" id="modal-slider-next">›</button>
+                <div class="modal-slider-dots" id="modal-slider-dots">
+                  <!-- Точки будут добавлены динамически -->
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-content">
+              <div class="modal-description">
+                <h3>Описание проекта</h3>
+                <p id="modal-description">Описание проекта будет здесь</p>
+              </div>
+
+              <div class="modal-features">
+                <h3>Основные функции</h3>
+                <ul id="modal-features">
+                  <!-- Список функций будет добавлен динамически -->
+                </ul>
+              </div>
+
+              <div class="modal-technologies">
+                <h3>Технологии</h3>
+                <div class="modal-tech-grid" id="modal-tech-grid">
+                  <!-- Технологии будут добавлены динамически -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- СЕКЦИЯ 3: ОБРАЗОВАНИЕ -->
       <section id="education" class="portfolio-section education-section">
-        <div class="planet-container">
-          <img class="planet-image" src="./assets/images/planets/moon.png" alt="Планета" />
-          <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <path id="circlePath" d="M20,50 a30,30 0 1,1 60,0 a30,30 0 1,1 -60,0" />
-            </defs>
-            <text>
-              <textPath href="#circlePath" startOffset="0">Бакалавриат - Мгту им Баумана</textPath>
-            </text>
-          </svg>
+          <div class="star-background"></div>
+        <div class="section-title">
+          <p class="text-primary">О</p>
+          <p class="text-primary">б</p>
+          <p class="text-primary">р</p>
+          <p class="text-primary">а</p>
+          <p class="text-primary">з</p>
+          <p class="text-primary">о</p>
+          <p class="text-primary">в</p>
+          <p class="text-primary">а</p>
+          <p class="text-primary">н</p>
+          <p class="text-primary">и</p>
+          <p class="text-primary">е</p>
+        </div>
+
+      
+
+        <div class="education-planets">
+          <!-- БАКАЛАВРИАТ -->
+          
+           <div class="ufo"></div>
+          <div class="education-planet" data-education="bachelor">
+            <div class="planet-container">
+              <img class="planet-image" src="./assets/images/planets/moon.png" alt="Бакалавриат" />
+              <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <path
+                    id="bachelor-circle"
+                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                  />
+                </defs>
+                <text>
+                  <textPath href="#bachelor-circle" startOffset="0%">
+                    БАКАЛАВРИАТ • МГТУ им. Баумана • 2015-2019 •
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+            <div class="education-info">
+              <h3 class="education-degree">Бакалавриат</h3>
+              <p class="education-university">МГТУ им. Баумана</p>
+              <p class="education-years">2015-2019</p>
+              <p class="education-specialty"> Конструирование и технология электронных средств</p>
+            </div>
+          </div>
+
+          <!-- МАГИСТРАТУРА -->
+          <div class="education-planet" data-education="master">
+            <div class="planet-container">
+              <img
+                class="planet-image"
+                src="./assets/images/planets/earth.png"
+                alt="Магистратура"
+              />
+              <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <path
+                    id="master-circle"
+                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                  />
+                </defs>
+                <text>
+                  <textPath href="#master-circle" startOffset="0%">
+                    МАГИСТРАТУРА • РТУ МИРЭА • 2019-2021 •
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+            <div class="education-info">
+              <h3 class="education-degree">Магистратура</h3>
+              <p class="education-university">РТУ МИРЭА</p>
+              <p class="education-years">2019-2021</p>
+              <p class="education-specialty"> Конструирование и технология электронных средств</p>
+            </div>
+          </div>
+
+          <!-- АСПИРАНТУРА -->
+          <div class="education-planet" data-education="phd">
+            <div class="planet-container">
+              <img class="planet-image" src="./assets/images/planets/mars.png" alt="Аспирантура" />
+              <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <path
+                    id="phd-circle"
+                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                  />
+                </defs>
+                <text>
+                  <textPath href="#phd-circle" startOffset="0%">
+                    АСПИРАНТУРА • МФЮА • 2021-2025 •
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+            <div class="education-info">
+              <h3 class="education-degree">Аспирантура</h3>
+              <p class="education-university">МФЮА</p>
+              <p class="education-years">2021-2025</p>
+              <p class="education-specialty">Информатика и вычислительная техника</p>
+            </div>
+          </div>
         </div>
       </section>
 

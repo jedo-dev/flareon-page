@@ -1,0 +1,321 @@
+/**
+ * Стили для секции образования
+ * Планеты с образовательной информацией
+ */
+
+/* ===== СЕКЦИЯ ОБРАЗОВАНИЯ ===== */
+.education-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  position: relative;
+}
+
+/* ===== ЗАГОЛОВОК СЕКЦИИ ===== */
+.education-header {
+  text-align: center;
+  margin-bottom: 60px;
+  z-index: 10;
+}
+
+.education-title {
+  font-size: 3rem;
+  color: #d0c896;
+  margin: 0 0 20px 0;
+  font-family: 'Besom-2';
+  text-shadow: 0 0 20px rgba(208, 200, 150, 0.5);
+}
+
+.education-subtitle {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* ===== КОНТЕЙНЕР ПЛАНЕТ ===== */
+.education-planets {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* ===== ПЛАНЕТА ОБРАЗОВАНИЯ ===== */
+.education-planet {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 40px;
+  background: rgba(16, 41, 48, 0.6);
+  border-radius: 30px;
+  border: 2px solid transparent;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.education-planet:hover {
+  border-color: #d0c896;
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  background: rgba(16, 41, 48, 0.8);
+}
+
+.education-planet::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(208, 200, 150, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.education-planet:hover::before {
+  opacity: 1;
+}
+
+/* ===== КОНТЕЙНЕР ПЛАНЕТЫ ===== */
+.planet-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+}
+
+.planet-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: planetRotate 20s linear infinite;
+  filter: drop-shadow(0 0 20px rgba(208, 200, 150, 0.3));
+}
+
+.circular-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: textRotate 20s linear infinite reverse;
+}
+
+.circular-text text {
+  font-size: 8px;
+  font-weight: bold;
+  fill: #d0c896;
+  text-shadow: 0 0 10px rgba(208, 200, 150, 0.5);
+}
+
+/* ===== ИНФОРМАЦИЯ ОБ ОБРАЗОВАНИИ ===== */
+.education-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.education-degree {
+  font-size: 2rem;
+  color: #d0c896;
+  margin: 0;
+  font-family: 'Besom-2';
+  text-shadow: 0 0 10px rgba(208, 200, 150, 0.3);
+}
+
+.education-university {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 600;
+}
+
+.education-years {
+  font-size: 1.2rem;
+  color: #d0c896;
+  margin: 0;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.education-specialty {
+  font-size: 1rem;
+  color: #ffffff;
+  margin: 0;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes planetRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes textRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+
+/* ПЛАНШЕТЫ (до 1024px) */
+@media (max-width: 1024px) {
+  .education-planets {
+    gap: 40px;
+  }
+
+  .education-planet {
+    gap: 40px;
+    padding: 30px;
+  }
+
+  .planet-container {
+    width: 150px;
+    height: 150px;
+  }
+
+  .education-degree {
+    font-size: 1.5rem;
+  }
+
+  .education-university {
+    font-size: 1.2rem;
+  }
+}
+
+/* МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) */
+@media (max-width: 768px) {
+  .education-section {
+    padding: 30px 15px;
+  }
+
+  .education-header {
+    margin-bottom: 40px;
+  }
+
+  .education-title {
+    font-size: 2.5rem;
+  }
+
+  .education-subtitle {
+    font-size: 1rem;
+  }
+
+  .education-planets {
+    gap: 40px;
+  }
+
+  .education-planet {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+    padding: 25px;
+  }
+
+  .planet-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  .education-degree {
+    font-size: 1.3rem;
+  }
+
+  .education-university {
+    font-size: 1.1rem;
+  }
+
+  .education-years {
+    font-size: 1rem;
+  }
+
+  .education-specialty {
+    font-size: 0.9rem;
+  }
+}
+
+/* МАЛЕНЬКИЕ МОБИЛЬНЫЕ (до 480px) */
+@media (max-width: 480px) {
+  .education-section {
+    padding: 20px 10px;
+  }
+
+  .education-title {
+    font-size: 2rem;
+  }
+
+  .education-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .education-planets {
+    gap: 30px;
+  }
+
+  .education-planet {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .planet-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .education-degree {
+    font-size: 1.1rem;
+  }
+
+  .education-university {
+    font-size: 1rem;
+  }
+
+  .education-years {
+    font-size: 0.9rem;
+  }
+
+  .education-specialty {
+    font-size: 0.8rem;
+  }
+}
+
+/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 360px) */
+@media (max-width: 360px) {
+  .education-title {
+    font-size: 1.8rem;
+  }
+
+  .education-planet {
+    padding: 15px;
+  }
+
+  .planet-container {
+    width: 80px;
+    height: 80px;
+  }
+
+  .education-degree {
+    font-size: 1rem;
+  }
+
+  .education-university {
+    font-size: 0.9rem;
+  }
+}
