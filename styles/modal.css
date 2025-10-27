@@ -351,6 +351,9 @@
   .modal-features,
   .modal-technologies {
     padding: 15px;
+    h3{
+      display: none;
+    }
   }
 
   .modal-slider-slide {
