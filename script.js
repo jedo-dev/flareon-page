@@ -285,12 +285,11 @@ document.addEventListener('DOMContentLoaded', function () {
       // Анимация через Anime.js
       const randomSpeed = lineConfig.minSpeed + Math.random() * (lineConfig.maxSpeed - lineConfig.minSpeed);
 
-      const viewportHeight = window.innerHeight;
+      const sectionHeight = technologiesSection.getBoundingClientRect().height;
       const lineStartTop = -randomHeight;
-
       anime({
         targets: line,
-        top: [lineStartTop, viewportHeight + 50],
+        top: [lineStartTop, sectionHeight + 50],
         opacity: [
           { value: 0, duration: 0 },
           { value: 1, duration: 100 },

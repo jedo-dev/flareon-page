@@ -204,9 +204,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 30px;
-  justify-items: center;
+  justify-items: start;
   align-items: center;
   padding: 40px 0;
+  max-width: 50%;
 }
 
 .technology-card {

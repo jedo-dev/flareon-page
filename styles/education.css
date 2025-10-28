@@ -58,6 +58,7 @@
   transition: all 0.5s ease;
   position: relative;
   overflow: hidden;
+  min-width: 650px;
 }
 
 .education-planet:hover {
@@ -178,7 +179,7 @@
 /* ПЛАНШЕТЫ (до 1024px) */
 @media (max-width: 1024px) {
   .education-planets {
-    gap: 40px;
+    gap: 20px;
   }
 
   .education-planet {
@@ -219,14 +220,15 @@
   }
 
   .education-planets {
-    gap: 40px;
+    gap: 10px;
   }
 
   .education-planet {
     flex-direction: column;
     text-align: center;
-    gap: 30px;
-    padding: 25px;
+    gap: 5px;
+    padding: 10px;
+    min-width: 350px;
   }
 
   .planet-container {
@@ -270,8 +272,9 @@
   }
 
   .education-planet {
-    padding: 20px;
-    gap: 20px;
+    padding: 10px;
+    gap: 10px;
+    min-width: 350px;
   }
 
   .planet-container {

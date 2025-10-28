@@ -66,6 +66,7 @@
   width: 636px;
   height: 162px;
   margin: 0 auto;
+  position: absolute;
   animation: character-vertical-animation 0.4s steps(2, end) infinite;
 }
 
@@ -117,7 +118,7 @@
   background-image: url('../assets/images/backgrounds/stars-background.png');
   background-repeat: repeat-x;
   background-size: auto 100%;
-  animation: move-stars 11s linear infinite alternate ;
+  animation: move-stars 11s linear infinite alternate;
   pointer-events: none;
   z-index: 1;
 }
@@ -130,8 +131,6 @@
     background-position: -3000px 0;
   }
 }
-
-
 
 .ufo {
   background-image: url('../assets/images/characters/ufo.png');
@@ -149,7 +148,6 @@
 @keyframes ufo {
   from {
     background-position: 0px;
-  
   }
   to {
     background-position: -1000px;
@@ -172,10 +170,8 @@
 @keyframes wind {
   from {
     background-position: 0px;
-  
   }
   to {
     background-position: -4400px;
   }
 }
-

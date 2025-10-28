@@ -6,7 +6,7 @@
 /* ===== КОНТЕЙНЕР ЛЕНТЫ ПРОЕКТОВ ===== */
 .projects-timeline {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -55,6 +55,7 @@
   transition: all 0.3s ease;
   border: 2px solid transparent;
   scroll-snap-align: start;
+  z-index: 10;
 }
 
 .project-timeline-item:hover {
