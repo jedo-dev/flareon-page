@@ -42,6 +42,7 @@
 @media (max-width: 768px) {
   .portfolio-container {
     scroll-snap-type: none; /* Отключаем snap на мобильных для лучшего UX */
+    scroll-behavior: auto;
   }
 
   .portfolio-section {
