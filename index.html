@@ -15,12 +15,14 @@
     <link rel="stylesheet" href="./styles/projects-timeline.css" />
     <link rel="stylesheet" href="./styles/modal.css" />
     <link rel="stylesheet" href="./styles/education.css" />
+    <link rel="stylesheet" href="./styles/experience-timeline.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
 
     <!-- Подключение библиотек и скриптов -->
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="script.js" defer></script>
     <script src="js/projects-timeline.js" defer></script>
+    <script src="js/experience-timeline.js" defer></script>
   </head>
   <body>
     <div class="portfolio-container">
@@ -1072,7 +1074,115 @@
         </div>
       </section>
 
-      <!-- СЕКЦИЯ 5: КОНТАКТЫ -->
+      <!-- СЕКЦИЯ 5: ОПЫТ РАБОТЫ -->
+      <section id="experience" class=" experience-section">
+        <div class="star-background"></div>
+        <div class="section-title">
+          <p class="text-primary">О</p>
+          <p class="text-primary">п</p>
+          <p class="text-primary">ы</p>
+          <p class="text-primary">т</p>
+          <p class="text-primary" style="width: 0.3em;"></p>
+          <p class="text-primary">р</p>
+          <p class="text-primary">а</p>
+          <p class="text-primary">б</p>
+          <p class="text-primary">о</p>
+          <p class="text-primary">т</p>
+          <p class="text-primary">ы</p>
+        </div>
+
+        <div class="experience-timeline-container">
+          <div class="experience-timeline-line"></div>
+          <div class="experience-timeline-items">
+            <!-- ОПЫТ 1: РТК-Синтез -->
+            <div class="experience-item" data-experience="rtk-sintez">
+              <div class="experience-item-point"></div>
+              <div class="experience-item-content">
+                <button class="experience-details-btn" title="Подробнее">
+                  <span class="details-icon">+</span>
+                </button>
+                <div class="experience-period">
+                  <p class="experience-period-date">Февраль 2025 — настоящее время</p>
+                  <p class="experience-period-duration">8 месяцев</p>
+                </div>
+                <h3 class="experience-company">РТК-Синтез</h3>
+                <p class="experience-location">Москва</p>
+                <h4 class="experience-position">Старший разработчик</h4>
+              </div>
+            </div>
+
+            <!-- ОПЫТ 2: Sandbox -->
+            <div class="experience-item" data-experience="sandbox">
+              <div class="experience-item-point"></div>
+              <div class="experience-item-content">
+                <button class="experience-details-btn" title="Подробнее">
+                  <span class="details-icon">+</span>
+                </button>
+                <div class="experience-period">
+                  <p class="experience-period-date">Сентябрь 2024 — Февраль 2025</p>
+                  <p class="experience-period-duration">6 месяцев</p>
+                </div>
+                <h3 class="experience-company">Sandbox</h3>
+                <p class="experience-location">Москва</p>
+                <h4 class="experience-position">Middle+ Frontend разработчик</h4>
+              </div>
+            </div>
+
+            <!-- ОПЫТ 3: Click Group -->
+            <div class="experience-item" data-experience="click-group">
+              <div class="experience-item-point"></div>
+              <div class="experience-item-content">
+                <button class="experience-details-btn" title="Подробнее">
+                  <span class="details-icon">+</span>
+                </button>
+                <div class="experience-period">
+                  <p class="experience-period-date">Август 2021 — Февраль 2025</p>
+                  <p class="experience-period-duration">3 года 7 месяцев</p>
+                </div>
+                <h3 class="experience-company">Click Group</h3>
+                <p class="experience-location">Москва</p>
+                <h4 class="experience-position">Lead React Developer</h4>
+              </div>
+            </div>
+
+            <!-- ОПЫТ 4: НПО Алмаз-Антей -->
+            <div class="experience-item" data-experience="almaz-antej">
+              <div class="experience-item-point"></div>
+              <div class="experience-item-content">
+                <button class="experience-details-btn" title="Подробнее">
+                  <span class="details-icon">+</span>
+                </button>
+                <div class="experience-period">
+                  <p class="experience-period-date">Август 2019 — Август 2021</p>
+                  <p class="experience-period-duration">2 года 1 месяц</p>
+                </div>
+                <h3 class="experience-company">НПО Алмаз-Антей</h3>
+                <p class="experience-location">Москва</p>
+                <h4 class="experience-position">Инженер</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ОПЫТА РАБОТЫ -->
+      <div id="experience-modal" class="experience-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+          <div class="modal-header">
+            <h2 class="modal-title" id="experience-modal-title">Опыт работы</h2>
+            <button class="modal-close-btn" id="experience-modal-close-btn">×</button>
+          </div>
+
+          <div class="modal-body">
+            <div id="experience-modal-description">
+              <!-- Описание будет добавлено динамически -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- СЕКЦИЯ 6: КОНТАКТЫ -->
       <section id="contact" class="portfolio-section contact-section">
         <div class="contact-wrapper">
           <div class="star-background"></div>

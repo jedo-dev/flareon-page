@@ -232,7 +232,7 @@
   }
 
   .portfolio-section {
-    min-height: 100vh;
+    min-height: fit-content;
   }
 
   .hero-card {
