@@ -264,3 +264,54 @@
   filter: blur(0.5px);
   border-radius: 2px;
 }
+
+/* ===== КОНТАКТЫ ===== */
+.contacts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 20px;
+}
+
+.contact-item {
+  width: 100%;
+  max-width: 400px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 30px;
+  background: rgba(16, 41, 48, 0.8);
+  border-radius: 15px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  backdrop-filter: blur(10px);
+}
+
+.contact-link:hover {
+  transform: translateY(-5px) scale(1.02);
+  background: rgba(16, 41, 48, 0.95);
+  border-color: #d0c896;
+  box-shadow: 0 10px 30px rgba(208, 200, 150, 0.2);
+}
+
+.contact-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.contact-text {
+  font-family: 'BellotaText';
+  color: #d0c896;
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex: 1;
+}
