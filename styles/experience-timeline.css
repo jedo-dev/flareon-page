@@ -117,6 +117,10 @@
   height: 35px;
   border-radius: 50%;
   background: #d0c896;
+  background-image: url('../assets/images/ui/expand.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50%;
   border: none;
   color: #0e1b21;
   font-size: 1.2rem;
@@ -132,7 +136,10 @@
 
 .experience-details-btn:hover {
   background: #b8a882;
-  transform: scale(1.1);
+  background-image: url('../assets/images/ui/expand.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 60%;
 }
 
 .details-icon {

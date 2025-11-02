@@ -192,6 +192,10 @@
   height: 35px;
   border-radius: 50%;
   background: #d0c896;
+  background-image: url('../assets/images/ui/expand.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,7 +207,10 @@
 
 .project-expand-btn:hover {
   background: #b8a882;
-  transform: scale(1.1);
+  background-image: url('../assets/images/ui/expand.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 60%;
 }
 
 .expand-icon {
