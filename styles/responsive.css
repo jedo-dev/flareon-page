@@ -74,13 +74,13 @@
   }
 
   .projects-grid {
-    min-height: 60dvh;
+    min-height: 60vh;
     transform: translateY(-5%);
   }
 
   .project-card {
     flex-direction: column;
-    min-height: 60dvh;
+    min-height: 60vh;
     margin: 10px;
     text-align: center;
   }
@@ -131,6 +131,9 @@
 
 /* ===== МАЛЕНЬКИЕ МОБИЛЬНЫЕ (до 480px) ===== */
 @media (max-width: 480px) {
+  .technologies-section{
+    min-height: 100vh;
+  }
   .portfolio-section {
     padding: 15px 0;
   }
@@ -157,7 +160,7 @@
 
   .project-card {
     flex-direction: column;
-    min-height: 60dvh;
+    min-height: 60vh;
     margin: 5px;
   }
 
@@ -251,6 +254,6 @@
 /* ===== ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 400px) ===== */
 @media (max-width: 400px) {
   .animated-image {
-    zoom: 0.35;
+    zoom: 0.25;
   }
 }

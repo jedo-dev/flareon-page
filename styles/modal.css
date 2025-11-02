@@ -163,7 +163,7 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 20px;
+  margin: 10px;
 }
 
 .modal-dot {
@@ -190,10 +190,12 @@
 .modal-description,
 .modal-features,
 .modal-technologies {
+
   background: rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 10px;
   border-left: 4px solid #d0c896;
+  font-family: 'BellotaText';
 }
 
 .modal-description h3,

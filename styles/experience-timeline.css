@@ -262,6 +262,7 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
+  font-family: 'BellotaText';
 }
 
 .experience-modal-section {
@@ -321,7 +322,7 @@
   color: #d0c896;
   padding: 5px 12px;
   border-radius: 15px;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-family: 'BellotaText';
   border: 1px solid rgba(208, 200, 150, 0.3);
 }

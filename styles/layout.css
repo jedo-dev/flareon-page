@@ -5,7 +5,7 @@
 
 /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
 .portfolio-container {
-  max-height: 100dvh;
+  max-height: 100vh;
   overflow-y: auto;
   /* scroll-snap-type: y mandatory;
   scroll-behavior: smooth; */
@@ -17,7 +17,7 @@
 
 /* ===== СЕКЦИИ ===== */
 .portfolio-section {
-  height: 100dvh;
+ 
   overflow: hidden;
   scroll-snap-align: start;
 }
@@ -29,7 +29,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100dvh;
+  min-height: 100vh;
 }
 
 /* ===== СЕКЦИЯ ПРОЕКТОВ ===== */
@@ -39,7 +39,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  min-height: 100dvh;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -56,7 +56,6 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  min-height: 100dvh;
 }
 
 /* ===== СЕКЦИЯ ОПЫТА РАБОТЫ ===== */
@@ -82,12 +81,12 @@
 /* ===== ЗАГОЛОВКИ СЕКЦИЙ ===== */
 .section-title {
   text-align: center;
+  padding: 40px 20px 20px 20px;
 }
 
 /* ===== КОНТЕЙНЕР ПРОЕКТОВ ===== */
 .projects-container {
   width: 100vw;
-  overflow-x: hidden;
   position: relative;
   padding: 20px;
 }

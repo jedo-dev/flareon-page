@@ -108,6 +108,7 @@
 }
 
 .project-preview-content {
+  padding: 10px 0 ;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -128,6 +129,7 @@
   font-size: 0.9rem;
   line-height: 1.4;
   flex: 1;
+  font-family: 'BellotaText';
 }
 
 .project-preview-tech {
@@ -155,11 +157,12 @@
   }
 
   .project-preview-image {
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: auto;
     margin-right: 15px;
     margin-bottom: 0;
     flex-shrink: 0;
+    aspect-ratio:16/9
   }
 
   .project-preview-content {
@@ -173,12 +176,12 @@
   }
 
   .project-preview-description {
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin-bottom: 10px;
   }
 
   .tech-tag {
-    font-size: 0.7rem;
+    font-size: 1rem;
     padding: 2px 8px;
   }
 }
@@ -227,11 +230,8 @@
 /* Мобильная версия */
 @media (max-width: 768px) {
   .project-expand-btn {
-    position: static;
-    width: 30px;
-    height: 30px;
-    margin-left: auto;
-    flex-shrink: 0;
+    top: 2px;
+    right: 2px;
   }
 
   .expand-icon {
