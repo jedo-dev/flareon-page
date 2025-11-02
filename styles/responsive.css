@@ -69,10 +69,6 @@
     margin: 0 auto 20px;
   }
 
-  .character-sprite {
-    /* transform: scale(0.25); */
-  }
-
   .projects-grid {
     min-height: 60vh;
     transform: translateY(-5%);
@@ -101,9 +97,6 @@
   }
 
   /* Улучшаем читаемость текста на мобильных */
- 
-
-
 
   .technologies-grid {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -131,7 +124,7 @@
 
 /* ===== МАЛЕНЬКИЕ МОБИЛЬНЫЕ (до 480px) ===== */
 @media (max-width: 480px) {
-  .technologies-section{
+  .technologies-section {
     min-height: 100vh;
   }
   .portfolio-section {
@@ -154,10 +147,6 @@
     bottom: 0px;
   }
 
-  .character-sprite {
-    /* transform: scale(0.4); */
-  }
-
   .project-card {
     flex-direction: column;
     min-height: 60vh;
@@ -168,8 +157,6 @@
     width: 80vw;
     height: 100px;
   }
-
-
 
   .technologies-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -201,13 +188,6 @@
     padding: 12px;
     margin: 3px;
   }
-
-  .character-sprite {
-    /* width: 100px;
-    height: 100px; */
-  }
-
-
 
   .text-secondary {
     font-size: 0.75rem;
@@ -245,7 +225,6 @@
 
 /* ===== МОБИЛЬНЫЕ (до 600px) ===== */
 @media (max-width: 600px) {
- 
   .animated-image {
     zoom: 0.3;
   }
