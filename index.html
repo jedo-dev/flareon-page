@@ -33,7 +33,7 @@
     />
 
     <title>Александр Горбунов - Frontend Developer</title>
-
+    <link rel="stylesheet" href="https://getwell-widget.flareon.ru/index.umd.css" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./assets/images/ui/favicon/favicon.ico" />
     <link
@@ -1380,6 +1380,67 @@
           </div>
         </div>
       </section>
+      <div id="widget-root"></div>
     </div>
+
+    <script src="https://getwell-widget.flareon.ru/index.umd.js"></script>
+    <script>
+      function initWidget() {
+        console.log('window.GetWellWidget', window.GetWellWidget);
+        if (window.GetWellWidget) {
+          window.GetWellWidget.init({
+            apiUrl: 'https://api.example.com',
+            theme: {
+              primaryColor: '#1890ff',
+              secondaryColor: '#52c41a',
+            },
+            showBranches: true,
+            showEmployees: true,
+            showDepartments: true,
+            stickyBtnEnable: true, // Включаем плавающую кнопку
+          });
+       
+        } else {
+          
+        }
+      }
+      window.addEventListener('DOMContentLoaded', function () {
+        // Проверяем, что библиотека загружена
+        if (typeof window.GetWellWidget !== 'undefined' && window.GetWellWidget.WidgetProvider) {
+          // Получаем корневой элемент для рендеринга
+          const rootElement = document.getElementById('widget-root');
+
+          if (rootElement) {
+            // React и ReactDOM теперь доступны через глобальные переменные из бандла
+            // Проверяем наличие React и ReactDOM
+            if (window.React && window.ReactDOM) {
+              // Проверяем, есть ли createRoot (React 18+) или используем render (React < 18)
+              const WidgetProvider = window.GetWellWidget.WidgetProvider;
+              const element = window.React.createElement(WidgetProvider);
+
+              if (typeof window.ReactDOM.createRoot === 'function') {
+                // React 18+
+                const root = window.ReactDOM.createRoot(rootElement);
+                root.render(element);
+              } else if (typeof window.ReactDOM.render === 'function') {
+                // React < 18
+                window.ReactDOM.render(element, rootElement);
+              } else {
+                console.error('ReactDOM.render или ReactDOM.createRoot не найдены');
+                return;
+              }
+
+              initWidget()
+            } else {
+              console.warn('React не найден. Возможно, библиотека не загружена полностью.');
+              console.log('window.React:', window.React);
+              console.log('window.ReactDOM:', window.ReactDOM);
+            }
+          }
+        } else {
+          console.warn('GetWell Widget не загружен правильно. Проверьте подключение скриптов.');
+        }
+      });
+    </script>
   </body>
 </html>
