@@ -131,6 +131,60 @@ document.addEventListener('DOMContentLoaded', function () {
   
   window.addEventListener('resize', handleResize);
   
+  // Остановка анимаций при скрытии вкладки (Page Visibility API)
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      // Останавливаем все анимации при скрытии вкладки
+      animations.stars.forEach(anim => {
+        if (anim && typeof anim.pause === 'function') {
+          anim.pause();
+        }
+      });
+      animations.fallingLines.forEach(anim => {
+        if (anim && typeof anim.pause === 'function') {
+          anim.pause();
+        }
+      });
+      if (animations.fallingStars && typeof animations.fallingStars.pause === 'function') {
+        animations.fallingStars.pause();
+      }
+      if (animations.jupiter && typeof animations.jupiter.pause === 'function') {
+        animations.jupiter.pause();
+      }
+      if (animations.ufo && typeof animations.ufo.pause === 'function') {
+        animations.ufo.pause();
+      }
+      animations.cardboard.forEach(anim => {
+        if (anim && typeof anim.pause === 'function') {
+          anim.pause();
+        }
+      });
+    } else {
+      // Возобновляем анимации при показе вкладки
+      animations.stars.forEach(anim => {
+        if (anim && typeof anim.play === 'function') {
+          anim.play();
+        }
+      });
+      if (animations.fallingStars && typeof animations.fallingStars.play === 'function') {
+        animations.fallingStars.play();
+      }
+      if (animations.jupiter && typeof animations.jupiter.play === 'function') {
+        animations.jupiter.play();
+      }
+      if (animations.ufo && typeof animations.ufo.play === 'function') {
+        animations.ufo.play();
+      }
+      animations.cardboard.forEach(anim => {
+        if (anim && typeof anim.play === 'function') {
+          anim.play();
+        }
+      });
+    }
+  };
+  
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  
   // Очистка при выгрузке страницы
   window.addEventListener('beforeunload', () => {
     // Останавливаем все анимации
@@ -165,8 +219,9 @@ document.addEventListener('DOMContentLoaded', function () {
       clearTimeout(animations.lineSpawnTimer);
     }
     
-    // Удаляем обработчик ресайза
+    // Удаляем обработчики
     window.removeEventListener('resize', handleResize);
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
   });
 
   // ===== АНИМАЦИИ ПАДАЮЩИХ ЗВЕЗД =====
@@ -259,6 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
    */
   const colors = ['#708ea7', '#7072a7', '#70a7a5', '#a78970'];
   const cardboardShake = (target) => {
+    // Используем одну анимацию с loop вместо рекурсивных вызовов
     const anim = anime({
       targets: target,
       translateX: () => anime.random(-1, 1),
@@ -270,13 +326,7 @@ document.addEventListener('DOMContentLoaded', function () {
       rotate: () => anime.random(-1, 1),
       duration: () => anime.random(80, 120),
       easing: 'steps(10)',
-      complete: () => {
-        // Проверяем, что элемент все еще существует перед созданием новой анимации
-        const elements = document.querySelectorAll(target);
-        if (elements.length > 0) {
-          cardboardShake(target);
-        }
-      }
+      loop: true
     });
     animations.cardboard.push(anim);
     return anim;
@@ -304,13 +354,13 @@ document.addEventListener('DOMContentLoaded', function () {
    * lineWidth - толщина линии
    */
   const lineConfig = {
-    numberOfLines: 100,           // Количество линий на экране
+    maxConcurrentLines: 50,      // Максимальное количество одновременно существующих линий
     colors: ['#d0c896', '#9e7960', '#708ea7'],  // Три цвета для линий
     minSpeed: 200,              // Минимальная скорость анимации (мс)
     maxSpeed: 1000,              // Максимальная скорость анимации (мс)
     minHeight: 80,               // Минимальная высота линии
     maxHeight: 200,              // Максимальная высота линии
-    spawnInterval: 100,          // Интервал появления новых линий (мс)
+    spawnInterval: 200,          // Интервал появления новых линий (мс) - увеличен для снижения нагрузки
     lineWidth: 2,                // Толщина линии (px)
   };
 
@@ -337,10 +387,24 @@ document.addEventListener('DOMContentLoaded', function () {
     // Очищаем предыдущие линии
     starBackground.innerHTML = '';
 
+    // Счетчик активных линий
+    let activeLinesCount = 0;
+
     // Создаем функцию для генерации одной линии
     const createLine = () => {
+      // Проверяем лимит одновременно существующих линий
+      if (activeLinesCount >= lineConfig.maxConcurrentLines) {
+        return;
+      }
+
+      // Проверяем видимость страницы
+      if (document.hidden) {
+        return;
+      }
+
       const line = document.createElement('div');
       line.classList.add('falling-line');
+      activeLinesCount++;
 
       // Случайная позиция по горизонтали
       const randomX = Math.random() * 100;
@@ -386,12 +450,13 @@ document.addEventListener('DOMContentLoaded', function () {
           if (index > -1) {
             animations.fallingLines.splice(index, 1);
           }
+          activeLinesCount--;
           line.remove();
         }
       });
       animations.fallingLines.push(mainAnim);
 
-      // Дополнительная анимация дрожания
+      // Дополнительная анимация дрожания (упрощенная, без loop)
       const shakeAnim = anime({
         targets: line,
         translateX: [
@@ -404,26 +469,19 @@ document.addEventListener('DOMContentLoaded', function () {
         ],
         duration: randomSpeed * 0.5,
         easing: 'easeInOutSine',
-        loop: true,
         direction: 'alternate'
       });
       animations.fallingLines.push(shakeAnim);
     };
 
-    // Создаем начальные линии
-    for (let i = 0; i < lineConfig.numberOfLines; i++) {
-      const randomDelay = Math.random() * 2000;
-      setTimeout(() => {
-        createLine();
-      }, randomDelay);
-    }
-
-    // Постоянно создаем новые линии
+    // Постоянно создаем новые линии с ограничением
     const spawnLines = () => {
-      // Проверяем, что секция все еще существует
-      if (!document.querySelector('.technologies-section')) {
+      // Проверяем, что секция все еще существует и вкладка видима
+      if (!document.querySelector('.technologies-section') || document.hidden) {
+        animations.lineSpawnTimer = setTimeout(spawnLines, lineConfig.spawnInterval);
         return;
       }
+      
       createLine();
       animations.lineSpawnTimer = setTimeout(spawnLines, lineConfig.spawnInterval);
     };
