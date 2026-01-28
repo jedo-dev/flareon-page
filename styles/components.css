@@ -146,7 +146,7 @@
 .animated-image {
   position: relative;
   z-index: 2;
-  background-image: url('../assets/images/backgrounds/animated-background.png');
+  background-image: url('../assets/images/backgrounds/animated-background.webp');
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: 2880px 660px;
