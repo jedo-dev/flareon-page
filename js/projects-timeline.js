@@ -8,6 +8,13 @@ class ProjectsTimeline {
     this.modal = null;
     this.currentProject = null;
     this.currentSlideIndex = 0;
+    this.animations = [];
+    this.eventHandlers = {
+      click: [],
+      keydown: [],
+      touchstart: null,
+      touchend: null
+    };
     this.init();
   }
 
@@ -21,26 +28,30 @@ class ProjectsTimeline {
    */
   setupEventListeners() {
     // Обработчики для кнопок открытия модального окна
-    document.addEventListener('click', (e) => {
+    const handleExpandClick = (e) => {
       if (e.target.closest('.project-expand-btn')) {
         e.preventDefault();
         e.stopPropagation();
         const projectItem = e.target.closest('.project-timeline-item');
         this.openModal(projectItem);
       }
-    });
+    };
+    document.addEventListener('click', handleExpandClick);
+    this.eventHandlers.click.push({ type: 'click', handler: handleExpandClick });
 
     // Обработчики для модального окна
-    document.addEventListener('click', (e) => {
+    const handleModalClick = (e) => {
       if (e.target.closest('#modal-close-btn') || e.target.closest('.modal-overlay')) {
         e.preventDefault();
         e.stopPropagation();
         this.closeModal();
       }
-    });
+    };
+    document.addEventListener('click', handleModalClick);
+    this.eventHandlers.click.push({ type: 'click', handler: handleModalClick });
 
     // Обработчики для слайдера в модальном окне
-    document.addEventListener('click', (e) => {
+    const handleSliderClick = (e) => {
       if (e.target.closest('.modal-slider-btn')) {
         e.preventDefault();
         e.stopPropagation();
@@ -54,14 +65,18 @@ class ProjectsTimeline {
         const dotIndex = Array.from(document.querySelectorAll('.modal-dot')).indexOf(e.target);
         this.goToModalSlide(dotIndex);
       }
-    });
+    };
+    document.addEventListener('click', handleSliderClick);
+    this.eventHandlers.click.push({ type: 'click', handler: handleSliderClick });
 
     // Закрытие по Escape
-    document.addEventListener('keydown', (e) => {
+    const handleKeydown = (e) => {
       if (e.key === 'Escape') {
         this.closeModal();
       }
-    });
+    };
+    document.addEventListener('keydown', handleKeydown);
+    this.eventHandlers.keydown.push({ type: 'keydown', handler: handleKeydown });
 
     // Обработка касаний для мобильных устройств
     this.setupTouchEvents();
@@ -85,14 +100,14 @@ class ProjectsTimeline {
     let startX = 0;
     let startY = 0;
 
-    document.addEventListener('touchstart', (e) => {
+    const handleTouchStart = (e) => {
       if (this.modal && this.modal.classList.contains('active')) {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
       }
-    });
+    };
 
-    document.addEventListener('touchend', (e) => {
+    const handleTouchEnd = (e) => {
       if (!this.modal || !this.modal.classList.contains('active') || !startX || !startY) return;
 
       const endX = e.changedTouches[0].clientX;
@@ -108,7 +123,12 @@ class ProjectsTimeline {
 
       startX = 0;
       startY = 0;
-    });
+    };
+
+    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('touchend', handleTouchEnd);
+    this.eventHandlers.touchstart = handleTouchStart;
+    this.eventHandlers.touchend = handleTouchEnd;
   }
 
   /**
@@ -129,12 +149,13 @@ class ProjectsTimeline {
     document.body.style.overflow = 'hidden';
 
     // Анимация появления
-    anime({
+    const anim = anime({
       targets: this.modal,
       opacity: [0, 1],
       duration: 300,
       easing: 'easeOutQuad'
     });
+    this.animations.push(anim);
   }
 
   /**
@@ -144,7 +165,7 @@ class ProjectsTimeline {
     if (!this.modal || !this.modal.classList.contains('active')) return;
 
     // Анимация скрытия
-    anime({
+    const anim = anime({
       targets: this.modal,
       opacity: [1, 0],
       duration: 200,
@@ -156,6 +177,7 @@ class ProjectsTimeline {
         this.currentSlideIndex = 0;
       }
     });
+    this.animations.push(anim);
   }
 
   /**
@@ -314,18 +336,55 @@ class ProjectsTimeline {
 
     // Анимация перехода
     const translateX = -slideIndex * 100;
-    anime({
+    const anim = anime({
       targets: track,
       translateX: `${translateX}%`,
       duration: 500,
       easing: 'easeOutCubic'
     });
+    this.animations.push(anim);
 
     this.currentSlideIndex = slideIndex;
+  }
+
+  /**
+   * Очистка ресурсов
+   */
+  destroy() {
+    // Останавливаем все анимации
+    this.animations.forEach(anim => {
+      if (anim && typeof anim.pause === 'function') {
+        anim.pause();
+      }
+    });
+    this.animations = [];
+
+    // Удаляем обработчики событий
+    this.eventHandlers.click.forEach(({ handler }) => {
+      document.removeEventListener('click', handler);
+    });
+    this.eventHandlers.keydown.forEach(({ handler }) => {
+      document.removeEventListener('keydown', handler);
+    });
+    if (this.eventHandlers.touchstart) {
+      document.removeEventListener('touchstart', this.eventHandlers.touchstart);
+    }
+    if (this.eventHandlers.touchend) {
+      document.removeEventListener('touchend', this.eventHandlers.touchend);
+    }
   }
 }
 
 // Инициализация при загрузке DOM
+let projectsTimelineInstance = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-  new ProjectsTimeline();
+  projectsTimelineInstance = new ProjectsTimeline();
+});
+
+// Очистка при выгрузке страницы
+window.addEventListener('beforeunload', () => {
+  if (projectsTimelineInstance) {
+    projectsTimelineInstance.destroy();
+  }
 });

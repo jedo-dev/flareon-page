@@ -11,6 +11,11 @@ class ExperienceTimeline {
     this.title = null;
     this.description = null;
     this.experienceData = {};
+    this.animations = [];
+    this.eventHandlers = {
+      click: [],
+      keydown: []
+    };
     this.init();
   }
 
@@ -101,7 +106,7 @@ class ExperienceTimeline {
    */
   setupEventListeners() {
     // Обработчик клика на кнопки "Подробнее"
-    document.addEventListener('click', (e) => {
+    const handleDetailsClick = (e) => {
       const btn = e.target.closest('.experience-details-btn');
       if (btn) {
         const experienceItem = btn.closest('.experience-item');
@@ -110,24 +115,32 @@ class ExperienceTimeline {
           this.openModal(experienceId);
         }
       }
-    });
+    };
+    document.addEventListener('click', handleDetailsClick);
+    this.eventHandlers.click.push({ type: 'click', handler: handleDetailsClick });
 
     // Закрытие по кнопке
     if (this.closeBtn) {
-      this.closeBtn.addEventListener('click', () => this.closeModal());
+      const handleCloseClick = () => this.closeModal();
+      this.closeBtn.addEventListener('click', handleCloseClick);
+      this.eventHandlers.click.push({ type: 'click', handler: handleCloseClick, element: this.closeBtn });
     }
 
     // Закрытие по клику на overlay
     if (this.overlay) {
-      this.overlay.addEventListener('click', () => this.closeModal());
+      const handleOverlayClick = () => this.closeModal();
+      this.overlay.addEventListener('click', handleOverlayClick);
+      this.eventHandlers.click.push({ type: 'click', handler: handleOverlayClick, element: this.overlay });
     }
 
     // Закрытие по ESC
-    document.addEventListener('keydown', (e) => {
+    const handleKeydown = (e) => {
       if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
         this.closeModal();
       }
-    });
+    };
+    document.addEventListener('keydown', handleKeydown);
+    this.eventHandlers.keydown.push({ type: 'keydown', handler: handleKeydown });
   }
 
   /**
@@ -153,12 +166,13 @@ class ExperienceTimeline {
 
     // Анимация появления
     if (typeof anime !== 'undefined') {
-      anime({
+      const anim = anime({
         targets: this.modal,
         opacity: [0, 1],
         duration: 300,
         easing: 'easeOutQuad'
       });
+      this.animations.push(anim);
     }
   }
 
@@ -170,7 +184,7 @@ class ExperienceTimeline {
 
     // Анимация исчезновения
     if (typeof anime !== 'undefined') {
-      anime({
+      const anim = anime({
         targets: this.modal,
         opacity: [1, 0],
         duration: 300,
@@ -180,6 +194,7 @@ class ExperienceTimeline {
           document.body.style.overflow = '';
         }
       });
+      this.animations.push(anim);
     } else {
       this.modal.classList.remove('active');
       document.body.style.overflow = '';
@@ -255,10 +270,44 @@ class ExperienceTimeline {
     html += '</div>';
     return html;
   }
+
+  /**
+   * Очистка ресурсов
+   */
+  destroy() {
+    // Останавливаем все анимации
+    this.animations.forEach(anim => {
+      if (anim && typeof anim.pause === 'function') {
+        anim.pause();
+      }
+    });
+    this.animations = [];
+
+    // Удаляем обработчики событий
+    this.eventHandlers.click.forEach(({ handler, element }) => {
+      if (element) {
+        element.removeEventListener('click', handler);
+      } else {
+        document.removeEventListener('click', handler);
+      }
+    });
+    this.eventHandlers.keydown.forEach(({ handler }) => {
+      document.removeEventListener('keydown', handler);
+    });
+  }
 }
 
 // Инициализация при загрузке страницы
+let experienceTimelineInstance = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-  new ExperienceTimeline();
+  experienceTimelineInstance = new ExperienceTimeline();
+});
+
+// Очистка при выгрузке страницы
+window.addEventListener('beforeunload', () => {
+  if (experienceTimelineInstance) {
+    experienceTimelineInstance.destroy();
+  }
 });
 

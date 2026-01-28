@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', function () {
   const starList = document.getElementById('star-list');
   let section1 = document.querySelector('.hero-section');
   let resizeTimeout;
+  
+  // Хранилище для анимаций и таймеров (для очистки)
+  const animations = {
+    stars: [],
+    fallingStars: null,
+    jupiter: null,
+    ufo: null,
+    cardboard: [],
+    fallingLines: [],
+    lineSpawnTimer: null
+  };
 
   // ===== ГЕНЕРАЦИЯ ЗВЕЗД =====
   /**
@@ -62,11 +73,20 @@ document.addEventListener('DOMContentLoaded', function () {
    */
   const updateStars = () => {
     section1 = document.querySelector('.hero-section');
+    
+    // Останавливаем старые анимации звезд
+    animations.stars.forEach(anim => {
+      if (anim && typeof anim.pause === 'function') {
+        anim.pause();
+      }
+    });
+    animations.stars = [];
+    
     starList.innerHTML = '';
     generateStars();
 
     // Анимация для разных групп звезд
-    anime({
+    animations.stars.push(anime({
       targets: '.star-1',
       translateX: 10,
       scale: 1,
@@ -75,9 +95,9 @@ document.addEventListener('DOMContentLoaded', function () {
       easing: 'linear',
       direction: 'alternate',
       loop: true,
-    });
+    }));
 
-    anime({
+    animations.stars.push(anime({
       targets: '.star-2',
       translateX: -100,
       scale: 1,
@@ -86,9 +106,9 @@ document.addEventListener('DOMContentLoaded', function () {
       easing: 'linear',
       direction: 'alternate',
       loop: true,
-    });
+    }));
 
-    anime({
+    animations.stars.push(anime({
       targets: '.star-3',
       translateX: 100,
       scale: 1,
@@ -97,16 +117,56 @@ document.addEventListener('DOMContentLoaded', function () {
       easing: 'linear',
       direction: 'alternate',
       loop: true,
-    });
+    }));
   };
 
   // ===== ИНИЦИАЛИЗАЦИЯ =====
   updateStars();
 
   // Обработчик ресайза с debounce
-  window.addEventListener('resize', () => {
+  const handleResize = () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(updateStars, 200);
+  };
+  
+  window.addEventListener('resize', handleResize);
+  
+  // Очистка при выгрузке страницы
+  window.addEventListener('beforeunload', () => {
+    // Останавливаем все анимации
+    animations.stars.forEach(anim => {
+      if (anim && typeof anim.pause === 'function') {
+        anim.pause();
+      }
+    });
+    animations.fallingLines.forEach(anim => {
+      if (anim && typeof anim.pause === 'function') {
+        anim.pause();
+      }
+    });
+    if (animations.fallingStars && typeof animations.fallingStars.pause === 'function') {
+      animations.fallingStars.pause();
+    }
+    if (animations.jupiter && typeof animations.jupiter.pause === 'function') {
+      animations.jupiter.pause();
+    }
+    if (animations.ufo && typeof animations.ufo.pause === 'function') {
+      animations.ufo.pause();
+    }
+    animations.cardboard.forEach(anim => {
+      if (anim && typeof anim.pause === 'function') {
+        anim.pause();
+      }
+    });
+    
+    // Очищаем таймеры
+    clearTimeout(resizeTimeout);
+    if (animations.lineSpawnTimer) {
+      clearTimeout(animations.lineSpawnTimer);
+    }
+    
+    // Удаляем обработчик ресайза
+    window.removeEventListener('resize', handleResize);
   });
 
   // ===== АНИМАЦИИ ПАДАЮЩИХ ЗВЕЗД =====
@@ -139,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /**
    * Анимация падающих звезд с эффектом появления и исчезновения
    */
-  anime({
+  animations.fallingStars = anime({
     targets: '.falling-star',
     translateX: ['100vw', '-100vw'],
     translateY: ['-100vh', '100vh'],
@@ -157,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /**
    * Плавная анимация покачивания планеты Юпитер
    */
-  anime({
+  animations.jupiter = anime({
     targets: '.jupiter',
     translateY: ['-200px', '-100px'],
     translateX: ['10px', '60px'],
@@ -175,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-  anime({
+  animations.ufo = anime({
     targets: '.ufo',
     translateY: ['0', '-100%'],
     translateX: ['0', '-100%'],
@@ -199,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
    */
   const colors = ['#708ea7', '#7072a7', '#70a7a5', '#a78970'];
   const cardboardShake = (target) => {
-    anime({
+    const anim = anime({
       targets: target,
       translateX: () => anime.random(-1, 1),
       translateY: () => anime.random(-1, 1),
@@ -210,8 +270,16 @@ document.addEventListener('DOMContentLoaded', function () {
       rotate: () => anime.random(-1, 1),
       duration: () => anime.random(80, 120),
       easing: 'steps(10)',
-      complete: () => cardboardShake(target)
+      complete: () => {
+        // Проверяем, что элемент все еще существует перед созданием новой анимации
+        const elements = document.querySelectorAll(target);
+        if (elements.length > 0) {
+          cardboardShake(target);
+        }
+      }
     });
+    animations.cardboard.push(anim);
+    return anim;
   };
 
   // Применяем эффект дрожания к тексту
@@ -252,6 +320,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!starBackground) return;
 
+    // Останавливаем старые анимации линий
+    animations.fallingLines.forEach(anim => {
+      if (anim && typeof anim.pause === 'function') {
+        anim.pause();
+      }
+    });
+    animations.fallingLines = [];
+
+    // Очищаем таймер генерации линий
+    if (animations.lineSpawnTimer) {
+      clearTimeout(animations.lineSpawnTimer);
+      animations.lineSpawnTimer = null;
+    }
+
     // Очищаем предыдущие линии
     starBackground.innerHTML = '';
 
@@ -287,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const sectionHeight = technologiesSection.getBoundingClientRect().height;
       const lineStartTop = -randomHeight;
-      anime({
+      const mainAnim = anime({
         targets: line,
         top: [lineStartTop, sectionHeight + 50],
         opacity: [
@@ -299,12 +381,18 @@ document.addEventListener('DOMContentLoaded', function () {
         duration: randomSpeed,
         easing: 'linear',
         complete: () => {
+          // Удаляем анимацию из массива при завершении
+          const index = animations.fallingLines.indexOf(mainAnim);
+          if (index > -1) {
+            animations.fallingLines.splice(index, 1);
+          }
           line.remove();
         }
       });
+      animations.fallingLines.push(mainAnim);
 
       // Дополнительная анимация дрожания
-      anime({
+      const shakeAnim = anime({
         targets: line,
         translateX: [
           { value: () => anime.random(-2, 2), duration: 200 },
@@ -319,6 +407,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loop: true,
         direction: 'alternate'
       });
+      animations.fallingLines.push(shakeAnim);
     };
 
     // Создаем начальные линии
@@ -331,12 +420,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Постоянно создаем новые линии
     const spawnLines = () => {
+      // Проверяем, что секция все еще существует
+      if (!document.querySelector('.technologies-section')) {
+        return;
+      }
       createLine();
-      setTimeout(spawnLines, lineConfig.spawnInterval);
+      animations.lineSpawnTimer = setTimeout(spawnLines, lineConfig.spawnInterval);
     };
 
     // Запускаем постоянную генерацию
-    setTimeout(spawnLines, lineConfig.spawnInterval);
+    animations.lineSpawnTimer = setTimeout(spawnLines, lineConfig.spawnInterval);
   };
 
   // Запускаем генерацию линий
