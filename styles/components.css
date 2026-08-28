@@ -122,6 +122,76 @@
   animation: last-frame-animation 0.5s steps(2, end) infinite;
 }
 
+/* ===== ПЕТ-ПРОЕКТЫ ===== */
+.pet-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 40px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Пунктирная рамка — визуальный маркер заглушки */
+.pet-project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 30px;
+  background: rgba(16, 41, 48, 0.6);
+  border-radius: 20px;
+  border: 2px dashed rgba(208, 200, 150, 0.25);
+  text-decoration: none;
+  text-align: center;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.pet-project-card:hover {
+  transform: translateY(-8px);
+  border-color: #d0c896;
+  background: rgba(16, 41, 48, 0.9);
+}
+
+.pet-project-planet {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(208, 200, 150, 0.3));
+}
+
+.pet-project-title {
+  margin: 0;
+  font-family: 'Besom-2';
+  font-weight: normal;
+  font-size: 1.4rem;
+  color: #d0c896;
+}
+
+.pet-project-desc {
+  margin: 0;
+  font-family: 'BellotaText';
+  font-size: 0.95rem;
+  color: #ffffff;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.pet-project-badge {
+  font-family: 'BellotaText';
+  font-size: 0.8rem;
+  color: #d0c896;
+  border: 1px solid rgba(208, 200, 150, 0.4);
+  border-radius: 999px;
+  padding: 4px 14px;
+}
+
 /* ===== СЕКЦИЯ ТЕХНОЛОГИЙ ===== */
 .technologies-section .section-title {
   position: relative;

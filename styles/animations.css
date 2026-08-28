@@ -132,6 +132,27 @@
   }
 }
 
+/* ===== ПОЯВЛЕНИЕ КОНТЕНТА ИЗ ТЕНИ ===== */
+/*
+ * Классы вешает script.js (initContentReveal): заголовки и карточки
+ * при входе во вьюпорт проявляются из темноты и приподнимаются.
+ * Фон секций не трогаем — стыки между блоками остаются бесшовными.
+ * После завершения анимации JS снимает классы, возвращая элементу
+ * исходные transition/hover-стили.
+ */
+.reveal {
+  transition:
+    opacity 0.8s ease var(--reveal-delay, 0s),
+    transform 0.8s ease var(--reveal-delay, 0s),
+    filter 0.8s ease var(--reveal-delay, 0s);
+}
+
+.reveal:not(.reveal-visible) {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: brightness(0.35);
+}
+
 .ufo {
   background-image: url('../assets/images/characters/ufo.webp');
   width: 250px;

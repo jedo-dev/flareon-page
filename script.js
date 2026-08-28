@@ -429,4 +429,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Запускаем генерацию линий
   generateFallingLines();
+
+  // ===== ПОЯВЛЕНИЕ КОНТЕНТА ИЗ ТЕНИ =====
+  /**
+   * Заголовки и карточки проявляются из темноты при входе во вьюпорт
+   * (см. .reveal в animations.css). Анимируется контент, а не фон секций,
+   * поэтому стыки между блоками остаются бесшовными.
+   * Эффект одноразовый: после проигрыша классы снимаются,
+   * чтобы не мешать hover-переходам элементов.
+   */
+  const initContentReveal = () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+
+    const revealSelectors = [
+      '.section-title',
+      '.project-timeline-item',
+      '.pet-project-card',
+      '.education-body',
+      '.technology-card',
+      '.experience-item',
+      '.contact-item'
+    ];
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          revealObserver.unobserve(el);
+          el.classList.add('reveal-visible');
+          // Возвращаем исходные стили после завершения перехода (0.8s + макс. задержка)
+          setTimeout(() => {
+            el.classList.remove('reveal', 'reveal-visible');
+            el.style.removeProperty('--reveal-delay');
+          }, 1600);
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    // Каскадная задержка внутри одного родителя (карточки появляются по очереди)
+    const parentCounters = new Map();
+    revealSelectors.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((el) => {
+        const count = parentCounters.get(el.parentElement) || 0;
+        parentCounters.set(el.parentElement, count + 1);
+        el.style.setProperty('--reveal-delay', `${Math.min(count * 90, 540)}ms`);
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+      });
+    });
+  };
+
+  initContentReveal();
 });

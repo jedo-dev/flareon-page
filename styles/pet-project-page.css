@@ -1,0 +1,78 @@
+/**
+ * Стили страниц пет-проектов (заглушки)
+ * Общий файл для всех страниц в pet-projects/
+ */
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, rgb(14 27 33) 0%, rgb(16 42 51) 100%);
+  min-height: 100vh;
+}
+
+.pet-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.pet-page-planet {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px rgba(208, 200, 150, 0.35));
+  animation: pet-page-float 6s ease-in-out infinite alternate;
+}
+
+@keyframes pet-page-float {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(10px);
+  }
+}
+
+.pet-page-title {
+  margin: 0;
+  font-family: 'Besom-2';
+  font-weight: normal;
+  font-size: 2.5rem;
+  color: #d0c896;
+}
+
+.pet-page-text {
+  margin: 0;
+  font-family: 'BellotaText';
+  font-size: 1.1rem;
+  color: #ffffff;
+  opacity: 0.8;
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+.pet-page-back {
+  font-family: 'BellotaText';
+  font-size: 1rem;
+  color: #d0c896;
+  text-decoration: none;
+  border: 1px solid rgba(208, 200, 150, 0.4);
+  border-radius: 999px;
+  padding: 10px 24px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.pet-page-back:hover {
+  background: rgba(208, 200, 150, 0.12);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-page-planet {
+    animation: none;
+  }
+}

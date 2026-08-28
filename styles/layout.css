@@ -43,6 +43,16 @@
   position: relative;
 }
 
+/* ===== СЕКЦИЯ ПЕТ-ПРОЕКТОВ ===== */
+.pet-projects-section {
+  /* Плоский фон в тон соседям: проекты заканчиваются и образование начинается на rgb(16 42 51) */
+  background: rgb(16 42 51);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* ===== СЕКЦИЯ ОБРАЗОВАНИЯ ===== */
 .education-section {
   background: linear-gradient(180deg, rgb(16 42 51) 0%, rgb(19 50 60) 100%);
