@@ -159,6 +159,12 @@
   background: rgba(16, 41, 48, 0.9);
 }
 
+/* Готовый проект — сплошная рамка вместо пунктирной */
+.pet-project-card--ready {
+  border-style: solid;
+  border-color: rgba(208, 200, 150, 0.45);
+}
+
 .pet-project-planet {
   width: 90px;
   height: 90px;

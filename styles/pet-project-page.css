@@ -55,6 +55,118 @@ body {
   line-height: 1.5;
 }
 
+/* ===== СТРАНИЦА ГОТОВОГО ПРОЕКТА ===== */
+.pet-page-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pet-page-btn {
+  font-family: 'BellotaText';
+  font-size: 1rem;
+  color: #d0c896;
+  text-decoration: none;
+  border: 1px solid rgba(208, 200, 150, 0.4);
+  border-radius: 999px;
+  padding: 12px 28px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.pet-page-btn:hover {
+  background: rgba(208, 200, 150, 0.12);
+  transform: translateY(-2px);
+}
+
+.pet-page-btn--primary {
+  background: rgba(208, 200, 150, 0.15);
+  border-color: #d0c896;
+}
+
+.pet-page-gallery {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 760px;
+}
+
+.pet-page-shot {
+  border-radius: 16px;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Мокап в раме телефона */
+.pet-page-shot--phone {
+  width: 200px;
+}
+
+/* Широкий скриншот интерфейса */
+.pet-page-shot--wide {
+  width: min(680px, 100%);
+}
+
+/* Фото устройства */
+.pet-page-shot--photo {
+  width: min(340px, 100%);
+}
+
+.pet-page-section {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.pet-page-heading {
+  margin: 0;
+  font-family: 'Besom-2';
+  font-weight: normal;
+  font-size: 1.5rem;
+  color: #d0c896;
+}
+
+.pet-page-list {
+  margin: 0;
+  padding: 0 0 0 20px;
+  font-family: 'BellotaText';
+  color: #ffffff;
+  opacity: 0.85;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.pet-page-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pet-page-tag {
+  font-family: 'BellotaText';
+  font-size: 0.85rem;
+  color: #d0c896;
+  border: 1px solid rgba(208, 200, 150, 0.35);
+  border-radius: 999px;
+  padding: 5px 14px;
+}
+
+.pet-page code {
+  font-family: Consolas, monospace;
+  font-size: 0.9em;
+  color: #d0c896;
+  background: rgba(208, 200, 150, 0.1);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
 .pet-page-back {
   font-family: 'BellotaText';
   font-size: 1rem;

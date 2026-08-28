@@ -3,16 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <title>Пет-проект №2 — Александр Горбунов</title>
+    <meta
+      name="description"
+      content="Tower Def — браузерная tower defense в духе Warcraft 3 на React 19 и Phaser 4. Пет-проект Александра Горбунова."
+    />
+    <title>Tower Def — браузерная tower defense | Александр Горбунов</title>
     <link rel="stylesheet" href="../styles/fonts.styles.css" />
     <link rel="stylesheet" href="../styles/pet-project-page.css" />
   </head>
   <body>
     <main class="pet-page">
-      <img class="pet-page-planet" src="../assets/images/planets/moon.webp" alt="" width="140" height="140" />
-      <h1 class="pet-page-title">Пет-проект №2</h1>
-      <p class="pet-page-text">Страница в разработке — скоро здесь появится описание проекта.</p>
+      <img
+        class="pet-page-planet"
+        src="../assets/images/planets/moon.webp"
+        alt=""
+        width="140"
+        height="140"
+      />
+      <h1 class="pet-page-title">Tower Def</h1>
+      <p class="pet-page-text">
+        Мобильная браузерная игра в жанре tower defense, вдохновленная Warcraft 3: дуэль против
+        компьютерного противника. Строишь лабиринты из башен, защищаешь свою полосу — или
+        инвестируешь золото в отправку врагов противнику по классической экономике WC3.
+      </p>
+
+      <div class="pet-page-actions">
+        <a
+          class="pet-page-btn pet-page-btn--primary"
+          href="https://github.com/jedo-dev/tower-def"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Код на GitHub</a
+        >
+      </div>
+
+      <div class="pet-page-gallery">
+        <img
+          class="pet-page-shot pet-page-shot--wide"
+          src="../assets/images/pet-projects/td-1.png"
+          alt="Tower Def — игровое поле с башнями, золотом и таймером волны"
+          loading="lazy"
+        />
+      </div>
+
+      <section class="pet-page-section">
+        <h2 class="pet-page-heading">Особенности</h2>
+        <ul class="pet-page-list">
+          <li>Режим дуэли против ИИ: защита своей полосы и отправка волн противнику</li>
+          <li>Экономика в духе Warcraft 3 — баланс между башнями и инвестициями в атаку</li>
+          <li>Типизированный мост React &harr; Phaser для связи UI и игрового движка</li>
+          <li>Бизнес-логика покрыта модульными тестами (Vitest)</li>
+          <li>Подробная проектная документация: геймдизайн-док, roadmap, инженерные правила</li>
+        </ul>
+      </section>
+
+      <section class="pet-page-section">
+        <h2 class="pet-page-heading">Технологии</h2>
+        <div class="pet-page-tags">
+          <span class="pet-page-tag">React 19</span>
+          <span class="pet-page-tag">Phaser 4</span>
+          <span class="pet-page-tag">TypeScript (strict)</span>
+          <span class="pet-page-tag">Vite</span>
+          <span class="pet-page-tag">Feature-Sliced Design</span>
+          <span class="pet-page-tag">Vitest</span>
+        </div>
+      </section>
+
       <a class="pet-page-back" href="../index.html#pet-projects">&larr; На главную</a>
     </main>
   </body>

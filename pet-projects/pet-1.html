@@ -3,16 +3,101 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <title>Пет-проект №1 — Александр Горбунов</title>
+    <meta
+      name="description"
+      content="FlareonFit — AI-трекер калорий, воды и тренировок в виде Telegram WebApp. Пет-проект Александра Горбунова: React, NestJS, MongoDB."
+    />
+    <title>FlareonFit — AI-трекер калорий | Александр Горбунов</title>
     <link rel="stylesheet" href="../styles/fonts.styles.css" />
     <link rel="stylesheet" href="../styles/pet-project-page.css" />
   </head>
   <body>
     <main class="pet-page">
-      <img class="pet-page-planet" src="../assets/images/planets/jupiter.webp" alt="" width="140" height="140" />
-      <h1 class="pet-page-title">Пет-проект №1</h1>
-      <p class="pet-page-text">Страница в разработке — скоро здесь появится описание проекта.</p>
+      <img
+        class="pet-page-planet"
+        src="../assets/images/planets/jupiter.webp"
+        alt=""
+        width="140"
+        height="140"
+      />
+      <h1 class="pet-page-title">FlareonFit</h1>
+      <p class="pet-page-text">
+        AI-трекер калорий в виде Telegram WebApp: дневник питания с подсчетом калорий, учет воды и
+        запись тренировок — все в одном приложении, без установки, прямо в Telegram.
+      </p>
+
+      <div class="pet-page-actions">
+        <a
+          class="pet-page-btn pet-page-btn--primary"
+          href="https://fit.flareon.ru/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Открыть приложение</a
+        >
+        <a
+          class="pet-page-btn"
+          href="https://github.com/jedo-dev/calories-tracker"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Код на GitHub</a
+        >
+      </div>
+
+      <div class="pet-page-gallery">
+        <img
+          class="pet-page-shot pet-page-shot--phone"
+          src="../assets/images/pet-projects/fit-graph.webp"
+          alt="FlareonFit — статистика недели с динамикой веса"
+          loading="lazy"
+        />
+        <img
+          class="pet-page-shot pet-page-shot--phone"
+          src="../assets/images/pet-projects/fit-plan.webp"
+          alt="FlareonFit — конструктор плана питания"
+          loading="lazy"
+        />
+        <img
+          class="pet-page-shot pet-page-shot--phone"
+          src="../assets/images/pet-projects/fit-train.webp"
+          alt="FlareonFit — каталог программ тренировок"
+          loading="lazy"
+        />
+      </div>
+
+      <section class="pet-page-section">
+        <h2 class="pet-page-heading">Возможности</h2>
+        <ul class="pet-page-list">
+          <li>Дневник питания с подсчетом калорий с помощью AI</li>
+          <li>AI-конструктор плана питания: режимы на день и неделю, фильтры и исключения</li>
+          <li>Статистика: динамика веса, дни в цели, сожженные калории</li>
+          <li>Отслеживание потребления воды</li>
+          <li>Каталог программ тренировок по группам мышц с уровнями сложности</li>
+          <li>Вход через Telegram — авторизация WebApp с HMAC-верификацией и JWT</li>
+        </ul>
+      </section>
+
+      <section class="pet-page-section">
+        <h2 class="pet-page-heading">Технологии</h2>
+        <div class="pet-page-tags">
+          <span class="pet-page-tag">React + Vite</span>
+          <span class="pet-page-tag">NestJS</span>
+          <span class="pet-page-tag">MongoDB</span>
+          <span class="pet-page-tag">Telegram WebApp</span>
+          <span class="pet-page-tag">JWT</span>
+          <span class="pet-page-tag">Docker Compose</span>
+          <span class="pet-page-tag">pnpm-монорепо</span>
+        </div>
+      </section>
+
+      <section class="pet-page-section">
+        <h2 class="pet-page-heading">Архитектура</h2>
+        <p class="pet-page-text">
+          Монорепозиторий на pnpm workspaces: <code>apps/api</code> — REST API на NestJS с MongoDB и
+          JWT-аутентификацией, <code>apps/web</code> — клиент на React + Vite с интеграцией
+          Telegram WebApp. Развертывание через Docker Compose.
+        </p>
+      </section>
+
       <a class="pet-page-back" href="../index.html#pet-projects">&larr; На главную</a>
     </main>
   </body>

@@ -3,16 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <title>Пет-проект №3 — Александр Горбунов</title>
+    <meta
+      name="description"
+      content="Magic Qube — почтовый дашборд на ESP: Node.js-сервис на Raspberry Pi собирает письма и задачи по IMAP. Пет-проект Александра Горбунова."
+    />
+    <title>Magic Qube — почтовый дашборд на ESP | Александр Горбунов</title>
     <link rel="stylesheet" href="../styles/fonts.styles.css" />
     <link rel="stylesheet" href="../styles/pet-project-page.css" />
   </head>
   <body>
     <main class="pet-page">
-      <img class="pet-page-planet" src="../assets/images/planets/mars.webp" alt="" width="140" height="140" />
-      <h1 class="pet-page-title">Пет-проект №3</h1>
-      <p class="pet-page-text">Страница в разработке — скоро здесь появится описание проекта.</p>
+      <img
+        class="pet-page-planet"
+        src="../assets/images/planets/mars.webp"
+        alt=""
+        width="140"
+        height="140"
+      />
+      <h1 class="pet-page-title">Magic Qube</h1>
+      <p class="pet-page-text">
+        Железный пет-проект из домашней лаборатории: Node.js-сервис на Raspberry Pi опрашивает
+        почтовые ящики и таск-трекеры по IMAP, хранит состояние в MongoDB и в реальном времени
+        выводит счетчики писем и задач на физический ESP-дашборд.
+      </p>
+
+      <div class="pet-page-actions">
+        <a
+          class="pet-page-btn pet-page-btn--primary"
+          href="https://github.com/jedo-dev/magic-qube-dashboard-integration"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Код на GitHub</a
+        >
+      </div>
+
+      <div class="pet-page-gallery">
+        <img
+          class="pet-page-shot pet-page-shot--photo"
+          src="../assets/images/pet-projects/mq-view.jpg"
+          alt="Куб GeekMagic на столе показывает счетчики: Mail.ru, Yandex, Tracker, Jira"
+          loading="lazy"
+        />
+      </div>
+
+      <section class="pet-page-section">
+        <h2 class="pet-page-heading">Возможности</h2>
+        <ul class="pet-page-list">
+          <li>Интеграции: Yandex/Mail.ru (непрочитанные), Yandex Tracker и GitLab (задачи из писем)</li>
+          <li>Устойчивый планировщик опроса с контролем параллелизма</li>
+          <li>Full- и delta-рендеринг экрана на ESP-устройстве</li>
+          <li>Шифрование учетных данных в базе, API с ключом доступа</li>
+          <li>Автовосстановление после перезагрузки, деплой через Docker/systemd</li>
+        </ul>
+      </section>
+
+      <section class="pet-page-section">
+        <h2 class="pet-page-heading">Технологии</h2>
+        <div class="pet-page-tags">
+          <span class="pet-page-tag">Node.js + TypeScript</span>
+          <span class="pet-page-tag">Express</span>
+          <span class="pet-page-tag">MongoDB + Mongoose</span>
+          <span class="pet-page-tag">imapflow</span>
+          <span class="pet-page-tag">Raspberry Pi</span>
+          <span class="pet-page-tag">ESP-дисплей</span>
+          <span class="pet-page-tag">Docker Compose</span>
+          <span class="pet-page-tag">GitHub Actions</span>
+        </div>
+      </section>
+
       <a class="pet-page-back" href="../index.html#pet-projects">&larr; На главную</a>
     </main>
   </body>
