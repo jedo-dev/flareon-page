@@ -290,6 +290,13 @@
 
 /* МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) */
 @media (max-width: 768px) {
+  /* Короче скролл-путь: на телефоне свайп "тяжелее" колесика,
+     на смену планеты хватает ~0.8 экрана вместо 1.5 */
+  .education-section.orbit-on {
+    height: 260vh;
+    height: 260svh;
+  }
+
   .orbit-scene {
     --planet-size: 120px;
     --orbit-ry: 45px;

@@ -33,6 +33,69 @@
     />
 
     <title>Александр Горбунов - Frontend Developer</title>
+
+    <!-- ЛОАДЕР: стили инлайном, чтобы отрисовался мгновенно, до загрузки внешних CSS -->
+    <style>
+      #page-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: #0e1b21;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        transition: opacity 0.5s ease;
+      }
+
+      #page-loader.loader-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loader-orbit {
+        width: 90px;
+        height: 90px;
+        border: 2px dashed rgba(208, 200, 150, 0.35);
+        border-radius: 50%;
+        position: relative;
+        animation: loader-spin 1.6s linear infinite;
+      }
+
+      /* Планета-спутник на орбите */
+      .loader-orbit::before {
+        content: '';
+        position: absolute;
+        top: -7px;
+        left: 50%;
+        margin-left: -6px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #d0c896;
+        box-shadow: 0 0 12px rgba(208, 200, 150, 0.8);
+      }
+
+      .loader-text {
+        color: #708ea7;
+        font-family: -apple-system, Roboto, sans-serif;
+        font-size: 13px;
+        letter-spacing: 3px;
+      }
+
+      @keyframes loader-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .loader-orbit {
+          animation: none;
+        }
+      }
+    </style>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./assets/images/ui/favicon/favicon.ico" />
     <link
@@ -76,6 +139,12 @@
     <script src="js/experience-timeline.js" defer></script>
   </head>
   <body>
+    <!-- ЛОАДЕР: виден с первого кадра, скрывается после полной загрузки (скрипт внизу страницы) -->
+    <div id="page-loader" aria-hidden="true">
+      <div class="loader-orbit"></div>
+      <span class="loader-text">ЗАГРУЗКА</span>
+    </div>
+
     <div class="portfolio-container">
       <!-- СЕКЦИЯ 1: ПРИВЕТСТВИЕ И ПРЕЗЕНТАЦИЯ -->
       <section id="hero" class="portfolio-section hero-section">
@@ -1399,5 +1468,28 @@
       </section>
     </div>
 
+    <!-- Скрытие лоадера: после загрузки всех ресурсов (включая deferred-скрипты),
+         со страховкой на 7 секунд, если какой-то ресурс завис -->
+    <script>
+      (function () {
+        var loader = document.getElementById('page-loader');
+        if (!loader) return;
+        var hidden = false;
+        var hide = function () {
+          if (hidden) return;
+          hidden = true;
+          loader.classList.add('loader-hidden');
+          setTimeout(function () {
+            loader.remove();
+          }, 600);
+        };
+        if (document.readyState === 'complete') {
+          hide();
+        } else {
+          window.addEventListener('load', hide);
+          setTimeout(hide, 7000);
+        }
+      })();
+    </script>
   </body>
 </html>
