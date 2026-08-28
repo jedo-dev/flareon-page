@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fallingStars: null,
     jupiter: null,
     ufo: null,
-    cardboard: [],
     fallingLines: [],
     lineSpawnTimer: null
   };
@@ -44,8 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
       svg.setAttribute('viewBox', '0 0 800 400');
       svg.setAttribute('height', '100px');
       svg.style.setProperty('--star-size', Math.floor(Math.random() * 3));
-      svg.style.setProperty('--twinkle-delay', `${Math.floor(Math.random() * 3)}s`);
-      svg.style.setProperty('--twinkle-duration', `${Math.floor(Math.random() * 3)}s`);
+      svg.style.setProperty('--twinkle-delay', `${(Math.random() * 3).toFixed(1)}s`);
+      /* Длительность не может быть 0s — иначе звезда не мерцает вовсе */
+      svg.style.setProperty('--twinkle-duration', `${(1.5 + Math.random() * 2).toFixed(1)}s`);
 
       svg.style.position = 'absolute';
       svg.style.left = `${Math.max(20, Math.min(x, sectionRect.width - 20))}px`;
@@ -128,126 +128,48 @@ document.addEventListener('DOMContentLoaded', function () {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(updateStars, 200);
   };
-  
+
   window.addEventListener('resize', handleResize);
-  
+
+  /**
+   * Применяет pause/play ко всем зарегистрированным анимациям.
+   * Единый реестр вместо ручного перечисления — чтобы новая анимация
+   * не могла "забыться" в одной из веток (pause без play).
+   */
+  const forEachAnimation = (method) => {
+    [
+      ...animations.stars,
+      ...animations.fallingLines,
+      animations.fallingStars,
+      animations.jupiter,
+      animations.ufo
+    ].forEach(anim => {
+      if (anim && typeof anim[method] === 'function') {
+        anim[method]();
+      }
+    });
+  };
+
   // Остановка анимаций при скрытии вкладки (Page Visibility API)
   const handleVisibilityChange = () => {
-    if (document.hidden) {
-      // Останавливаем все анимации при скрытии вкладки
-      animations.stars.forEach(anim => {
-        if (anim && typeof anim.pause === 'function') {
-          anim.pause();
-        }
-      });
-      animations.fallingLines.forEach(anim => {
-        if (anim && typeof anim.pause === 'function') {
-          anim.pause();
-        }
-      });
-      if (animations.fallingStars && typeof animations.fallingStars.pause === 'function') {
-        animations.fallingStars.pause();
-      }
-      if (animations.jupiter && typeof animations.jupiter.pause === 'function') {
-        animations.jupiter.pause();
-      }
-      if (animations.ufo && typeof animations.ufo.pause === 'function') {
-        animations.ufo.pause();
-      }
-      animations.cardboard.forEach(anim => {
-        if (anim && typeof anim.pause === 'function') {
-          anim.pause();
-        }
-      });
-    } else {
-      // Возобновляем анимации при показе вкладки
-      animations.stars.forEach(anim => {
-        if (anim && typeof anim.play === 'function') {
-          anim.play();
-        }
-      });
-      if (animations.fallingStars && typeof animations.fallingStars.play === 'function') {
-        animations.fallingStars.play();
-      }
-      if (animations.jupiter && typeof animations.jupiter.play === 'function') {
-        animations.jupiter.play();
-      }
-      if (animations.ufo && typeof animations.ufo.play === 'function') {
-        animations.ufo.play();
-      }
-      animations.cardboard.forEach(anim => {
-        if (anim && typeof anim.play === 'function') {
-          anim.play();
-        }
-      });
-    }
+    forEachAnimation(document.hidden ? 'pause' : 'play');
   };
-  
+
   document.addEventListener('visibilitychange', handleVisibilityChange);
-  
+
   // Очистка при выгрузке страницы
   window.addEventListener('beforeunload', () => {
-    // Останавливаем все анимации
-    animations.stars.forEach(anim => {
-      if (anim && typeof anim.pause === 'function') {
-        anim.pause();
-      }
-    });
-    animations.fallingLines.forEach(anim => {
-      if (anim && typeof anim.pause === 'function') {
-        anim.pause();
-      }
-    });
-    if (animations.fallingStars && typeof animations.fallingStars.pause === 'function') {
-      animations.fallingStars.pause();
-    }
-    if (animations.jupiter && typeof animations.jupiter.pause === 'function') {
-      animations.jupiter.pause();
-    }
-    if (animations.ufo && typeof animations.ufo.pause === 'function') {
-      animations.ufo.pause();
-    }
-    animations.cardboard.forEach(anim => {
-      if (anim && typeof anim.pause === 'function') {
-        anim.pause();
-      }
-    });
-    
+    forEachAnimation('pause');
+
     // Очищаем таймеры
     clearTimeout(resizeTimeout);
     if (animations.lineSpawnTimer) {
       clearTimeout(animations.lineSpawnTimer);
     }
-    
+
     // Удаляем обработчики
     window.removeEventListener('resize', handleResize);
     document.removeEventListener('visibilitychange', handleVisibilityChange);
-  });
-
-  // ===== АНИМАЦИИ ПАДАЮЩИХ ЗВЕЗД =====
-  /**
-   * Анимация падающих звезд в первой секции
-   */
-  anime({
-    targets: ['.line-stars-3', '.line-stars', '.line-stars-2'],
-    translateX: window.innerWidth,
-    easing: function (el, i, total) {
-      return function (t) {
-        return Math.pow(Math.sin(t * (i + 1)), 1);
-      };
-    },
-    loop: true,
-  });
-
-  // Анимация вертикальных элементов
-  anime({
-    targets: ['.vertical'],
-    easing: 'linear',
-    translateX: 50,
-    translateY: 50,
-    direction: 'alternate',
-    duration: 900,
-    loop: true,
   });
 
   // ===== АНИМАЦИЯ ПАДАЮЩИХ ЗВЕЗД =====
@@ -309,32 +231,50 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ===== ЭФФЕКТ "ДРОЖАНИЯ" ДЛЯ ТЕКСТА =====
   /**
-   * Создает эффект дрожания для текста (cardboard effect)
-   * @param {string} target - CSS селектор элемента
+   * Разбивает заголовки с классом .jitter-text на отдельные буквы (span)
+   * для покадровой CSS-анимации дрожания (см. base.css, @keyframes letter-boil-*).
+   *
+   * В отличие от старого варианта на anime.js:
+   * - в HTML остается настоящий текст (SEO и доступность);
+   * - анимация привязана ко времени, а не к частоте кадров/мощности CPU;
+   * - для скринридеров заголовок читается целиком через aria-label.
    */
-  const colors = ['#708ea7', '#7072a7', '#70a7a5', '#a78970'];
-  const cardboardShake = (target) => {
-    // Используем одну анимацию с loop вместо рекурсивных вызовов
-    const anim = anime({
-      targets: target,
-      translateX: () => anime.random(-1, 1),
-      translateY: () => anime.random(-1, 1),
-      color: () => {
-        let num = anime.random(0, 4);
-        return colors[num];
-      },
-      rotate: () => anime.random(-1, 1),
-      duration: () => anime.random(80, 120),
-      easing: 'steps(10)',
-      loop: true
+  const JITTER_POSE_VARIANTS = 3;
+  const initJitterText = () => {
+    document.querySelectorAll('.jitter-text').forEach((el) => {
+      if (el.dataset.jitterReady) return;
+      el.dataset.jitterReady = 'true';
+      // innerText учитывает <br> как перенос — textContent склеил бы слова
+      el.setAttribute('aria-label', el.innerText.replace(/\s+/g, ' ').trim());
+
+      let letterIndex = 0;
+      const splitNode = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const fragment = document.createDocumentFragment();
+          for (const char of node.textContent) {
+            if (char.trim() === '') {
+              fragment.appendChild(document.createTextNode(' '));
+            } else {
+              const span = document.createElement('span');
+              span.className = `jitter-letter jitter-v${(letterIndex % JITTER_POSE_VARIANTS) + 1}`;
+              span.style.setProperty('--letter-index', letterIndex);
+              span.setAttribute('aria-hidden', 'true');
+              span.textContent = char;
+              fragment.appendChild(span);
+              letterIndex++;
+            }
+          }
+          node.replaceWith(fragment);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          [...node.childNodes].forEach(splitNode);
+        }
+      };
+
+      [...el.childNodes].forEach(splitNode);
     });
-    animations.cardboard.push(anim);
-    return anim;
   };
 
-  // Применяем эффект дрожания к тексту
-  cardboardShake('.text-primary');
-  cardboardShake('.text-secondary');
+  initJitterText();
 
   // ===== ГЕНЕРАЦИЯ ПАДАЮЩИХ ЛИНИЙ ДЛЯ СЕКЦИИ ТЕХНОЛОГИЙ =====
   /**
@@ -390,6 +330,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Счетчик активных линий
     let activeLinesCount = 0;
 
+    // Генерируем линии только когда секция технологий видна на экране
+    let sectionVisible = false;
+    if ('IntersectionObserver' in window) {
+      const visibilityObserver = new IntersectionObserver((entries) => {
+        sectionVisible = entries[0].isIntersecting;
+      });
+      visibilityObserver.observe(technologiesSection);
+    } else {
+      sectionVisible = true;
+    }
+
     // Создаем функцию для генерации одной линии
     const createLine = () => {
       // Проверяем лимит одновременно существующих линий
@@ -397,8 +348,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      // Проверяем видимость страницы
-      if (document.hidden) {
+      // Не тратим ресурсы, пока вкладка скрыта или секция вне экрана
+      if (document.hidden || !sectionVisible) {
         return;
       }
 
@@ -422,20 +373,23 @@ document.addEventListener('DOMContentLoaded', function () {
       // Толщина линии
       line.style.width = `${lineConfig.lineWidth}px`;
 
-      // Небольшой горизонтальный сдвиг для неровности
-      const randomOffset = (Math.random() - 0.5) * 3;
-      line.style.setProperty('--shake-offset', `${randomOffset}px`);
-
       starBackground.appendChild(line);
 
-      // Анимация через Anime.js
+      // Анимация через Anime.js: одна инстанция на линию,
+      // падение через translateY (не top) — без пересчета layout на каждом кадре
       const randomSpeed = lineConfig.minSpeed + Math.random() * (lineConfig.maxSpeed - lineConfig.minSpeed);
 
       const sectionHeight = technologiesSection.getBoundingClientRect().height;
-      const lineStartTop = -randomHeight;
+      line.style.top = '0px';
       const mainAnim = anime({
         targets: line,
-        top: [lineStartTop, sectionHeight + 50],
+        translateY: [-randomHeight, sectionHeight + 50],
+        translateX: [
+          { value: anime.random(-2, 2), duration: randomSpeed * 0.25 },
+          { value: anime.random(-2, 2), duration: randomSpeed * 0.25 },
+          { value: anime.random(-2, 2), duration: randomSpeed * 0.25 },
+          { value: anime.random(-2, 2), duration: randomSpeed * 0.25 }
+        ],
         opacity: [
           { value: 0, duration: 0 },
           { value: 1, duration: 100 },
@@ -455,23 +409,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
       animations.fallingLines.push(mainAnim);
-
-      // Дополнительная анимация дрожания (упрощенная, без loop)
-      const shakeAnim = anime({
-        targets: line,
-        translateX: [
-          { value: () => anime.random(-2, 2), duration: 200 },
-          { value: () => anime.random(-1.5, 1.5), duration: 200 },
-          { value: () => anime.random(-2, 2), duration: 200 },
-          { value: () => anime.random(-1, 1), duration: 200 },
-          { value: () => anime.random(-2, 2), duration: 200 },
-          { value: () => anime.random(-1.5, 1.5), duration: 200 },
-        ],
-        duration: randomSpeed * 0.5,
-        easing: 'easeInOutSine',
-        direction: 'alternate'
-      });
-      animations.fallingLines.push(shakeAnim);
     };
 
     // Постоянно создаем новые линии с ограничением

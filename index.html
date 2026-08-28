@@ -33,7 +33,6 @@
     />
 
     <title>Александр Горбунов - Frontend Developer</title>
-    <link rel="stylesheet" href="https://getwell-widget.flareon.ru/index.umd.css" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./assets/images/ui/favicon/favicon.ico" />
     <link
@@ -68,8 +67,11 @@
     <link rel="stylesheet" href="./styles/responsive.css" />
 
     <!-- Подключение библиотек и скриптов -->
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <!-- defer: скрипт не блокирует первый рендер, но выполнится раньше остальных deferred-скриптов -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js" defer></script>
     <script src="script.js" defer></script>
+    <script src="js/education-orbit.js" defer></script>
     <script src="js/projects-timeline.js" defer></script>
     <script src="js/experience-timeline.js" defer></script>
   </head>
@@ -81,40 +83,9 @@
 
         <div class="main-character"></div>
         <div class="hero-card">
-          <div>
-            <p class="text-primary">A</p>
-            <p class="text-primary">l</p>
-            <p class="text-primary">e</p>
-            <p class="text-primary">x</p>
-            <br />
-            <p class="text-primary"></p>
-            <p class="text-primary">G</p>
-            <p class="text-primary">o</p>
-            <p class="text-primary">r</p>
-            <p class="text-primary">b</p>
-            <p class="text-primary">u</p>
-            <p class="text-primary">n</p>
-            <p class="text-primary">o</p>
-            <p class="text-primary">v</p>
-            <div>&nbsp;</div>
-            <p class="text-secondary">F</p>
-            <p class="text-secondary">r</p>
-            <p class="text-secondary">o</p>
-            <p class="text-secondary">n</p>
-            <p class="text-secondary">t</p>
-            <p class="text-secondary">e</p>
-            <p class="text-secondary">n</p>
-            <p class="text-secondary">d</p>
-            <br />
-            <p class="text-secondary">D</p>
-            <p class="text-secondary">e</p>
-            <p class="text-secondary">v</p>
-            <p class="text-secondary">e</p>
-            <p class="text-secondary">l</p>
-            <p class="text-secondary">o</p>
-            <p class="text-secondary">p</p>
-            <p class="text-secondary">e</p>
-            <p class="text-secondary">r</p>
+          <div class="hero-heading">
+            <h1 class="hero-title text-primary jitter-text">Alex<br />Gorbunov</h1>
+            <p class="hero-subtitle text-secondary jitter-text">Frontend<br />Developer</p>
           </div>
           <img src="./assets/images/ui/falling-star.svg" class="falling-star" width="70" alt="" />
           <img src="./assets/images/ui/falling-star.svg" class="falling-star" width="70" alt="" />
@@ -127,13 +98,7 @@
       <section id="projects" class="portfolio-section projects-section">
         <div class="star-background"></div>
         <div class="section-title">
-          <p class="text-primary">П</p>
-          <p class="text-primary">р</p>
-          <p class="text-primary">о</p>
-          <p class="text-primary">е</p>
-          <p class="text-primary">к</p>
-          <p class="text-primary">т</p>
-          <p class="text-primary">ы</p>
+          <h2 class="text-primary jitter-text">Проекты</h2>
         </div>
         <div class="character-sprite"></div>
 
@@ -1008,104 +973,132 @@
       </div>
 
       <!-- СЕКЦИЯ 3: ОБРАЗОВАНИЕ -->
+      <!--
+        Орбитальный слайдер: секция растянута по высоте (см. education.css),
+        внутренний экран прилипает (sticky), а планеты при скроле едут по орбите.
+        Активная планета выходит вперед, остальные удаляются назад в тень.
+      -->
       <section id="education" class="portfolio-section education-section">
-        <div class="star-background"></div>
-        <div class="section-title">
-          <p class="text-primary">О</p>
-          <p class="text-primary">б</p>
-          <p class="text-primary">р</p>
-          <p class="text-primary">а</p>
-          <p class="text-primary">з</p>
-          <p class="text-primary">о</p>
-          <p class="text-primary">в</p>
-          <p class="text-primary">а</p>
-          <p class="text-primary">н</p>
-          <p class="text-primary">и</p>
-          <p class="text-primary">е</p>
-        </div>
-
-        <div class="education-planets">
-          <!-- БАКАЛАВРИАТ -->
+        <div class="education-sticky">
+          <div class="star-background"></div>
+          <div class="section-title">
+            <h2 class="text-primary jitter-text">Образование</h2>
+          </div>
 
           <div class="ufo"></div>
-          <div class="education-planet" data-education="bachelor">
-            <div class="planet-container">
-              <img class="planet-image" src="./assets/images/planets/moon.webp" alt="Бакалавриат" />
-              <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <path
-                    id="bachelor-circle"
-                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
-                  />
-                </defs>
-                <text>
-                  <textPath href="#bachelor-circle" startOffset="0%">
-                    БАКАЛАВРИАТ • МГТУ им. Баумана • 2015-2019 •
-                  </textPath>
-                </text>
-              </svg>
-            </div>
-            <div class="education-info">
-              <h3 class="education-degree">Бакалавриат</h3>
-              <p class="education-university">МГТУ им. Баумана</p>
-              <p class="education-years">2015-2019</p>
-              <p class="education-specialty">Конструирование и технология электронных средств</p>
-            </div>
-          </div>
 
-          <!-- МАГИСТРАТУРА -->
-          <div class="education-planet" data-education="master">
-            <div class="planet-container">
-              <img
-                class="planet-image"
-                src="./assets/images/planets/earth.webp"
-                alt="Магистратура"
-              />
-              <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <path
-                    id="master-circle"
-                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
-                  />
-                </defs>
-                <text>
-                  <textPath href="#master-circle" startOffset="0%">
-                    МАГИСТРАТУРА • РТУ МИРЭА • 2019-2021 •
-                  </textPath>
-                </text>
-              </svg>
-            </div>
-            <div class="education-info">
-              <h3 class="education-degree">Магистратура</h3>
-              <p class="education-university">РТУ МИРЭА</p>
-              <p class="education-years">2019-2021</p>
-              <p class="education-specialty">Конструирование и технология электронных средств</p>
-            </div>
-          </div>
+          <div class="education-body">
+            <!-- ОРБИТА С ПЛАНЕТАМИ -->
+            <div class="orbit-scene">
+              <div class="orbit-path" aria-hidden="true"></div>
 
-          <!-- АСПИРАНТУРА -->
-          <div class="education-planet" data-education="phd">
-            <div class="planet-container">
-              <img class="planet-image" src="./assets/images/planets/mars.webp" alt="Аспирантура" />
-              <svg class="circular-text" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <path
-                    id="phd-circle"
-                    d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+              <!-- БАКАЛАВРИАТ -->
+              <div class="orbit-planet" data-education="bachelor">
+                <div class="planet-container">
+                  <img
+                    class="planet-image"
+                    src="./assets/images/planets/moon.webp"
+                    alt="Бакалавриат"
                   />
-                </defs>
-                <text>
-                  <textPath href="#phd-circle" startOffset="0%">
-                    АСПИРАНТУРА • МФЮА • 2021-2025 •
-                  </textPath>
-                </text>
-              </svg>
+                  <svg
+                    class="circular-text"
+                    viewBox="0 0 100 100"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <path
+                        id="bachelor-circle"
+                        d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                      />
+                    </defs>
+                    <text>
+                      <textPath href="#bachelor-circle" startOffset="0%">
+                        БАКАЛАВРИАТ • МГТУ им. Баумана • 2015-2019 •
+                      </textPath>
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- МАГИСТРАТУРА -->
+              <div class="orbit-planet" data-education="master">
+                <div class="planet-container">
+                  <img
+                    class="planet-image"
+                    src="./assets/images/planets/earth.webp"
+                    alt="Магистратура"
+                  />
+                  <svg
+                    class="circular-text"
+                    viewBox="0 0 100 100"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <path
+                        id="master-circle"
+                        d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                      />
+                    </defs>
+                    <text>
+                      <textPath href="#master-circle" startOffset="0%">
+                        МАГИСТРАТУРА • РТУ МИРЭА • 2019-2021 •
+                      </textPath>
+                    </text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- АСПИРАНТУРА -->
+              <div class="orbit-planet" data-education="phd">
+                <div class="planet-container">
+                  <img
+                    class="planet-image"
+                    src="./assets/images/planets/mars.webp"
+                    alt="Аспирантура"
+                  />
+                  <svg
+                    class="circular-text"
+                    viewBox="0 0 100 100"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <path
+                        id="phd-circle"
+                        d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                      />
+                    </defs>
+                    <text>
+                      <textPath href="#phd-circle" startOffset="0%">
+                        АСПИРАНТУРА • МФЮА • 2021-2025 •
+                      </textPath>
+                    </text>
+                  </svg>
+                </div>
+              </div>
             </div>
-            <div class="education-info">
-              <h3 class="education-degree">Аспирантура</h3>
-              <p class="education-university">МФЮА</p>
-              <p class="education-years">2021-2025</p>
-              <p class="education-specialty">Информатика и вычислительная техника</p>
+
+            <!-- ОПИСАНИЯ ОБРАЗОВАНИЯ (появляются из тени у активной планеты) -->
+            <div class="education-info-stack">
+              <article class="education-info" data-education="bachelor">
+                <h3 class="education-degree">Бакалавриат</h3>
+                <p class="education-university">МГТУ им. Баумана</p>
+                <p class="education-years">2015-2019</p>
+                <p class="education-specialty">Конструирование и технология электронных средств</p>
+              </article>
+
+              <article class="education-info" data-education="master">
+                <h3 class="education-degree">Магистратура</h3>
+                <p class="education-university">РТУ МИРЭА</p>
+                <p class="education-years">2019-2021</p>
+                <p class="education-specialty">Конструирование и технология электронных средств</p>
+              </article>
+
+              <article class="education-info" data-education="phd">
+                <h3 class="education-degree">Аспирантура</h3>
+                <p class="education-university">МФЮА</p>
+                <p class="education-years">2021-2025</p>
+                <p class="education-specialty">Информатика и вычислительная техника</p>
+              </article>
             </div>
           </div>
         </div>
@@ -1115,16 +1108,7 @@
       <section id="technologies" class="portfolio-section technologies-section">
         <div class="star-background"></div>
         <div class="section-title">
-          <p class="text-primary">Т</p>
-          <p class="text-primary">е</p>
-          <p class="text-primary">х</p>
-          <p class="text-primary">н</p>
-          <p class="text-primary">о</p>
-          <p class="text-primary">л</p>
-          <p class="text-primary">о</p>
-          <p class="text-primary">г</p>
-          <p class="text-primary">и</p>
-          <p class="text-primary">и</p>
+          <h2 class="text-primary jitter-text">Технологии</h2>
         </div>
 
         <div class="second-char"></div>
@@ -1216,17 +1200,7 @@
       <section id="experience" class="experience-section">
         <div class="star-background"></div>
         <div class="section-title">
-          <p class="text-primary">О</p>
-          <p class="text-primary">п</p>
-          <p class="text-primary">ы</p>
-          <p class="text-primary">т</p>
-          <p class="text-primary" style="width: 0.3em"></p>
-          <p class="text-primary">р</p>
-          <p class="text-primary">а</p>
-          <p class="text-primary">б</p>
-          <p class="text-primary">о</p>
-          <p class="text-primary">т</p>
-          <p class="text-primary">ы</p>
+          <h2 class="text-primary jitter-text">Опыт работы</h2>
         </div>
 
         <div class="experience-timeline-container">
@@ -1239,7 +1213,7 @@
                 <button class="experience-details-btn" title="Подробнее"></button>
                 <div class="experience-period">
                   <p class="experience-period-date">Февраль 2025 — настоящее время</p>
-                  <p class="experience-period-duration">8 месяцев</p>
+                  <p class="experience-period-duration">1 год 7 месяцев</p>
                 </div>
                 <h3 class="experience-company">РТК-Синтез</h3>
                 <p class="experience-location">Москва</p>
@@ -1317,14 +1291,7 @@
         <div class="contact-wrapper">
           <div class="star-background"></div>
           <div class="section-title">
-            <p class="text-primary">К</p>
-            <p class="text-primary">о</p>
-            <p class="text-primary">н</p>
-            <p class="text-primary">т</p>
-            <p class="text-primary">а</p>
-            <p class="text-primary">к</p>
-            <p class="text-primary">т</p>
-            <p class="text-primary">ы</p>
+            <h2 class="text-primary jitter-text">Контакты</h2>
           </div>
 
           <div class="contacts-container">
@@ -1382,12 +1349,5 @@
       </section>
     </div>
 
-    <script>
-      window.GetWellWidgetConfig = {
-        apiUrl: 'https://test.dev10.getwell.ru',
-        basePath: 'https://getwell-widget.flareon.ru',
-      };
-    </script>
-    <script src="https://getwell-widget.flareon.ru/init.js"></script>
   </body>
 </html>

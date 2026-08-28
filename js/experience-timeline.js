@@ -161,8 +161,10 @@ class ExperienceTimeline {
     }
 
     // Показываем модальное окно
+    // Скролл живет в .portfolio-container, а не в body — блокируем именно его
     this.modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    const scroller = document.querySelector('.portfolio-container');
+    if (scroller) scroller.style.overflow = 'hidden';
 
     // Анимация появления
     if (typeof anime !== 'undefined') {
@@ -191,13 +193,15 @@ class ExperienceTimeline {
         easing: 'easeInQuad',
         complete: () => {
           this.modal.classList.remove('active');
-          document.body.style.overflow = '';
+          const scroller = document.querySelector('.portfolio-container');
+          if (scroller) scroller.style.overflow = '';
         }
       });
       this.animations.push(anim);
     } else {
       this.modal.classList.remove('active');
-      document.body.style.overflow = '';
+      const scroller = document.querySelector('.portfolio-container');
+      if (scroller) scroller.style.overflow = '';
     }
   }
 

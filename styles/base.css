@@ -25,6 +25,8 @@ body {
   padding: 0;
   border: 0;
   font-size: 50px;
+  /* У Besom нет жирного начертания — гасим UA-bold у h1/h2, иначе браузер синтезирует faux-bold */
+  font-weight: normal;
   font-family: 'Besom-2';
   vertical-align: baseline;
   display: inline-block;
@@ -36,6 +38,7 @@ body {
   padding: 0;
   border: 0;
   font-size: 50px;
+  font-weight: normal;
   font-family: 'Besom-2';
   vertical-align: baseline;
   display: inline-block;
@@ -45,18 +48,126 @@ body {
   font-family: 'Besom-cyr';
 }
 
-/* ===== АНИМАЦИИ ТЕКСТА ===== */
-.animated-text {
-  stroke-dasharray: 519;
-  stroke-dashoffset: 519;
-  animation: sign 2s ease;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
+/* ===== ДРОЖАЩИЕ ЗАГОЛОВКИ (стоп-моушен эффект) ===== */
+/*
+ * Заголовок в HTML — обычный текст (SEO), script.js разбивает его на буквы-span.
+ * Анимация чисто на CSS: step-end дает покадровую смену поз (~10 кадров/с)
+ * с одинаковой скоростью на любом мониторе и процессоре.
+ */
+.jitter-text {
+  line-height: 1.1;
 }
 
-@keyframes sign {
-  to {
-    stroke-dashoffset: 0;
+.hero-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.hero-title,
+.hero-subtitle {
+  font-size: 50px;
+}
+
+.jitter-letter {
+  display: inline-block;
+  animation-timing-function: step-end, step-end;
+  animation-iteration-count: infinite, infinite;
+  animation-delay: calc(var(--letter-index, 0) * -97ms), calc(var(--letter-index, 0) * -151ms);
+}
+
+/* Три варианта поз, чтобы соседние буквы дрожали по-разному */
+.jitter-v1 {
+  animation-name: letter-boil-1, letter-color-cycle;
+  animation-duration: 0.44s, 0.92s;
+}
+
+.jitter-v2 {
+  animation-name: letter-boil-2, letter-color-cycle;
+  animation-duration: 0.4s, 0.84s;
+}
+
+.jitter-v3 {
+  animation-name: letter-boil-3, letter-color-cycle;
+  animation-duration: 0.48s, 1s;
+}
+
+@keyframes letter-boil-1 {
+  0% {
+    transform: translate(0px, 0.6px) rotate(0.5deg);
+  }
+  25% {
+    transform: translate(-0.8px, -0.4px) rotate(-0.7deg);
+  }
+  50% {
+    transform: translate(0.6px, 0.5px) rotate(0.4deg);
+  }
+  75% {
+    transform: translate(-0.4px, 0.8px) rotate(-0.4deg);
+  }
+  100% {
+    transform: translate(0px, 0.6px) rotate(0.5deg);
+  }
+}
+
+@keyframes letter-boil-2 {
+  0% {
+    transform: translate(-0.6px, 0.3px) rotate(-0.5deg);
+  }
+  25% {
+    transform: translate(0.5px, -0.6px) rotate(0.6deg);
+  }
+  50% {
+    transform: translate(-0.3px, -0.3px) rotate(-0.3deg);
+  }
+  75% {
+    transform: translate(0.7px, 0.6px) rotate(0.5deg);
+  }
+  100% {
+    transform: translate(-0.6px, 0.3px) rotate(-0.5deg);
+  }
+}
+
+@keyframes letter-boil-3 {
+  0% {
+    transform: translate(0.4px, -0.5px) rotate(0.4deg);
+  }
+  25% {
+    transform: translate(-0.5px, 0.6px) rotate(-0.5deg);
+  }
+  50% {
+    transform: translate(0.8px, 0.2px) rotate(0.7deg);
+  }
+  75% {
+    transform: translate(-0.3px, -0.7px) rotate(-0.3deg);
+  }
+  100% {
+    transform: translate(0.4px, -0.5px) rotate(0.4deg);
+  }
+}
+
+/* Мерцание цвета — та же палитра, что была в anime.js версии */
+@keyframes letter-color-cycle {
+  0% {
+    color: #708ea7;
+  }
+  25% {
+    color: #7072a7;
+  }
+  50% {
+    color: #70a7a5;
+  }
+  75% {
+    color: #a78970;
+  }
+  100% {
+    color: #708ea7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jitter-letter {
+    animation: none;
   }
 }
 

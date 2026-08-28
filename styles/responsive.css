@@ -15,14 +15,6 @@
     zoom: 0.5;
   }
 
-  .project-card {
-    margin-bottom: 20px;
-  }
-
-  .project-image {
-    height: 150px;
-  }
-
   .technologies-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 20px;
@@ -50,11 +42,6 @@
     padding: 20px 0;
   }
 
-  .text-primary,
-  .text-secondary {
-    text-align: left;
-  }
-
   .hero-card {
     gap: 40px;
     flex-direction: column;
@@ -67,33 +54,6 @@
   .main-character {
     /* transform: scale(0.25); */
     margin: 0 auto 20px;
-  }
-
-  .projects-grid {
-    min-height: 60vh;
-    transform: translateY(-5%);
-  }
-
-  .project-card {
-    flex-direction: column;
-    min-height: 60vh;
-    margin: 10px;
-    text-align: center;
-  }
-
-  .project-image {
-    width: 80vw;
-    height: 120px;
-    margin-bottom: 15px;
-  }
-
-  .last-img {
-    width: 100%;
-    height: auto;
-  }
-
-  .star-layer {
-    display: none;
   }
 
   /* Улучшаем читаемость текста на мобильных */
@@ -131,11 +91,6 @@
     padding: 15px 0;
   }
 
-  .text-primary,
-  .text-secondary {
-    text-align: left;
-  }
-
   .hero-card {
     padding: 15px;
     margin: 5px;
@@ -145,17 +100,6 @@
     transform: scale(0.3);
     right: 0px;
     bottom: 0px;
-  }
-
-  .project-card {
-    flex-direction: column;
-    min-height: 60vh;
-    margin: 5px;
-  }
-
-  .project-image {
-    width: 80vw;
-    height: 100px;
   }
 
   .technologies-grid {
@@ -197,7 +141,9 @@
 /* ===== ЛАНДШАФТНАЯ ОРИЕНТАЦИЯ НА МОБИЛЬНЫХ ===== */
 @media (max-width: 768px) and (orientation: landscape) {
   .portfolio-container {
-    scroll-snap-type: y mandatory; /* Включаем snap в ландшафте */
+    /* proximity вместо mandatory: жесткий snap конфликтует
+       с покадровым скроллом внутри высокой секции образования */
+    scroll-snap-type: y proximity;
   }
 
   .portfolio-section {

@@ -91,26 +91,3 @@
   padding: 20px;
 }
 
-.projects-grid {
-  display: flex;
-  gap: 20px;
-  padding: 0 5vw;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  padding: 20px;
-  scrollbar-width: thin;
-  scrollbar-color: #973faf transparent;
-}
-
-/* Стилизация скроллбара проектов */
-.projects-grid::-webkit-scrollbar {
-  width: 6px;
-}
-
-.projects-grid::-webkit-scrollbar-thumb {
-  background-color: #973faf;
-  background: url('../assets/images/ui/scroll-planet.png');
-  border-radius: 3px;
-}

@@ -1,128 +1,176 @@
 /**
  * Стили для секции образования
- * Планеты с образовательной информацией
+ * Орбитальный слайдер: секция растянута по высоте, внутренний экран
+ * прилипает (sticky), планеты при скроле движутся по орбите.
+ *
+ * Режимы (класс вешает js/education-orbit.js):
+ * - .orbit-on  — орбитальный слайдер (десктоп и мобильные);
+ * - без класса — статичная колонка (prefers-reduced-motion или без JS).
  */
 
 /* ===== СЕКЦИЯ ОБРАЗОВАНИЯ ===== */
 .education-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 40px 20px;
   position: relative;
+  /* overflow: hidden у .portfolio-section ломает sticky — clip не создает скролл-контейнер */
+  overflow: visible;
+  overflow: clip;
 }
 
-/* ===== ЗАГОЛОВОК СЕКЦИИ ===== */
-.education-header {
-  text-align: center;
-  margin-bottom: 60px;
-  z-index: 10;
-}
-
-.education-title {
-  font-size: 3rem;
-  color: #d0c896;
-  margin: 0 0 20px 0;
-  font-family: 'Besom-2';
-  text-shadow: 0 0 20px rgba(208, 200, 150, 0.5);
-}
-
-.education-subtitle {
-  font-size: 1.2rem;
-  color: #ffffff;
-  margin: 0;
-  opacity: 0.8;
-}
-
-/* ===== КОНТЕЙНЕР ПЛАНЕТ ===== */
-.education-planets {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-}
-
-/* ===== ПЛАНЕТА ОБРАЗОВАНИЯ ===== */
-.education-planet {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-  padding: 40px;
-  background: rgba(16, 41, 48, 0.6);
-  border-radius: 30px;
-  border: 2px solid transparent;
-  transition: all 0.5s ease;
+.education-section .section-title {
   position: relative;
-  overflow: hidden;
-  min-width: 650px;
+  z-index: 3;
 }
 
-.education-planet:hover {
-  border-color: #d0c896;
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  background: rgba(16, 41, 48, 0.8);
+/* ===== ОРБИТАЛЬНЫЙ РЕЖИМ ===== */
+.education-section.orbit-on {
+  /* Высота задает длину скролла: чем больше, тем медленнее вращается орбита */
+  height: 400vh;
+  height: 400svh;
+  padding: 0;
 }
 
-.education-planet::before {
-  content: '';
-  position: absolute;
+.education-section.orbit-on .education-sticky {
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent, rgba(208, 200, 150, 0.1), transparent);
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
 }
 
-.education-planet:hover::before {
-  opacity: 1;
+/* НЛО уводим наверх, чтобы не мешало тексту образования */
+.education-section.orbit-on .ufo {
+  top: 8%;
+  right: 2%;
+  bottom: auto;
 }
 
-/* ===== КОНТЕЙНЕР ПЛАНЕТЫ ===== */
-.planet-container {
+.education-section.orbit-on .education-body {
   position: relative;
-  width: 150px;
-  height: 150px;
-  flex-shrink: 0;
+  flex: 1;
+  z-index: 2;
 }
 
-.planet-image {
+/* ===== СЦЕНА С ОРБИТОЙ ===== */
+.orbit-scene {
+  /* Параметры орбиты: --orbit-rx обновляет JS под ширину экрана */
+  --orbit-rx: 400px;
+  --orbit-ry: 70px;
+  --orbit-center-y: 40%;
+  --planet-size: 190px;
+}
+
+.education-section.orbit-on .orbit-scene {
+  position: absolute;
+  inset: 0;
+}
+
+/* Пунктирный след орбиты */
+.orbit-path {
+  position: absolute;
+  left: 50%;
+  top: var(--orbit-center-y);
+  width: calc(var(--orbit-rx) * 2);
+  height: calc(var(--orbit-ry) * 2.6);
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(208, 200, 150, 0.18);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ===== ПЛАНЕТА НА ОРБИТЕ ===== */
+.education-section.orbit-on .orbit-planet {
+  position: absolute;
+  left: 50%;
+  top: var(--orbit-center-y);
+  width: var(--planet-size);
+  height: var(--planet-size);
+  /* transform, z-index и filter выставляет JS на каждый кадр скролла */
+  transform: translate(-50%, -50%);
+  will-change: transform, filter;
+}
+
+.education-section .planet-container {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+
+.education-section .planet-image {
+  position: absolute;
+  inset: 0;
+  width: 72%;
+  height: 72%;
+  margin: auto;
   object-fit: contain;
-  animation: planetRotate 20s linear infinite;
+  animation: rotate 20s linear infinite;
   filter: drop-shadow(0 0 20px rgba(208, 200, 150, 0.3));
 }
 
-.circular-text {
+.education-section .circular-text {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  animation: textRotate 20s linear infinite reverse;
+  /* rotate/rotateReverse — общие keyframes из animations.css */
+  animation: rotateReverse 20s linear infinite;
+  pointer-events: none;
 }
 
-.circular-text text {
+.education-section .circular-text text {
   font-size: 8px;
   font-weight: bold;
   fill: #d0c896;
-  text-shadow: 0 0 10px rgba(208, 200, 150, 0.5);
 }
 
-/* ===== ИНФОРМАЦИЯ ОБ ОБРАЗОВАНИИ ===== */
+/* ===== ОПИСАНИЯ ОБРАЗОВАНИЯ ===== */
 .education-info {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
   font-family: 'BellotaText';
+}
+
+.education-section.orbit-on .education-info-stack {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(24px, 7vh, 90px);
+  transform: translateX(-50%);
+  width: min(680px, 92%);
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* Текст активной планеты появляется "из тени" */
+.education-section.orbit-on .education-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  filter: blur(14px) brightness(0.3);
+  transform: translateY(26px) scale(0.96);
+  transition:
+    opacity 0.55s ease,
+    filter 0.55s ease,
+    transform 0.55s ease,
+    visibility 0s linear 0.55s;
+}
+
+.education-section.orbit-on .education-info.active {
+  opacity: 1;
+  visibility: visible;
+  filter: blur(0) brightness(1);
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 0.55s ease,
+    filter 0.55s ease,
+    transform 0.55s ease,
+    visibility 0s;
 }
 
 .education-degree {
@@ -156,41 +204,79 @@
   line-height: 1.4;
 }
 
-/* ===== АНИМАЦИИ ===== */
-@keyframes planetRotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ===== СТАТИЧНЫЙ РЕЖИМ (мобильные, reduced motion, без JS) ===== */
+.education-section:not(.orbit-on) .education-sticky {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-@keyframes textRotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.education-section:not(.orbit-on) .education-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+/* Растворяем обертки, чтобы чередовать планету и ее описание */
+.education-section:not(.orbit-on) .orbit-scene,
+.education-section:not(.orbit-on) .education-info-stack {
+  display: contents;
+}
+
+.education-section:not(.orbit-on) .orbit-path {
+  display: none;
+}
+
+.education-section:not(.orbit-on) .orbit-planet {
+  width: 170px;
+  height: 170px;
+}
+
+.education-section:not(.orbit-on) .orbit-planet[data-education='bachelor'] {
+  order: 1;
+}
+.education-section:not(.orbit-on) .education-info[data-education='bachelor'] {
+  order: 2;
+}
+.education-section:not(.orbit-on) .orbit-planet[data-education='master'] {
+  order: 3;
+}
+.education-section:not(.orbit-on) .education-info[data-education='master'] {
+  order: 4;
+}
+.education-section:not(.orbit-on) .orbit-planet[data-education='phd'] {
+  order: 5;
+}
+.education-section:not(.orbit-on) .education-info[data-education='phd'] {
+  order: 6;
+}
+
+.education-section:not(.orbit-on) .education-info {
+  width: 100%;
+  max-width: 520px;
+  padding: 24px 28px;
+  background: rgba(16, 41, 48, 0.6);
+  border-radius: 24px;
+  text-align: center;
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
 
 /* ПЛАНШЕТЫ (до 1024px) */
 @media (max-width: 1024px) {
-  .education-planets {
-    gap: 20px;
-  }
-
-  .education-planet {
-    gap: 40px;
-    padding: 30px;
-  }
-
-  .planet-container {
-    width: 150px;
-    height: 150px;
+  .orbit-scene {
+    --planet-size: 150px;
+    --orbit-ry: 55px;
   }
 
   .education-degree {
@@ -204,37 +290,28 @@
 
 /* МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) */
 @media (max-width: 768px) {
-  .education-section {
-    padding: 30px 15px;
+  .orbit-scene {
+    --planet-size: 120px;
+    --orbit-ry: 45px;
+    --orbit-center-y: 38%;
   }
 
-  .education-header {
-    margin-bottom: 40px;
+  /* На маленьких экранах НЛО загромождает сцену */
+  .education-section.orbit-on .ufo {
+    display: none;
   }
 
-  .education-title {
-    font-size: 2.5rem;
+  .education-section:not(.orbit-on) .education-sticky {
+    padding: 15px;
   }
 
-  .education-subtitle {
-    font-size: 1rem;
+  .education-section:not(.orbit-on) .orbit-planet {
+    width: 130px;
+    height: 130px;
   }
 
-  .education-planets {
-    gap: 10px;
-  }
-
-  .education-planet {
-    flex-direction: column;
-    text-align: center;
-    gap: 5px;
-    padding: 10px;
-    min-width: 350px;
-  }
-
-  .planet-container {
-    width: 120px;
-    height: 120px;
+  .education-section:not(.orbit-on) .education-info {
+    padding: 16px 18px;
   }
 
   .education-degree {
@@ -254,33 +331,29 @@
   }
 }
 
+/* НИЗКИЕ ЭКРАНЫ — поднимаем орбиту и уменьшаем планеты,
+   чтобы активная планета не наезжала на текст */
+@media (min-width: 769px) and (max-height: 760px) {
+  .orbit-scene {
+    --planet-size: 150px;
+    --orbit-ry: 55px;
+    --orbit-center-y: 35%;
+  }
+}
+
+@media (max-height: 620px) {
+  .orbit-scene {
+    --planet-size: 110px;
+    --orbit-ry: 40px;
+    --orbit-center-y: 33%;
+  }
+}
+
 /* МАЛЕНЬКИЕ МОБИЛЬНЫЕ (до 480px) */
 @media (max-width: 480px) {
-  .education-section {
-    padding: 20px 10px;
-  }
-
-  .education-title {
-    font-size: 2rem;
-  }
-
-  .education-subtitle {
-    font-size: 0.9rem;
-  }
-
-  .education-planets {
-    gap: 30px;
-  }
-
-  .education-planet {
-    padding: 10px;
-    gap: 10px;
-    min-width: 350px;
-  }
-
-  .planet-container {
-    width: 100px;
-    height: 100px;
+  .education-section:not(.orbit-on) .orbit-planet {
+    width: 110px;
+    height: 110px;
   }
 
   .education-degree {
@@ -297,29 +370,5 @@
 
   .education-specialty {
     font-size: 0.8rem;
-  }
-}
-
-/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 360px) */
-@media (max-width: 360px) {
-  .education-title {
-    font-size: 1.8rem;
-  }
-
-  .education-planet {
-    padding: 15px;
-  }
-
-  .planet-container {
-    width: 80px;
-    height: 80px;
-  }
-
-  .education-degree {
-    font-size: 1rem;
-  }
-
-  .education-university {
-    font-size: 0.9rem;
   }
 }

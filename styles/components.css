@@ -20,41 +20,6 @@
   width: 100dvw;
 }
 
-/* ===== КАРТОЧКИ ПРОЕКТОВ ===== */
-.project-card {
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-  min-height: 300px;
-  background: rgba(16, 41, 48, 0.8);
-  border-radius: 10px;
-  padding: 15px;
-  max-width: 550px;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateX(-10px);
-  }
-
-  /* Изображение проекта */
-  .project-image {
-    width: 400px;
-    height: auto;
-    object-fit: cover;
-    border-radius: 5px;
-    aspect-ratio: 16 / 9;
-    margin: 0 auto;
-  }
-
-  /* Логотип технологии */
-  .tech-logo {
-    height: 50px;
-    aspect-ratio: none;
-    width: auto;
-  }
-}
-
 /* ===== СОДЕРЖИМОЕ КАРТОЧКИ ПРОЕКТА ===== */
 .project-content {
   margin-left: 15px;
@@ -155,34 +120,6 @@
   height: 660px;
   zoom: 0.8;
   animation: last-frame-animation 0.5s steps(2, end) infinite;
-}
-
-/* ===== ЛИНИИ ЗВЕЗД ===== */
-.star-line {
-  width: 1rem;
-  height: 1px;
-  margin: 10px;
-  background-color: white;
-
-  &--medium {
-    width: 1.2rem;
-  }
-
-  &--small {
-    width: 0.5rem;
-  }
-}
-
-/* ===== ВЕРТИКАЛЬНЫЕ ЭЛЕМЕНТЫ ===== */
-.vertical-element {
-  position: absolute;
-  top: 20px;
-  right: 0px;
-}
-
-.flying-element {
-  position: absolute;
-  width: 100%;
 }
 
 /* ===== СЕКЦИЯ ТЕХНОЛОГИЙ ===== */

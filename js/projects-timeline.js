@@ -97,8 +97,9 @@ class ProjectsTimeline {
    * Настройка событий касания для мобильных устройств
    */
   setupTouchEvents() {
-    let startX = 0;
-    let startY = 0;
+    // null, а не 0 — координата 0 (край экрана) это валидная точка старта свайпа
+    let startX = null;
+    let startY = null;
 
     const handleTouchStart = (e) => {
       if (this.modal && this.modal.classList.contains('active')) {
@@ -108,7 +109,7 @@ class ProjectsTimeline {
     };
 
     const handleTouchEnd = (e) => {
-      if (!this.modal || !this.modal.classList.contains('active') || !startX || !startY) return;
+      if (!this.modal || !this.modal.classList.contains('active') || startX === null || startY === null) return;
 
       const endX = e.changedTouches[0].clientX;
       const endY = e.changedTouches[0].clientY;
@@ -121,8 +122,8 @@ class ProjectsTimeline {
         this.navigateModalSlider(direction);
       }
 
-      startX = 0;
-      startY = 0;
+      startX = null;
+      startY = null;
     };
 
     document.addEventListener('touchstart', handleTouchStart);
@@ -145,8 +146,10 @@ class ProjectsTimeline {
     this.populateModal(projectData);
 
     // Показываем модальное окно
+    // Скролл живет в .portfolio-container, а не в body — блокируем именно его
     this.modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    const scroller = document.querySelector('.portfolio-container');
+    if (scroller) scroller.style.overflow = 'hidden';
 
     // Анимация появления
     const anim = anime({
@@ -172,7 +175,8 @@ class ProjectsTimeline {
       easing: 'easeInQuad',
       complete: () => {
         this.modal.classList.remove('active');
-        document.body.style.overflow = '';
+        const scroller = document.querySelector('.portfolio-container');
+        if (scroller) scroller.style.overflow = '';
         this.currentProject = null;
         this.currentSlideIndex = 0;
       }
@@ -273,9 +277,10 @@ class ProjectsTimeline {
     const sliderTrack = document.getElementById('modal-slider-track');
     const sliderDots = document.getElementById('modal-slider-dots');
 
-    // Очищаем слайдер
+    // Очищаем слайдер и сбрасываем сдвиг, оставшийся от прошлого проекта
     sliderTrack.innerHTML = '';
     sliderDots.innerHTML = '';
+    sliderTrack.style.transform = 'translateX(0%)';
 
     // Добавляем слайды
     images.forEach((image, index) => {
